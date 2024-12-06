@@ -1,0 +1,298 @@
+<template>
+    <div class="grid">
+        <div class="block flex-column ">
+            <div class="block1 flex-column">
+                <h1 class="title">Mon Portfolio</h1>
+                <h2>Alexandre Meux</h2>
+                <h3><i class="gray">Un développeur web</i> et bien d'autres</h3>
+            </div>
+            <div class="block2 flex-column">
+                <p>Je m'appelle Alexandre Meux, je suis étudiant en BUT MMI
+                    et je suis passionné par l'univers du multimédia et d'Internet. Mes domaines de prédilection sont le
+                    développement web et le graphisme.
+                    Je suis actuellement à la recherche d'une alternance pour ma deuxième année de BUT.
+                </p>
+                <div class="social-media flex">
+                    <div>
+                        <a class="centered" href="www.linkedin.com/in/alexandre-meux-2ba28a29b" target="_blank"><img
+                                class="linkedIn" width="40" src="/img/pictogramme/linkedIn.png"></a>
+                    </div>
+                    <div>
+                        <a class="centered" href="" target="_blank"><img class="mail" width="40"
+                                src="/img/pictogramme/email.svg">
+                            <p>alexandre.meux@etu.u-pec.fr</p>
+                        </a>
+                    </div>
+                    <div>
+                        <a class="centered" href="" target="_blank"><img class="phone" width="40"
+                                src="/img/pictogramme/phone.png">
+                            <p>07 50 57 84 84</p>
+                        </a>
+                    </div>
+                </div>
+                <a class="cta-btn" href="portfolio.php">
+                    <button class="centered">Voir Plus<img class="plus" alt="plus image"
+                            src="/img/pictogramme/plus.svg"></button>
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-inner centered">
+                <div class="card-front">
+                    <img class="scroll-fade front" src="/img/hero-img.png" width="300" alt="photo Alexandre MEUX">
+                </div>
+                <div class="card-back">
+                    <h3>11 septembre 2023</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--<div class="popUp">
+    <div class="content">
+        <h1>Pop-Up</h1>
+        <p>Vous avez déclenché le pop-up</p>
+        <button onclick="closePopUp()">Fermer</button>
+        <span onclick="closePopUp()" class="close">&#10006;</span>
+    </div>
+</div>
+-->
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+export default {
+    name: 'HomePage',
+};
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style scoped>
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
+.block {
+    gap: 4rem;
+    padding: 12% 4%;
+}
+
+.social-media div a {
+    background: var(--white);
+    opacity: 0.7;
+    transition: all 0.25s ease-in;
+    border-radius: var(--circle-radius);
+    border: var(--double-gray);
+    white-space: nowrap;
+}
+
+.social-media div a:hover {
+    z-index: 10;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.block1,
+.block2 {
+    gap: 2.5rem;
+    align-items: flex-start;
+}
+
+.social-media {
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-media p {
+    color: black;
+    padding: 0.2rem 0.8rem;
+    text-transform: lowercase;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.card img {
+    width: 40rem;
+    border: 6px ridge var(--gray);
+}
+
+.card {
+    perspective: 1000px;
+    transition: all 0.15s ease;
+    background: var(--yellow-white);
+    height: -webkit-fill-available;
+    padding: 10rem 0;
+    display: grid;
+    place-items: center;
+    border-left: var(--light-gray-border);
+    min-height: 75vh;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card:hover .card-inner .card-front{
+    transform: rotateX(32deg) rotateY(22deg);
+    box-shadow: 1px 1px 15px 10px black;
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s cubic-bezier(0.18, 1.41, 0.32, 1.27);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--bck);
+    border: var(--double-white);
+    min-height: 350px;
+    min-width: 350px;
+}
+
+
+p {
+    text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:935px) {
+    .grid {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .card {
+        border-left: 0;
+        border-bottom: var(--light-gray-border);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* POP-UP */
+
+.popUp {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.519);
+    z-index: 1000000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background: rgb(0, 0, 0);
+    border: var(--double-white);
+    padding: 2%;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 20px;
+    font-size: 2.4rem;
+    border-radius: 100px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close:hover {
+    background: var(--bck);
+    border: 1px solid white;
+}
+</style>

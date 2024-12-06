@@ -28,6 +28,12 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
   </div>
+
+  <button @click="increment()">Incrémenter</button>
+  <button @click="decrement()">Décrémenter</button>
+  <p>{{ value }}</p>
+
+
 </template>
 
 <script>
@@ -35,12 +41,31 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+
+  data(){
+    return{
+      value:0
+    }
+  },
+  methods:{
+      increment(){
+        this.value++;
+      },
+      decrement(){
+        this.value--;
+      }
   }
 }
+
+/*:style="{ color: isActive ? 'green' : 'purple' }"*/
+// :class="{ actif: isActive, inactif: !isActive }"
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 h3 {
   margin: 40px 0 0;
 }
@@ -53,6 +78,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: rgb(255, 245, 195);
 }
 </style>
