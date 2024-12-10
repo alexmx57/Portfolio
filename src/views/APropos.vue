@@ -1,5 +1,5 @@
 <template>
-<img width="200" src="/img/alexandre.jpg">
+    <img width="200" src="/img/alexandre.jpg">
     <div class="cv">
 
 
@@ -10,8 +10,8 @@
 
 
             <div class="cv-section">
-                <div class="flame-title">
-                    <img class="flames" src="/img/pictogramme/flame.png">
+                <div class="title">
+                    <img class="pictogrammes" src="/img/pictogramme/experiences.png">
                     <h3>Expériences</h3>
                 </div>
             </div>
@@ -20,8 +20,8 @@
 
 
             <div class="cv-section">
-                <div class="flame-title">
-                    <img class="flames" src="/img/pictogramme/flame.png">
+                <div class="title">
+                    <img class="pictogrammes" src="/img/pictogramme/formation.png">
                     <h3>Formations</h3>
                 </div>
             </div>
@@ -30,8 +30,8 @@
 
 
             <div class="cv-section">
-                <div class="flame-title">
-                    <img class="flames" src="/img/pictogramme/flame.png">
+                <div class="title">
+                    <img class="pictogrammes" src="/img/pictogramme/centresInteret.png">
                     <h3>Centres d'intérêts</h3>
                 </div>
             </div>
@@ -40,8 +40,8 @@
 
 
             <div class="cv-section">
-                <div class="flame-title">
-                    <img class="flames" src="/img/pictogramme/flame.png">
+                <div class="title">
+                    <img class="pictogrammes" src="/img/pictogramme/divers.png">
                     <h3>Divers</h3>
                 </div>
             </div>
@@ -61,8 +61,8 @@
 
 <script>
 
-export default{
-    name:"APropos"
+export default {
+    name: "APropos"
 }
 
 
@@ -73,11 +73,8 @@ export default{
 
 
 <style scoped>
-
-
-
-main{
-    margin:8rem 0;
+main {
+    margin: 8rem 0;
 }
 
 .cv {
@@ -86,33 +83,28 @@ main{
     align-items: center;
     justify-items: center;
     width: 100%;
-    margin:8rem 0;
+    margin: 8rem 0;
 }
 
-.cv .shape-container .shape{
+.cv .shape-container .shape {
     max-width: 320px;
 }
 
-.cv-details{
+.cv-details {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     justify-items: flex-start;
-    gap:12rem;
+    gap: 12rem;
     align-items: center;
 }
 
-.flames{
-    max-width: 30px;
-    margin:0 2rem;
+.pictogrammes {
+    max-width: 50px;
+    margin: 0 2rem;
 }
 
-.flame-title{
+.title {
     display: flex;
     align-items: flex-end;
 }
-
-
-
-
-
 </style>

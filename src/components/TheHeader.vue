@@ -24,18 +24,43 @@
 
 
         <div class="right-header centered">
+
+
             <div class="social-media-header centered">
-                <div class="social-media-img-container"><img class="mail" width="30" src="/img/pictogramme/email.svg">
-                    <p class="hidden-element">alexandre.meux@etu.u-pec.fr</p>
+
+
+                <div class="social-media-img-container">
+                    <transition name="fade-slide">
+                        <p v-if="activeEmail" class="hidden-element">alexandre.meux@etu.u-pec.fr</p>
+                    </transition><img @mouseout="activeEmail = false" @mouseover="activeEmail = true" class="mail"
+                        width="30" src="/img/pictogramme/email.svg">
+
                 </div>
-                <div class="social-media-img-container"><img class="linkedIn" width="35"
-                        src="/img/pictogramme/linkedIn.png">
-                    <p class="hidden-element">www.linkedin.com/in/alexandre-meux-2ba28a29b</p>
+
+
+
+
+                <div class="social-media-img-container">
+                    <transition name="fade-slide">
+                        <p v-if="activeLinkedIn" class="hidden-element">www.linkedin.com/in/alexandre-meux-2ba28a29b</p>
+                    </transition><img @mouseout="activeLinkedIn = false" @mouseover="activeLinkedIn = true"
+                        class="linkedIn" width="35" src="/img/pictogramme/linkedIn.png">
+
                 </div>
-                <div class="social-media-img-container"><img class="phone" width="30" src="/img/pictogramme/phone.png">
-                    <p class="hidden-element">07 50 57 84 84</p>
+
+
+
+
+
+                <div class="social-media-img-container">
+                    <transition name="fade-slide">
+                        <p v-if="activePhone" class="hidden-element">07 50 57 84 84</p>
+                    </transition><img @mouseout="activePhone = false" @mouseover="activePhone = true" class="phone"
+                        width="30" src="/img/pictogramme/phone.png">
+
                 </div>
             </div>
+
 
 
             <TheParameters />
@@ -48,33 +73,38 @@
             <div class="navbar-responsive-container">
 
 
+                <div class="logo_menu">
+                    <p class="navbar-responsive-title gray-bck">Menu</p>
+                    <RouterLink to="/"><img class="logo" width="55" src="/img/am.png" alt="Logo"></RouterLink>
+                    <span @click="isActive = !isActive" class="close-btn">✖</span>
+                </div>
 
-                <p class="navbar-responsive-title gray-bck">Menu</p>
 
 
-                <RouterLink to="/"><img class="logo" width="200" src="/img/am.png" alt="Logo"></RouterLink>
-
-
-                <span @click="isActive = !isActive" class="close-btn">✖</span>
 
 
 
                 <div class="navbar-responsive-list-container">
                     <ul class="navbar-responsive-list">
                         <li>
-                            <img class="pictogramme-header" src="/img/pictogramme/header/home.svg"><RouterLink class="header-links" to="/">Accueil</RouterLink>
+                            <img class="pictogramme-header" src="/img/pictogramme/header/home.svg">
+                            <RouterLink class="header-links" to="/">Accueil</RouterLink>
                         </li>
                         <li>
-                            <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg"><RouterLink class="header-links" to="/aPropos">À propos de moi</RouterLink>
+                            <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg">
+                            <RouterLink class="header-links" to="/aPropos">À propos de moi</RouterLink>
                         </li>
                         <li>
-                          <img src="/img/pictogramme/header/stars.svg" class="pictogramme-header"> <RouterLink to="/competences" class="header-links">Compétences</RouterLink>
+                            <img src="/img/pictogramme/header/stars.svg" class="pictogramme-header">
+                            <RouterLink to="/competences" class="header-links">Compétences</RouterLink>
                         </li>
                         <li>
-                           <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header"><RouterLink to="/portfolio" class="header-links">Portfolio</RouterLink>
+                            <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header">
+                            <RouterLink to="/portfolio" class="header-links">Portfolio</RouterLink>
                         </li>
                         <li>
-                            <img src="/img/pictogramme/header/contact.svg" class="pictogramme-header"><RouterLink to="/contact" class="header-links">Contact</RouterLink>
+                            <img src="/img/pictogramme/header/contact.svg" class="pictogramme-header">
+                            <RouterLink to="/contact" class="header-links">Contact</RouterLink>
                         </li>
                     </ul>
                 </div>
@@ -134,7 +164,10 @@ export default {
     },
     data() {
         return {
-            isActive: false
+            isActive: false,
+            activeEmail: false,
+            activeLinkedIn: false,
+            activePhone: false
         }
     },
     watch: {
@@ -184,6 +217,23 @@ export default {
 
 
 <style scoped>
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+    transition: all 0.3s ease;
+}
+
+.fade-slide-enter {
+    opacity: 0;
+    transform: translateY(10px);
+    /* Décalage initial */
+}
+
+.fade-slide-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+    /* Décalage final */
+}
+
 header {
     width: 100%;
     position: sticky;
@@ -257,10 +307,10 @@ header {
     align-items: center;
 }
 
-.navbar-responsive-container li .pictogramme-header{
-    width:18px;
+.navbar-responsive-container li .pictogramme-header {
+    width: 18px;
     filter: invert(0.85);
-    margin:0 1rem;
+    margin: 0 1rem;
 }
 
 .social-media-header {
@@ -315,7 +365,7 @@ header {
 
 .navbar-responsive-container {
     width: max-content;
-    padding: 120px 18rem 6rem 5rem;
+    padding: 20px;
     background: var(--footer-header_bck);
     position: relative;
     height: -webkit-fill-available;
@@ -323,31 +373,34 @@ header {
 
 .navbar-responsive-list-container {
     display: flex;
+    justify-content: flex-start;
+    margin-top: 7rem;
+    margin-left: 2rem;
+}
+
+.logo_menu {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    gap:2rem;
 }
 
 .close-btn {
     cursor: pointer;
-    font-size: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: var(--double-white);
-    width: 45px;
-    height: 45px;
+    font-size: 15px;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
-    border-radius: var(--circle-radius);
+    border-radius: 8px;
+    margin-left: 10rem;
 }
 
 .close-btn:hover {
-    background: var(--gray);
+    background: #ffffff14;
 }
 
 .navbar-responsive-title {
-    position: absolute;
-    top: 2rem;
-    left: 4rem;
     background: var(--gray);
     padding: 4px;
     margin-bottom: 1.15rem;
@@ -358,12 +411,6 @@ header {
     font-size: 1.5rem;
 }
 
-.navbar-responsive-container .logo {
-    position: absolute;
-    bottom: 5rem;
-    left: 5%;
-}
-
 .social-media-img-container {
     display: flex;
     gap: 5px;
@@ -372,7 +419,6 @@ header {
 }
 
 .hidden-element {
-    display: none;
     transition: 0.55s;
     color: var(--black);
     font-size: 1.25rem;
@@ -384,7 +430,7 @@ header {
     height: 100vh;
     width: 100%;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.5);
     transition: 0.1s ease-out;
 }
 

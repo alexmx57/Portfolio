@@ -7,6 +7,6 @@
   
   <script>
   export default {
-    name: 'PortfolioSection2',
+    name: 'C_Graphisme',
   };
   </script>

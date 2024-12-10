@@ -8,7 +8,7 @@
     <TheHeader />
 
 
-    <RouterView/>
+    <RouterView />
 
 
     <TheFooter />
@@ -57,7 +57,7 @@ export default {
   methods: {
     handleScroll() {
       const scrollPosition = document.querySelector('#main').scrollTop;
-      this.activeArrow = scrollPosition >= 10; // Active uniquement si le scroll dépasse 10px
+      this.activeArrow = scrollPosition >= 10;
     },
     scrollTop() {
       document.querySelector('#main').scrollTop = 0;
@@ -108,8 +108,7 @@ input {
 }
 
 
-p,
-span {
+p {
   font-size: 1.75rem;
 }
 
@@ -139,13 +138,13 @@ h3 {
 
 h2 {
   font-size: 5rem;
-  font-weight: var(--font-weight-midbold);
+  font-weight: var(--font-weight-bold);
 }
 
 h1 {
   font-size: 10rem;
   color: var(--gray);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-black);
   text-transform: uppercase;
 }
 
@@ -233,6 +232,7 @@ button:hover {
 
 
   --font-weight-extrabold: 900;
+  --font-weight-black: 800;
   --font-weight-bold: 700;
   --font-weight-midbold: 500;
   --font-weight-light: 300;

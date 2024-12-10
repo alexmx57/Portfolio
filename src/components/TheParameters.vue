@@ -60,16 +60,15 @@ export default {
 
 
 <style scoped>
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.75s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-
+  transform: translateX(100vh);
 }
 
 

@@ -4,21 +4,43 @@
 
     <div class="params">
         <form>
-            <div class="dark-mode-svg">
-                <svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px"
-                    class="ScIconSVG-sc-1q25cff-1 jpczqG">
-                    <g>
-                        <path fill-rule="evenodd"
-                            d="M8.614 2.134a8.001 8.001 0 001.388 15.879 8.003 8.003 0 007.884-6.635 6.947 6.947 0 01-2.884.62 7.004 7.004 0 01-6.388-9.864zM6.017 5.529a5.989 5.989 0 00-2.015 4.484c0 3.311 2.69 6 6 6a5.99 5.99 0 004.495-2.028 9.006 9.006 0 01-8.48-8.456z"
-                            clip-rule="evenodd"></path>
-                    </g>
-                </svg>
+
+
+
+
+
+
+            <div class="form-block">
+                <div class="dark-mode-svg">
+                    <svg width="100%" height="100%" version="1.1" viewBox="0 0 20 20" x="0px" y="0px"
+                        class="ScIconSVG-sc-1q25cff-1 jpczqG">
+                        <g>
+                            <path fill-rule="evenodd"
+                                d="M8.614 2.134a8.001 8.001 0 001.388 15.879 8.003 8.003 0 007.884-6.635 6.947 6.947 0 01-2.884.62 7.004 7.004 0 01-6.388-9.864zM6.017 5.529a5.989 5.989 0 00-2.015 4.484c0 3.311 2.69 6 6 6a5.99 5.99 0 004.495-2.028 9.006 9.006 0 01-8.48-8.456z"
+                                clip-rule="evenodd"></path>
+                        </g>
+                    </svg>
+                </div>
+                <p class="dark-mode-text">Mode Nocturne</p>
+                <div class="toggle-container">
+                    <input @click="toggleDarkMode" v-model="isDarkMode" type="checkbox" id="toggle"
+                        class="toggle-input">
+                    <label for="toggle" class="toggle-label"></label>
+                </div>
             </div>
-            <p class="dark-mode-text">Mode Nocturne</p>
-            <div class="toggle-container">
-                <input @click="toggleDarkMode" v-model="isDarkMode" type="checkbox" id="toggle" class="toggle-input">
-                <label for="toggle" class="toggle-label"></label>
+
+
+            <div class="form-block">
+                <img src="/img/pictogramme/hamburger.svg">
+                <p class="dark-mode-text">Menu hamburger</p>
+                <div class="toggle-container">
+                    <input type="checkbox" id="toggle" class="toggle-input">
+                    <label for="toggle" class="toggle-label"></label>
+                </div>
             </div>
+
+
+
         </form>
     </div>
 
@@ -63,7 +85,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 .params {
     background: var(--footer-header_bck);
     position: absolute;
@@ -86,22 +108,28 @@ export default {
 form {
     height: 200px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    flex-direction: column;
+    gap:2rem;
 }
 
 
-.dark-mode-svg{
+.dark-mode-svg,img {
     filter: invert(0.85);
     width: 25px;
 }
 
-.dark-mode-text{
+.dark-mode-text {
     font-weight: 600;
 }
 
 
-
+.form-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
@@ -156,4 +184,6 @@ form {
 .toggle-input:checked+.toggle-label::after {
     transform: translateX(20px);
 }
+
+
 </style>

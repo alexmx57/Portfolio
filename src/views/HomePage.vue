@@ -185,8 +185,8 @@ export default {
 }
 
 .card:hover .card-inner .card-front{
-    transform: rotateX(32deg) rotateY(22deg);
-    box-shadow: 1px 1px 15px 10px black;
+    transform: scale(1.125) rotateX(32deg) rotateY(22deg);
+    box-shadow: 1px 1px 15px 6px black;
 }
 
 .card-front,
