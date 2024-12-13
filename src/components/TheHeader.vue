@@ -88,23 +88,28 @@
                     <ul class="navbar-responsive-list">
                         <li>
                             <img class="pictogramme-header" src="/img/pictogramme/header/home.svg">
-                            <RouterLink class="header-links" to="/">Accueil</RouterLink>
+                            <RouterLink active-class="active-header-link" class="header-links" to="/">Accueil
+                            </RouterLink>
                         </li>
                         <li>
                             <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg">
-                            <RouterLink class="header-links" to="/aPropos">À propos de moi</RouterLink>
+                            <RouterLink active-class="active-header-link" class="header-links" to="/aPropos">À propos de
+                                moi</RouterLink>
                         </li>
                         <li>
                             <img src="/img/pictogramme/header/stars.svg" class="pictogramme-header">
-                            <RouterLink to="/competences" class="header-links">Compétences</RouterLink>
+                            <RouterLink active-class="active-header-link" to="/competences" class="header-links">
+                                Compétences</RouterLink>
                         </li>
                         <li>
                             <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header">
-                            <RouterLink to="/portfolio" class="header-links">Portfolio</RouterLink>
+                            <RouterLink active-class="active-header-link" to="/portfolio" class="header-links">Portfolio
+                            </RouterLink>
                         </li>
                         <li>
                             <img src="/img/pictogramme/header/contact.svg" class="pictogramme-header">
-                            <RouterLink to="/contact" class="header-links">Contact</RouterLink>
+                            <RouterLink active-class="active-header-link" to="/contact" class="header-links">Contact
+                            </RouterLink>
                         </li>
                     </ul>
                 </div>
@@ -234,6 +239,13 @@ export default {
     /* Décalage final */
 }
 
+.active-header-link {
+    transition: 0.25s ease-out;
+    background-color: var(--gray);
+    border-radius: 20px;
+    padding: 8px;
+}
+
 header {
     width: 100%;
     position: sticky;
@@ -301,7 +313,7 @@ header {
 }
 
 .navbar-responsive-container li {
-    margin: 2.5rem 0;
+    margin: 1.8rem 0;
     width: max-content;
     display: flex;
     align-items: center;
@@ -382,7 +394,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:2rem;
+    gap: 2rem;
 }
 
 .close-btn {

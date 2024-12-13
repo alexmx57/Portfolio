@@ -97,7 +97,7 @@ export default {
 }
 
 
-input {
+input[type="text"] {
   font-family: "Roboto Flex";
   color: var(--white);
   letter-spacing: 1px;
@@ -174,6 +174,7 @@ button {
   border: 1px solid rgb(90, 106, 121);
   transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   white-space: nowrap;
+  cursor: pointer;
 }
 
 
@@ -247,7 +248,7 @@ button:hover {
 
   /**   PRIMARY COLORS   **/
 
-
+--light-blue:#1D1D2C;
   --black: hsl(0, 0%, 0%);
   --gray: rgb(90, 106, 121);
   --white: hsl(0, 0%, 100%);
@@ -304,7 +305,7 @@ button:hover {
 
 body {
   font-family: 'Roboto Flex';
-  background: #1D1D2C;
+  background: var(--light-blue);
   color: rgb(236, 236, 236);
   overflow-x: hidden;
 }

@@ -9,7 +9,7 @@ import C_Audiovisuel from '../views/portfolio/C_Audiovisuel.vue'
 import C_Graphisme from '../views/portfolio/C_Graphisme.vue'
 import C_DeveloppementWeb from '../views/portfolio/C_DeveloppementWeb.vue'
 import C_UIUX from '../views/portfolio/C_UIUX.vue'
-
+import ProjectDetails from '../views/ProjectDetails.vue'
 
 
 import { createRouter, createWebHistory } from 'vue-router'
@@ -29,9 +29,10 @@ export const routes = [
             { path: 'audiovisuel', component: C_Audiovisuel },
             { path: 'graphisme', component: C_Graphisme },
             { path: 'developpement-web', component: C_DeveloppementWeb },
-            { path: 'UI-UX', component: C_UIUX }
+            { path: 'UI-UX', component: C_UIUX },
         ]
     },
+    {path: "/portfolio/:category/:id",component: ProjectDetails, },
 ]
 
 

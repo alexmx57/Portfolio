@@ -10,16 +10,20 @@
                     <p class="navigation-title gray-bck">Plan du site</p>
                     <ul>
                         <li>
-                            <RouterLink class="footer-links" to="/aPropos">À propos</RouterLink>
+                            <RouterLink active-class="active-footer-link" class="footer-links" to="/aPropos">À propos
+                            </RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="footer-links" to="/competences">Compétences</RouterLink>
+                            <RouterLink active-class="active-footer-link" class="footer-links" to="/competences">
+                                Compétences</RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="footer-links" to="/portfolio">Portfolio</RouterLink>
+                            <RouterLink active-class="active-footer-link" class="footer-links" to="/portfolio">Portfolio
+                            </RouterLink>
                         </li>
                         <li>
-                            <RouterLink class="footer-links" to="/contact">Contact</RouterLink>
+                            <RouterLink active-class="active-footer-link" class="footer-links" to="/contact">Contact
+                            </RouterLink>
                         </li>
                     </ul>
 
@@ -38,7 +42,7 @@
 
                 <div class="middle-footer">
                     <div class="logo-sentence flex-column-center">
-                        <RouterLink href="/">
+                        <RouterLink active-class="active-footer-link" to="/">
                             <img class="logo" width="125" src="/img/am.png" alt="Logo">
                         </RouterLink>
                         <p class="gray">Restons connectés pour ne rien manquer</p>
@@ -116,6 +120,14 @@ export default {
     padding: 0.5rem;
 }
 
+.active-footer-link {
+    transition: 0.25s ease-out;
+    text-decoration: underline;
+    font-weight: var(--font-weight-extrabold) !important;
+    color:var(--yellow-white);
+}
+
+
 .outer-footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -129,6 +141,7 @@ export default {
     font-family: "Roboto Flex";
     font-size: 1.5rem;
     margin: 0.5rem 0;
+    font-weight: 600;
     cursor: pointer;
 }
 
