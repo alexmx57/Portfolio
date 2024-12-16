@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       ui_ux_Projects: [
-        {
+      {
           id: 1,
           nom: 'Digital Detox',
           description: "Vidéo réalisé en cours d'Anglais pour aider les gens...",
@@ -36,9 +36,19 @@ export default {
         { id: 2, 
           nom: 'Bob',
            description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' },
+           background: '/img/projet/vitinha2.png' 
+          },
+          { id: 3, 
+          nom: 'Xob',
+           description: 'Vidéo sur l’univers de Bob...', 
+           background: '/img/projet/vitinha2.png' 
+          },
+          { id: 4, 
+          nom: 'Cob',
+           description: 'Vidéo sur l’univers de Bob...', 
+           background: '/img/projet/vitinha2.png' 
+          },
       ],
-      visibleProjectId: null, 
     };
   },
 };

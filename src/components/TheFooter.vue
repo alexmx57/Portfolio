@@ -10,7 +10,7 @@
                     <p class="navigation-title gray-bck">Plan du site</p>
                     <ul>
                         <li>
-                            <RouterLink active-class="active-footer-link" class="footer-links" to="/aPropos">À propos
+                            <RouterLink active-class="active-footer-link" class="footer-links" to="/a-propos">À propos
                             </RouterLink>
                         </li>
                         <li>

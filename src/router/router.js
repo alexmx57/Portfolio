@@ -19,7 +19,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 export const routes = [
     { path: '/', component: HomePage },
-    { path: '/aPropos', component: APropos },
+    { path: '/a-propos', component: APropos },
     { path: '/contact', component: MyContact },
     { path: '/competences', component: MyCompetencies },
     {

@@ -17,7 +17,7 @@
 
 
 
-        <nav class="secondary-nav">
+        <transition-group tag="nav" class="secondary-nav">
 
 
 
@@ -76,7 +76,7 @@
 
 
 
-        </nav>
+        </transition-group>
 
 
 
@@ -134,7 +134,7 @@
     border-radius: 20px;
     padding: 3rem;
     text-align: center;
-    min-width: 200px;
+    min-width: 20rem;
     transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
     transform: translateY(30px);
     background: var(--light-blue);
@@ -167,7 +167,7 @@
 }
 
 .card-container img {
-    max-width: 75px;
+    max-width: 7.5rem;
     filter: invert(1);
 }
 
@@ -180,7 +180,7 @@
 .banner {
     width: 100%;
     min-height: 60rem;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url(/public/img/banniere.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(/public/img/banniere.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

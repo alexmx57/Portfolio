@@ -2,9 +2,11 @@
     <div class="page">
 
 
+<div class="banner">
+    <div class="banner-content">
 
         <form>
-            <h2>COMPÉTENCES</h2>
+            <h1>COMPÉTENCES</h1>
             <p>Durant mes deux premières années d'études j'ai eu l'occasion d'apprendre de nombreuses nouvelles
                 compétences variées et chargées, retrouvez les ci-dessous.</p>
             <label id="search-bar"><input class="mobile__recherche__btn" type="image"
@@ -13,8 +15,8 @@
                     placeholder="Rechercher une compétence ou un domaine" />
             </label>
         </form>
-
-
+</div>
+</div>
 
 
 
@@ -29,7 +31,7 @@
 
 
 
-        <transition-group mode="out-in" name="fade" tag="div" class="categories">
+        <transition-group mode="in-out" name="fade" tag="div" class="categories">
             <div v-for="category in filteredCategories" :key="category.domain" class="category">
                 <h3 class="domain-title">{{ category.domain }}</h3>
                 <div class="skill-collection">
@@ -332,14 +334,14 @@ export default {
             return this.categories
                 .map(category => {
                     const matchesDomain = category.domain.toLowerCase().includes(searchQuery);
-
                     const filteredSkills = category.skills.filter(skill =>
-                        skill.title.toLowerCase().includes(searchQuery) ||
-                        skill.description.toLowerCase().includes(searchQuery)
+                        skill.title.toLowerCase().includes(searchQuery)
                     );
+                    
                     return matchesDomain
                         ? { ...category, skills: category.skills }
                         : { ...category, skills: filteredSkills };
+                        
                 })
                 .filter(category => category.skills.length > 0);
         }
@@ -360,6 +362,28 @@ export default {
 
 
 <style scoped>
+
+.banner {
+    width: 100%;
+    min-height: 60rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(/public/img/banniere2.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    color: white;
+    box-shadow: -5px 3px 15px black;
+}
+
+
+.banner-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
 .level-indicator {
     display: flex;
@@ -390,12 +414,11 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 10rem;
     gap: 2.5rem;
 }
 
 form p {
-    max-width: 280px;
+    padding: 0 16rem;
 }
 
 
@@ -415,11 +438,11 @@ form p {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.5) translateY(-20px);
 }
 
 .fade-move {
-    transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all .5s cubic-bezier(0, 0, 0.33, 1.32);
 }
 
 #search-bar {
@@ -462,7 +485,7 @@ form p {
     flex-direction: column;
     gap: 15px;
     align-items: flex-start;
-    margin: 10rem 0;
+    margin: 5rem 0;
     flex-wrap: wrap
 }
 

@@ -1,26 +1,26 @@
 <template>
-    <div class="trombinoscope-container">
-      <div class="trombinoscope">
-        <div
-          v-for="project in projects"
-          :key="project.id"
-          :style="{ backgroundImage: `linear-gradient(180deg, #00000000, #ffffff), url(${project.background})` }"
-          class="project"
-          @mouseleave="visibleProjectId = null"
-          @mouseover="visibleProjectId = project.id"
-        >
-          <h3 class="project-name">{{ project.nom }}</h3>
-          <transition name="text-appear">
-            <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
-          </transition>
-          <RouterLink :to="`${baseRoute}/${project.nom.toLowerCase()}`">
-            <button class="projectButton">Voir les détails</button>
-          </RouterLink>
-        </div>
+  <div class="trombinoscope-container">
+    <button @click="toggleSort">Trier par ordre alphabétique {{ sortByAlphabet ? ': Oui' : ": Non" }}</button>
+    <TransitionGroup name="list" tag="div" class="trombinoscope">
+      <div
+        v-for="project in sortedProjects"
+        :key="project.id"
+        :style="{ backgroundImage: `linear-gradient(180deg, #00000000, #ffffff00), url(${project.background})` }"
+        class="project"
+        @mouseleave="visibleProjectId = null"
+        @mouseover="visibleProjectId = project.id"
+      >
+        <h3 class="project-name">{{ project.nom }}</h3>
+        <transition name="text-appear">
+          <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
+        </transition>
+        <RouterLink :to="`${baseRoute}/${project.nom.toLowerCase()}`">
+          <button class="projectButton">Voir les détails</button>
+        </RouterLink>
       </div>
-    </div>
-  </template>
-  
+    </TransitionGroup>
+  </div>
+</template>
 
 
 
@@ -42,22 +42,36 @@
 
   <script>
   export default {
-    props: {
-      projects: {
-        type: Array,
-        required: true,
-      },
-      baseRoute: {
-        type: String,
-        default: '/portfolio/audiovisuel',
-      },
+  props: {
+    projects: {
+      type: Array,
+      required: true,
     },
-    data() {
-      return {
-        visibleProjectId: null,
-      };
+    baseRoute: {
+      type: String,
+      default: '/portfolio/audiovisuel',
     },
-  };
+  },
+  data() {
+    return {
+      visibleProjectId: null,
+      sortByAlphabet: false,
+    };
+  },
+  computed: {
+    sortedProjects() {
+      if (this.sortByAlphabet) {
+        return [...this.projects].sort((a, b) => a.nom.localeCompare(b.nom));
+      }
+      return this.projects;
+    },
+  },
+  methods: {
+    toggleSort() {
+      this.sortByAlphabet = !this.sortByAlphabet;
+    },
+  },
+};
   </script>
   
 
@@ -96,7 +110,9 @@
   transform: translateX(100vh);
 }
 
-
+.list-move{
+  transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
 
 
 .trombinoscope {
@@ -110,7 +126,7 @@
 
 
 .project {
-    transition: all 0.2s ease;
+    /* transition: transform .25s cubic-bezier(0.455, 0.03, 0.515, 0.955); */
     flex-basis: 40rem;
     min-height: 40rem;
     background-size: contain;
@@ -145,7 +161,7 @@
   position:absolute;
   top:3rem;
   left:3rem;
-  transition: 0.25s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: 0.2s ease-in;
 }
 
 .project:hover .project-name{

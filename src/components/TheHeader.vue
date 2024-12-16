@@ -6,7 +6,7 @@
 
 
         <div class="logo-navbar centered">
-            <div @click="changeActivity" class="menu"
+            <div @click="this.isActive = !this.isActive" class="menu"
                 style="width: 32px; height: 100%; display: block; fill: currentcolor;">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false"
                     style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
@@ -68,8 +68,8 @@
         </div>
 
 
-
-        <div :class="{ actif: isActive, inactif: !isActive }" class="navbar-responsive">
+     <Transition name="fade-slide" mode="in-out">
+        <div v-if="isActive" class="navbar-responsive">
             <div class="navbar-responsive-container">
 
 
@@ -93,7 +93,7 @@
                         </li>
                         <li>
                             <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg">
-                            <RouterLink active-class="active-header-link" class="header-links" to="/aPropos">À propos de
+                            <RouterLink active-class="active-header-link" class="header-links" to="/a-propos">À propos de
                                 moi</RouterLink>
                         </li>
                         <li>
@@ -115,6 +115,7 @@
                 </div>
             </div>
         </div>
+     </Transition>
 
 
 
@@ -184,11 +185,6 @@ export default {
             }
         },
     },
-    methods: {
-        changeActivity() {
-            this.isActive = !this.isActive
-        }
-    }
 }
 
 
@@ -224,26 +220,20 @@ export default {
 <style scoped>
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-    transition: all 0.3s ease;
+  transition: all .25s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
-.fade-slide-enter {
-    opacity: 0;
-    transform: translateY(10px);
-    /* Décalage initial */
-}
-
+.fade-slide-enter-from,
 .fade-slide-leave-to {
-    opacity: 0;
-    transform: translateY(10px);
-    /* Décalage final */
+transform: scale(0.5) translateX(100vw);
+  opacity: 0;
 }
 
 .active-header-link {
     transition: 0.25s ease-out;
     background-color: var(--gray);
-    border-radius: 20px;
-    padding: 8px;
+    border-radius: 8px;
+    padding: 6px;
 }
 
 header {
@@ -259,8 +249,6 @@ header {
     backdrop-filter: var(--bck-blur);
     border-bottom: var(--light-gray-border);
 }
-
-
 
 .navbar-responsive-container .header-links::after {
     content: "";
@@ -367,12 +355,14 @@ header {
     border: 1px solid rgb(136, 134, 134);
 }
 
-
 .navbar-responsive {
-    transition: 0.45s ease;
     position: fixed;
-    left: -200vw;
     top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .navbar-responsive-container {

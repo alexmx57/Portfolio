@@ -166,15 +166,16 @@ h4 {
 
 button {
   font-family: 'Roboto Flex';
-  font-weight: 900;
-  border-radius: 10px;
-  padding: 8px;
+  font-weight: var(--font-weight-extrabold);
+  border-radius: 1rem;
+  padding: 0.8rem;
   background: #141428;
   color: rgb(238, 238, 238);
   border: 1px solid rgb(90, 106, 121);
   transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   white-space: nowrap;
   cursor: pointer;
+  font-size: 1.33rem;
 }
 
 
