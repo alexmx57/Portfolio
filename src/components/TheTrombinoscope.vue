@@ -41,6 +41,10 @@
         <Transition mode="out-in" name="banner-appear">
           <div v-if="visibleProjectId !== project.id" class="project-banner">
             <h3 class="project-name">{{ project.nom }}</h3>
+            <div class="right-banner">
+            <span class="date span">{{project.date}}</span>
+            <div class="skills"><img v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="skill" :alt="`Skill: ${skill}`" class="skill-image" /></div>
+          </div>
           </div>
         </Transition>
         <Transition mode="out-in" name="text-appear">
@@ -211,6 +215,27 @@ required:true
     transform: scale(0.1) translateY(-20px);
 } */
 
+.skills{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap:0.75rem;
+  margin-top: 4px;
+}
+
+.skill-image{
+  width:25px;
+}
+
+.select-container{
+  margin-left: 7vw;
+}
+
+.right-banner{
+  padding:10px;
+  text-align: right;
+}
 
 .project-description,.projectButton{
   z-index:10000;
@@ -267,13 +292,15 @@ select{
 .project .project-name{
   font-size: 2rem;
   transition: 0.2s ease-in;
+  padding:1vw 1vw;
 }
 
 .project .project-banner{
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(6px);
   height: fit-content;
-  padding:1.25vw 1vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 .project:hover .project-name{

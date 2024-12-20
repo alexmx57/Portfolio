@@ -169,13 +169,13 @@
 
 .router-enter-active,
 .router-leave-active {
-  transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
 .router-enter-from,
 .router-leave-to {
   opacity: 0;
-  transform: translateY(10vh) scale(0) rotateX(80deg) rotateY(30deg);
+  transform: translateX(50px) scale(0.5) rotateX(20deg) rotateY(7.5deg);
 }
 
 .nav-container{
