@@ -30,10 +30,11 @@
                         </a>
                     </div>
                 </div>
-                <a class="cta-btn" href="portfolio.php">
+                <RouterLink class="cta-btn" :to="links[rand] ">
                     <button class="centered">Voir Plus<img class="plus" alt="plus image"
-                            src="/img/pictogramme/plus.svg"></button>
-                </a>
+                            src="/img/pictogramme/plus.svg">
+                        </button>
+                </RouterLink>
             </div>
         </div>
         <div class="card">
@@ -84,6 +85,23 @@
 
 export default {
     name: 'HomePage',
+    data() {
+        return {
+            rand: null,
+            links: [
+                '/portfolio/graphisme',
+                '/portfolio/audiovisuel',
+                '/portfolio/developpement-web',
+                '/portfolio/ui-ux',
+                '/competences',
+                '/a-propos',
+                '/contact'
+            ]
+        }
+    },
+    created() {
+        this.rand = Math.floor(Math.random() * this.links.length);
+    }
 };
 
 

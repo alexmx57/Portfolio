@@ -5,7 +5,7 @@
     <div class="banner">
         <div class="banner-content">
             <h1>Bienvenue sur mon PORTFOLIO</h1>
-            <p>Découvrez mes projets et compétences.</p>
+            <p>Découvrez mes meilleurs projets auquels j'ai pu participé, que ce soit en BUT MMI ou dans le cadre d'un projet personnel et compétences.</p>
             <button>En savoir plus</button>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <h4>Audiovisuel</h4>
         <transition><button v-if="audiovisuel">Découvrir</button></transition>
     </div>
-    <p id="level">Level</p>
+    <span  class="span">Level</span>
 </router-link>
 
 
@@ -46,7 +46,7 @@
         <h4>Graphisme</h4>
         <transition><button v-if="graphisme">Découvrir</button></transition>
     </div>
-    <p id="level">Level</p>
+    <span  class="span">Level</span>
 </router-link>
 
 
@@ -58,7 +58,7 @@
         <h4>Développement Web</h4>
         <transition><button v-if="devWeb">Découvrir</button></transition>
     </div>
-    <p id="level">Level</p>
+    <span class="span">Level</span>
 </router-link>
 
 
@@ -70,7 +70,7 @@
         <h4>UI/UX</h4>
         <transition><button v-if="uiux">Découvrir</button></transition>
     </div>
-    <p id="level">Level</p>
+    <span  class="span">Level</span>
 </router-link>
 
 
@@ -83,9 +83,75 @@
 
 
 
+
+
+
+
+
+<div class="nav-container">
+<div class="navigation">
+
+
+
+
+<div class="links-container">
+    <router-link class="link" to="/portfolio/audiovisuel">
+   <p>Audiovisuel</p>
+</router-link>
+
+
+
+
+
+<router-link class="link" to="/portfolio/graphisme">
+   <p>Graphisme</p>
+</router-link>
+
+
+
+
+<router-link class="link" to="/portfolio/developpement-web">
+    <p>Développement web</p>
+</router-link>
+
+
+
+
+<router-link class="link" to="/portfolio/ui-ux">
+  <p>UI-UX</p>
+</router-link>
+</div>
+
+<div class="search-container">
+    <p>Rechercher un projet</p>
+    <label for="project-search"></label><input type="text" placeholder="Rechercher un projet" id="project-search">
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="content">
-            <router-view></router-view>
+            <transition mode="out-in" name="router">
+            <RouterView></RouterView>
+        </transition>
         </div>
+
+
+
 
 
 
@@ -101,11 +167,48 @@
 
 <style scoped>
 
-#level{
-    font-size: 1.1rem;
-    font-weight: 200;
-    color: rgb(127, 127, 127);
-    align-self: end;
+.router-enter-active,
+.router-leave-active {
+  transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.router-enter-from,
+.router-leave-to {
+  opacity: 0;
+  transform: translateY(10vh) scale(0) rotateX(80deg) rotateY(30deg);
+}
+
+.nav-container{
+    display: flex;
+    justify-content: center;
+}
+
+.navigation .links-container{
+    display: flex;
+    gap:4vw;
+    
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    gap:1vw;
+}
+
+.navigation{
+    margin:auto;
+    background: var(--footer-header_bck);
+    border:var(--light-gray-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding:1vw;
+    border-radius: 4px;
+    gap:2vw;
+}
+
+.router-link span{
     position: absolute;
     right: 20px;
     bottom: 15px;

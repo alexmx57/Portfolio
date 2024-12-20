@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheTrombinoscope :projects="webDevelopmentProjects" baseRoute="/portfolio/developpement-web"/>
+    <TheTrombinoscope Title="Développement web" :projects="webDevelopmentProjects" baseRoute="/portfolio/developpement-web"/>
   </div>
 </template>
 
@@ -23,24 +23,24 @@ export default {
       webDevelopmentProjects: [
       {
           id: 1,
-          nom: 'Digital Detox',
-          description: "Vidéo réalisé en cours d'Anglais pour aider les gens...",
-          background: '/img/projet/digitaldetox.png',
+          nom: 'Quantum',
+          description: "Site web de vente de bière",
+          background: '/img/projet/quantum.png',
         },
         { id: 2, 
-          nom: 'Bob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'Eh Connard !',
+           description: 'Site web féministe', 
+           background: '/img/projet/ehConnard.png' 
           },
           { id: 3, 
-          nom: 'Xob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'Shanks',
+           description: 'Site web consacré au personnage de Shanks dans One Piece', 
+           background: '/img/projet/shanksSite.png' 
           },
           { id: 4, 
-          nom: 'Cob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'Films du moment',
+           description: 'Page web présentant les films du moment', 
+           background: '/img/projet/filmDuMoment.png' 
           },
       ],
     };

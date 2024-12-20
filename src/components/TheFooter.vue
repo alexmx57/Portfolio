@@ -63,9 +63,10 @@
                     </ul>
                     <div class="send-mail flex footer-cta">
                         <input type="text" placeholder="M'envoyer un mail">
-                        <div class="send-cta">
-                            <img width="30" src="/img/pictogramme/correct.png">
-                        </div>
+                        <!-- <div class="send-cta"> -->
+                            <!-- <img width="30" src="/img/pictogramme/correct.png"> -->
+                             <button>Envoyer</button>
+                        <!-- </div> -->
                     </div>
                 </div>
 
@@ -199,6 +200,8 @@ export default {
 
 .footer-cta {
     margin-top: 2rem;
+    gap:0.5vw;
+    align-items: center;
 }
 
 .send-cta {

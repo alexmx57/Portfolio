@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheTrombinoscope TheTrombinoscope
+    <TheTrombinoscope Title="Graphisme" TheTrombinoscope
       :projects="graphicProjects"
       baseRoute="/portfolio/graphisme"
     />
@@ -83,20 +83,25 @@ export default {
            description: 'Affiche pour une campagne de festival pour la jeunesse européenne', 
            background: '/img/projet/festival.png' 
           },
-          { id: 11, 
+          { id: 12, 
           nom: 'Cerf de Virginie',
            description: 'Animal totem ', 
            background: '/img/projet/cerfDeVirginie.jpg' 
           },
-          { id: 12, 
+          { id: 13, 
           nom: 'Auto-Portrait',
            description: 'Auto-Portrait', 
            background: '/img/projet/autoPortrait.png' 
           },
-          { id: 13, 
+          { id: 14, 
           nom: 'Lame secrète',
            description: 'Téléphone lame secrète', 
            background: '/img/projet/lameSecrete.jpg' 
+          },
+          { id: 15,
+          nom: 'Campagne publicitaire',
+           description: "Affiche campagne publicitaire contre l'étalement urbain",
+           background: '/img/projet/campagnePublicitaire.png'
           },
       ],
     };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheTrombinoscope TheTrombinoscope
+    <TheTrombinoscope Title="Audiovisuel" TheTrombinoscope
       :projects="audiovisualProjects"
       baseRoute="/portfolio/audiovisuel"
     />
@@ -34,20 +34,26 @@ export default {
           background: '/img/projet/digitaldetox.png',
         },
         { id: 2, 
-          nom: 'Bob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: "Scène d'épouvante",
+           description: 'Vidéo épouvante réalisé avec la caméra 3D sur after effects', 
+           background: '/img/projet/epouvante.png' 
           },
           { id: 3, 
-          nom: 'Xob',
+          nom: 'New World Symphony',
            description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+           background: '/img/projet/clip.png' 
           },
           { id: 4, 
-          nom: 'Cob',
+          nom: 'Les Arènes',
            description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+           background: '/img/projet/lesArenes.png' 
           },
+          { id: 5, 
+          nom: 'Player',
+           description: 'Vidéo sur l’univers de Bob...', 
+           background: '/img/projet/player.png' 
+          },
+          
       ],
     };
   },

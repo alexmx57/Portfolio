@@ -38,7 +38,7 @@
                     <div :id="'skill-' + skill.id" v-for="skill in category.skills" :key="skill.id" class="skill">
                         <div class="top-part">
                             <div>
-                                <h4 class="skill-title">{{ skill.title }}</h4><span id="lieu">{{ skill.place }}</span>
+                                <h4 class="skill-title">{{ skill.title }}</h4><span class="span">{{ skill.place }}</span>
                             </div>
                             <img width="35" :src="'/img/pictogramme/competences/' + skill.image">
                         </div>
@@ -47,7 +47,7 @@
                            
                            
                              <div>
-                                <button>Projet associé</button><span id="level">Level {{ skill.level }}<div class="level-indicator"><span v-for="n in 10" :key="n" class="circle" :class="{ active: n <= skill.level }"></span>
+                                <button>Projet associé</button><span class="span">Level {{ skill.level }}<div class="level-indicator"><span v-for="n in 10" :key="n" class="circle" :class="{ active: n <= skill.level }"></span>
                              </div></span>
                             </div>
 
@@ -365,7 +365,7 @@ export default {
 
 .banner {
     width: 100%;
-    min-height: 60rem;
+    min-height: 50rem;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(/public/img/banniere2.png);
     background-size: cover;
     background-position: center;

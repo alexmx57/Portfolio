@@ -7,9 +7,9 @@
 
     <TheHeader />
 
-
+<Transition name="fade-slide">
     <RouterView />
-
+</Transition>
 
     <TheFooter />
 
@@ -90,14 +90,52 @@ export default {
   opacity: 0;
 }
 
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all .725s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+transform: scale(0.5) translateX(100vw);
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
 #main {
   max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
+.span{
+  color:var(--gray);
+  font-weight: var(--font-weight-extrabold);
+}
 
-input[type="text"] {
+select{
+  background: var(--white);
+  font-family: 'Roboto Flex';
+  padding:8px 10px;
+  border-radius: 5px;
+  color:black;
+  font-weight: var(--font-weight-extrabold);
+  border: var(--light-black-border);
+}
+
+* input::placeholder,textarea::placeholder{
+  color:rgb(135, 135, 135);
+}
+
+input[type="text"],textarea {
   font-family: "Roboto Flex";
   color: var(--white);
   letter-spacing: 1px;
@@ -105,8 +143,15 @@ input[type="text"] {
   padding: 1.2rem 1rem;
   display: flex;
   align-items: center;
+  background: none;
+  border: var(--light-gray-border);
+  border-radius: 0.5vw;
+  transition: 0.25s ease-out;
 }
 
+input:focus:not(input[type="image"]){
+  border-bottom: 10px double var(--gray);
+}
 
 p {
   font-size: 1.75rem;

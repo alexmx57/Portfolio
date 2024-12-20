@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheTrombinoscope TheTrombinoscope
+    <TheTrombinoscope Title="UI-UX" TheTrombinoscope
       :projects="ui_ux_Projects"
       baseRoute="/portfolio/audiovisuel"
     />
@@ -34,19 +34,19 @@ export default {
           background: '/img/projet/digitaldetox.png',
         },
         { id: 2, 
-          nom: 'Bob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'Marseille.fr',
+           description: 'Maquette du site web de Marseille sur axure', 
+           background: '/img/projet/marseille.png' 
           },
           { id: 3, 
-          nom: 'Xob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'AccessiWeb',
+           description: "Maquette axure visant à expliquer tous les rouages de l'accessibilité sur le web",
+           background: '/img/projet/accessiWeb.png' 
           },
           { id: 4, 
-          nom: 'Cob',
-           description: 'Vidéo sur l’univers de Bob...', 
-           background: '/img/projet/vitinha2.png' 
+          nom: 'ErgoWeb',
+           description: "Maquette axure traitant de l'ergonomie web", 
+           background: '/img/projet/ergoWeb.png' 
           },
       ],
     };
