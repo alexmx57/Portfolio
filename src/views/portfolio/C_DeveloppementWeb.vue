@@ -1,7 +1,5 @@
 <template>
-  <div>
     <TheTrombinoscope Title="Développement web" :projects="webDevelopmentProjects" baseRoute="/portfolio/developpement-web"/>
-  </div>
 </template>
 
 

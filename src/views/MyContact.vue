@@ -66,8 +66,6 @@ export default {
             padding: 10px;
             font-size: 16px;
             border: var(--light-gray-border);
-            border-radius: 5px;
-            background: none;
         }
         .email {
             text-align: center;

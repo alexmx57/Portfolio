@@ -1,34 +1,132 @@
 <template>
+
+
+
+
+<div class="nav-container">
+<div class="navigation">
+
+
+
+
+
+   
+
+
+  <div class="links-container"> 
+    
+    
+    <router-link class="link" to="/portfolio/tous">
+   <p>Tous</p>
+</router-link>
+
+
+
+
+    <router-link class="link" to="/portfolio/audiovisuel">
+   <p>Audiovisuel</p>
+</router-link>
+
+
+  
+
+
+<router-link class="link" to="/portfolio/graphisme">
+   <p>Graphisme</p>
+</router-link>
+
+
+
+
+<router-link class="link" to="/portfolio/developpement-web">
+    <p>Développement web</p>
+</router-link>
+
+
+
+
+<router-link class="link" to="/portfolio/ui-ux">
+  <p>UI-UX</p>
+</router-link>
+</div>
+
+
+
+
+<div class="search-container">
+    <label for="project-search"></label>
+    <input 
+        type="text" 
+        placeholder="Rechercher un projet" 
+        id="project-search" 
+        v-model="searchQuery" 
+    />
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
   <div class="trombinoscope-container">
+
+
+
+
+    <div class="section-details">
     <h3>{{ Title }}</h3>
 
 <div class="projectCounter"><span class="span">Tous les projets ({{ numberOfProject }})</span></div>
 
 
+
+
+
 <div class="select-container">
-    <select id="sort">
-      <option value="true">Trier par ordre alphabétique (Oui)</option>
-      <option value="false">Trier par ordre alphabétique (Non)</option>
-    </select>
 
-    <select id="sort-date">
-      <option value="true">Trier par date (Oui)</option>
-      <option value="false">Trier par date (Non)</option>
-    </select>
 
-    <select id="sort-order">
-      <option value="true">Ordre chronologique (Oui)</option>
-      <option value="false">Ordre chronologique (Non)</option>
-    </select>
+  <select id="sort" v-model="sortOption">
+  <option value="none" selected>Pas de tri par ordre alphabétique</option>
+  <option value="a-z">Trier par ordre alphabétique (A-Z)</option>
+  <option value="z-a">Trier par ordre alphabétique (Z-A)</option>
+</select>
+
+<select id="sort-date" v-model="sortDateOption">
+  <option value="none" selected>Pas de tri par date</option>
+  <option value="3-months">Derniers 3 mois</option>
+  <option value="6-months">Derniers 6 mois</option>
+  <option value="1-year">Dernière année</option>
+  <option value="2-years">Derniers 2 ans</option>
+</select>
+
+<select id="sort-order" v-model="sortOrderOption">
+  <option value="none" selected>Pas de tri par ordre chronologique</option>
+  <option value="chronological">Trier par ordre chronologique</option>
+  <option value="reverse-chronological">Trier par ordre antichronologique</option>
+</select>
+
+
+</div>
 </div>    
     
     
+    <Transition mode="out-in" name="banner-appear">
+<h2 v-if="sortedProjects.length === 0" class="no-projects-message">
+      Aucun projet trouvé correspondant aux critères.
+    </h2>
+    </Transition>
+
     
-    
-    
-    
-    
-    <TransitionGroup name="list" tag="div" class="trombinoscope">
+    <TransitionGroup mode="out-in" name="list" tag="div" class="trombinoscope">
       <div
         v-for="project in sortedProjects"
         :key="project.id"
@@ -43,7 +141,7 @@
             <h3 class="project-name">{{ project.nom }}</h3>
             <div class="right-banner">
             <span class="date span">{{project.date}}</span>
-            <div class="skills"><img v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="skill" :alt="`Skill: ${skill}`" class="skill-image" /></div>
+            <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="skill" :alt="`Skill: ${skill}`" class="skill-image" /></div>
           </div>
           </div>
         </Transition>
@@ -91,25 +189,73 @@ required:true
     },
   },
   data() {
-    return {
-      numberOfProject:this.projects.length,
-      visibleProjectId: null,
-      sortByAlphabet: false,
-    };
+  return {
+    numberOfProject: this.projects.length,
+    visibleProjectId: null,
+    sortByAlphabet: false,
+    sortOption: 'none',
+    sortDateOption: 'none',
+    sortOrderOption: 'none',
+    searchQuery: '',
+  };
+},
+computed: {
+  sortedProjects() {
+    let sorted = [...this.projects];
+
+    // Filtrer par recherche
+    if (this.searchQuery) {
+      const query = this.normalizeString(this.searchQuery.toLowerCase());
+      sorted = sorted.filter(project =>
+        this.normalizeString(project.nom.toLowerCase()).includes(query) ||
+        this.normalizeString(project.description.toLowerCase()).includes(query)
+      );
+    }
+
+    // Trier par ordre alphabétique basé sur le titre (nom)
+    if (this.sortOption === 'a-z') {
+      sorted.sort((a, b) => a.nom.localeCompare(b.nom));
+    } else if (this.sortOption === 'z-a') {
+      sorted.sort((a, b) => b.nom.localeCompare(a.nom));
+    }
+
+    // Filtrer par date
+    const now = new Date();
+    if (this.sortDateOption === '3-months') {
+      sorted = sorted.filter(project => 
+        (now - new Date(project.date)) / (1000 * 60 * 60 * 24) <= 90
+      );
+    } else if (this.sortDateOption === '6-months') {
+      sorted = sorted.filter(project => 
+        (now - new Date(project.date)) / (1000 * 60 * 60 * 24) <= 180
+      );
+    } else if (this.sortDateOption === '1-year') {
+      sorted = sorted.filter(project => 
+        (now - new Date(project.date)) / (1000 * 60 * 60 * 24) <= 365
+      );
+    } else if (this.sortDateOption === '2-years') {
+      sorted = sorted.filter(project => 
+        (now - new Date(project.date)) / (1000 * 60 * 60 * 24) <= 730
+      );
+    }
+
+    // Trier par ordre chronologique
+    if (this.sortOrderOption === 'chronological') {
+      sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else if (this.sortOrderOption === 'reverse-chronological') {
+      sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    return sorted;
   },
-  computed: {
-    sortedProjects() {
-      if (this.sortByAlphabet) {
-        return [...this.projects].sort((a, b) => a.nom.localeCompare(b.nom));
-      }
-      return this.projects;
-    },
-  },
+},
   mounted() {
-    // Ajouter les événements de survol
     this.addHoverEffect();
   },
   methods: {
+    normalizeString(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  },
     toggleSort() {
       this.sortByAlphabet = !this.sortByAlphabet;
     },
@@ -130,9 +276,9 @@ required:true
             overlay.style.left = '0';
             overlay.style.width = '100%';
             overlay.style.height = '100%';
-            overlay.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 ))';
+            overlay.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75 ))';
             overlay.style.pointerEvents = 'none';
-            overlay.style.transition = 'opacity 0.3s ease-in-out';
+            overlay.style.transition = 'opacity 0.85s ease-in-out';
             overlay.style.opacity = '1';
             project.appendChild(overlay);
           }
@@ -177,14 +323,22 @@ required:true
   <style scoped>
  .text-appear-enter-active,
 .text-appear-leave-active {
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.75s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .text-appear-enter-from,
 .text-appear-leave-to {
   opacity: 0;
-  transform: translateX(10vh);
+  transform: translateX(50vh);
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -193,27 +347,81 @@ required:true
 
 .banner-appear-enter-active,
 .banner-appear-leave-active {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .banner-appear-enter-from,
 .banner-appear-leave-to {
   opacity: 0;
-  transform: translateY(-50px) scale(0.95);
+  transform: translateY(-100px);
 }
 
 
-/* 
+
+
+
 .list-enter-active,
 .list-leave-active {
-    transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all 0.5s ease;
 }
 
-.list-enter,
+.list-enter-from,
 .list-leave-to {
-    opacity: 0;
-    transform: scale(0.1) translateY(-20px);
-} */
+  opacity: 0;
+  transform: scale(0.25) translateY(20px);
+}
+
+.list-move {
+  transition: transform 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+
+
+
+
+
+
+
+
+
+.nav-container{
+    display: flex;
+    justify-content: center;
+}
+
+.navigation .links-container{
+    display: flex;
+    gap:4vw;
+    
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    gap:1vw;
+}
+
+.navigation{
+    margin:auto;
+    background: var(--footer-header_bck);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    padding:1vw;
+    border-radius: 4px;
+    gap:2vw;
+}
+
+.trombinoscope-container{
+  display: flex;
+  flex-direction: column;
+}
+
+h2{
+  text-align: center;
+  margin:15rem 0;
+}
 
 .skills{
   display: flex;
@@ -229,7 +437,9 @@ required:true
 }
 
 .select-container{
-  margin-left: 7vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap:3rem;
 }
 
 .right-banner{
@@ -237,27 +447,31 @@ required:true
   text-align: right;
 }
 
-.project-description,.projectButton{
-  z-index:10000;
+.select-container{
+  margin:2rem 0;
 }
 
-select{
-  margin:4rem 1rem;
+.section-details{
+  margin: 2rem 8vw;
+}
+
+.project-description,.projectButton{
+  z-index:100;
 }
 
 .trombinoscope {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   gap: 5rem;
-  color: black !important;
+  width: 100%;
+  justify-content: center;
+  padding:0 0.4rem
 }
 
 
 .project {
     transition:0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    flex-basis: 40rem;
+    min-width: 40rem;
     min-height: 40rem;
     background-size: cover;
     background-repeat: no-repeat;
@@ -273,18 +487,20 @@ select{
 
 .project .project-description{
   color:var(--white);
-  font-weight:700;
-  padding:16rem 4rem;
+  font-weight:var(--font-weight-bold);
   text-align: center;
+  padding:16rem 4rem;
   position: absolute;
+  text-transform: uppercase;
+  font-family: Advent Pro !important;
 }
 
 
 
 
 .project:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px 1px var(--yellow-white);
+  z-index: 1000;
+  transform: scale(1.1);
 }
 
 
@@ -292,15 +508,16 @@ select{
 .project .project-name{
   font-size: 2rem;
   transition: 0.2s ease-in;
-  padding:1vw 1vw;
+  padding:1.5rem;
 }
 
 .project .project-banner{
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(6px);
   height: fit-content;
   display: flex;
   justify-content: space-between;
+  border-bottom: var(--light-gray-border);
 }
 
 .project:hover .project-name{

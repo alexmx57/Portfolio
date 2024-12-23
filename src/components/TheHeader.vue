@@ -30,22 +30,16 @@
 
 
                 <div class="social-media-img-container">
-                    <transition name="fade-slide">
-                        <p v-if="activeEmail" class="hidden-element">alexandre.meux@etu.u-pec.fr</p>
-                    </transition><img @mouseout="activeEmail = false" @mouseover="activeEmail = true" class="mail"
+                   <img @mouseout="activeEmail = false" @mouseover="activeEmail = true" class="mail"
                         width="30" src="/img/pictogramme/email.svg">
-
                 </div>
 
 
 
 
                 <div class="social-media-img-container">
-                    <transition name="fade-slide">
-                        <p v-if="activeLinkedIn" class="hidden-element">www.linkedin.com/in/alexandre-meux-2ba28a29b</p>
-                    </transition><img @mouseout="activeLinkedIn = false" @mouseover="activeLinkedIn = true"
+                    <img @mouseout="activeLinkedIn = false" @mouseover="activeLinkedIn = true"
                         class="linkedIn" width="35" src="/img/pictogramme/linkedIn.png">
-
                 </div>
 
 
@@ -53,11 +47,8 @@
 
 
                 <div class="social-media-img-container">
-                    <transition name="fade-slide">
-                        <p v-if="activePhone" class="hidden-element">07 50 57 84 84</p>
-                    </transition><img @mouseout="activePhone = false" @mouseover="activePhone = true" class="phone"
+<img @mouseout="activePhone = false" @mouseover="activePhone = true" class="phone"
                         width="30" src="/img/pictogramme/phone.png">
-
                 </div>
             </div>
 
@@ -171,9 +162,6 @@ export default {
     data() {
         return {
             isActive: false,
-            activeEmail: false,
-            activeLinkedIn: false,
-            activePhone: false
         }
     },
     watch: {
@@ -231,9 +219,12 @@ transform: scale(0.5) translateX(100vw);
 
 .active-header-link {
     transition: 0.25s ease-out;
-    background-color: var(--gray);
+    /* background-color: var(--gray);
     border-radius: 8px;
-    padding: 6px;
+    padding: 6px; */
+    text-decoration: underline;
+    color:var(--yellow-white);
+    font-weight:var(--font-weight-extrabold) !important;
 }
 
 header {

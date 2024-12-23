@@ -7,7 +7,7 @@
 
     <TheHeader />
 
-<Transition name="fade-slide">
+<Transition mode="out-in" name="fade-slide">
     <RouterView />
 </Transition>
 
@@ -80,24 +80,16 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: 0.25s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: all .725s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .fade-slide-enter-from,
 .fade-slide-leave-to {
-transform: scale(0.5) translateX(100vw);
+transform: scale(0.75) rotateX(60deg) rotateY(25deg) translateX(75vw);
   opacity: 0;
 }
 
@@ -105,6 +97,110 @@ transform: scale(0.5) translateX(100vw);
 
 
 
+
+:root {
+  --bg-color-smooth-dark-grey-1: radial-gradient(circle,
+      rgba(53, 51, 54, 1) 0%,
+      rgba(0, 0, 0, 1) 100%);
+  --bg-color-smooth-dark-grey-2: radial-gradient(circle,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(45, 52, 54, 1) 100%);
+  --bg-color-smooth-dark-grey-conic: conic-gradient(from 338deg at 50% 50%,
+      #000000 0%,
+      #696b74 23%,
+      #000000 75%);
+
+
+  /**   BORDER - RADIUS    **/
+
+
+
+  --circle-radius: 100px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+
+
+
+
+
+
+  /**   FONT - WEIGHT    **/
+
+
+  --font-weight-extrabold: 900;
+  --font-weight-black: 800;
+  --font-weight-bold: 700;
+  --font-weight-midbold: 500;
+  --font-weight-light: 300;
+  --font-weight-extralight: 100;
+
+
+
+
+
+
+
+
+  /**   PRIMARY COLORS   **/
+  --hard-blue:#141428;
+  --light-blue:#1D1D2C;
+  --white-text:#ECECEC;
+  --black: hsl(0, 0%, 0%);
+  --gray: rgb(90, 106, 121);
+  --white: hsl(0, 0%, 100%);
+  --yellow-white: rgb(243 234 187);
+
+
+
+
+
+
+
+  /**   BACKGROUNDS    **/
+
+
+  --bck: rgb(0, 0, 0);
+  --footer-header_bck: #141428;
+  --transparent-bck: rgba(0, 0, 0, 0.2);
+  --gray-hover: rgba(90, 106, 121, 0.6);
+
+
+
+
+
+
+
+  /**   BORDERS   **/
+
+  /**  DOUBLE BORDERS  **/
+
+  --double-gray: 0.5rem double var(--gray);
+  --double-white: 0.5rem double var(--white);
+  --double-black: 0.5rem double var(--black);
+
+
+  /**  SOLID BORDERS  **/
+  --light-yellow-white-border:0.1rem solid var(--yellow-white);
+  --light-gray-border: 0.1rem solid var(--gray);
+  --light-white-border: 0.1rem solid var(--white);
+  --light-black-border: 0.1rem solid var(--black);
+
+
+
+
+
+
+
+
+
+
+  /** BLUR **/
+
+  --bck-blur: blur(10px);
+}
 
 
 
@@ -122,45 +218,60 @@ transform: scale(0.5) translateX(100vw);
 }
 
 select{
-  background: var(--white);
+  background: var(--gray);
   font-family: 'Roboto Flex';
-  padding:8px 10px;
-  border-radius: 5px;
-  color:black;
+  padding:0.8rem 1rem;
+  border-radius: 0.5rem;
+  color:#ECECEC;
   font-weight: var(--font-weight-extrabold);
   border: var(--light-black-border);
 }
 
-* input::placeholder,textarea::placeholder{
-  color:rgb(135, 135, 135);
+select:focus{
+ border:2px solid var(--white-text);
 }
 
-input[type="text"],textarea {
+select option{
+  font-weight: var(--font-weight-extrabold);
+}
+
+* input::placeholder,textarea::placeholder{
+  color:var(--gray);
+}
+
+input[type="text"],input[type='email'],textarea {
   font-family: "Roboto Flex";
-  color: var(--white);
+  font-weight: var(--font-weight-bold);
+  color: var(--gray);
   letter-spacing: 1px;
   font-size: 1.7rem;
   padding: 1.2rem 1rem;
+  border-radius: 5px 5px 0 0;
   display: flex;
   align-items: center;
-  background: none;
+  background: var(--yellow-white);
   border: var(--light-gray-border);
-  border-radius: 0.5vw;
-  transition: 0.25s ease-out;
+  transition: 0.1s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
-input:focus:not(input[type="image"]){
-  border-bottom: 10px double var(--gray);
+input[type="text"]:focus,input[type="email"]:focus,textarea:focus{
+  border-bottom: 4px solid var(--gray);
+}
+
+input,select,textarea{
+  outline:none
 }
 
 p {
   font-size: 1.75rem;
+  font-weight: var(--font-weight-midbold);
+  color:var(--white-text)
 }
 
-
 a {
-  color: var(--white);
+  color: var(--white-text);
   transition: 0.2s ease-in;
+  cursor: pointer;
 }
 
 u {
@@ -215,12 +326,13 @@ button {
   border-radius: 1rem;
   padding: 0.8rem;
   background: #141428;
-  color: rgb(238, 238, 238);
+  color: var(--white-text);
   border: 1px solid rgb(90, 106, 121);
   transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   white-space: nowrap;
   cursor: pointer;
   font-size: 1.33rem;
+  cursor:pointer
 }
 
 
@@ -237,117 +349,6 @@ button:hover {
 
 
 
-:root {
-  --bg-color-smooth-dark-grey-1: radial-gradient(circle,
-      rgba(53, 51, 54, 1) 0%,
-      rgba(0, 0, 0, 1) 100%);
-  --bg-color-smooth-dark-grey-2: radial-gradient(circle,
-      rgba(0, 0, 0, 1) 50%,
-      rgba(45, 52, 54, 1) 100%);
-
-  --bg-color-soursweet: radial-gradient(circle,
-      rgba(252, 176, 69, 1) 50%,
-      rgba(255, 101, 11, 1) 100%);
-  --bg-color-smooth-dark-grey-conic: conic-gradient(from 338deg at 50% 50%,
-      #000000 0%,
-      #696b74 23%,
-      #000000 75%);
-
-
-
-
-
-
-
-  /**   BORDER - RADIUS    **/
-
-
-
-  --circle-radius: 100px;
-  --radius-4: 4px;
-  --radius-8: 8px;
-  --radius-12: 12px;
-  --radius-16: 16px;
-  --radius-20: 20px;
-
-
-
-
-
-
-  /**   FONT - WEIGHT    **/
-
-
-  --font-weight-extrabold: 900;
-  --font-weight-black: 800;
-  --font-weight-bold: 700;
-  --font-weight-midbold: 500;
-  --font-weight-light: 300;
-  --font-weight-extralight: 100;
-
-
-
-
-
-
-
-
-  /**   PRIMARY COLORS   **/
-
---light-blue:#1D1D2C;
-  --black: hsl(0, 0%, 0%);
-  --gray: rgb(90, 106, 121);
-  --white: hsl(0, 0%, 100%);
-  --yellow-white: rgb(243 234 187);
-
-
-
-
-
-
-
-  /**   BACKGROUNDS    **/
-
-
-  --bck: rgb(0, 0, 0);
-  --footer-header_bck: #141428;
-  --transparent-bck: rgba(0, 0, 0, 0.2);
-  --gray-hover: rgba(90, 106, 121, 0.6);
-
-
-
-
-
-
-
-  /**   BORDERS   **/
-
-  /**  DOUBLE BORDERS  **/
-
-  --double-gray: 0.5rem double var(--gray);
-  --double-white: 0.5rem double var(--white);
-  --double-black: 0.5rem double var(--black);
-
-  /**  SOLID BORDERS  **/
-
-  --light-gray-border: 0.1rem solid var(--gray);
-  --light-white-border: 0.1rem solid var(--white);
-  --light-black-border: 0.1rem solid var(--black);
-
-
-
-
-
-
-
-
-
-
-  /** BLUR **/
-
-  --bck-blur: blur(10px);
-}
-
 
 body {
   font-family: 'Roboto Flex';
@@ -355,8 +356,6 @@ body {
   color: rgb(236, 236, 236);
   overflow-x: hidden;
 }
-
-
 
 *,
 *::before,
@@ -382,11 +381,6 @@ hr {
   background: rgba(243, 234, 187, 0.2);
   height: 1px;
   border: 0;
-}
-
-
-input:focus {
-  border: var(--light-black-border)
 }
 
 .flex-column {
@@ -563,14 +557,6 @@ input:focus {
   html {
     font-size: 8px;
   }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    letter-spacing: 0;
-  }
-
   .navbar-responsive-container {
     width: 50% !important;
   }
@@ -582,7 +568,7 @@ input:focus {
   }
 
   .navbar-responsive-container {
-    width: auto !important;
+    width: 70% !important;
   }
 
   h1 {
@@ -598,4 +584,17 @@ input:focus {
     font-size: 1.85rem;
   }
 }
+
+
+
+
+@media (max-width:350px) {
+  .navbar-responsive-container {
+    width: auto !important;
+  }
+}
+
+
+
+
 </style>

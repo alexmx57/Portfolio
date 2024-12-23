@@ -18,7 +18,7 @@
                                 Compétences</RouterLink>
                         </li>
                         <li>
-                            <RouterLink active-class="active-footer-link" class="footer-links" to="/portfolio">Portfolio
+                            <RouterLink active-class="active-footer-link" class="footer-links" :to="links[rand]">Portfolio
                             </RouterLink>
                         </li>
                         <li>
@@ -28,8 +28,8 @@
                     </ul>
 
 
-                    <a class="cv-download centered footer-cta" href="public/file/CV_Alexandre-MEUX.pdf"
-                        download="CV_Alexandre-MEUX.pdf">
+                    <a class="cv-download centered footer-cta" href="/files/CV.pdf"
+                        download="CV.pdf">
                         <button class="centered">
                             <div>Télécharger Mon CV</div><img class="plus" alt="plus image"
                                 src="/img/pictogramme/download.svg">
@@ -58,7 +58,7 @@
                     <ul>
                         <li><a class="footer-links"><u>Téléphone:</u>07 50 57 84 84</a></li>
                         <li><a class="footer-links"><u>E-mail:</u>alexandre.meux@etu.u-pec.fr</a></li>
-                        <li><a class="footer-links">LinkedIn</a></li>
+                        <li><a href="https://www.linkedin.com/in/alexandre-meux-2ba28a29b/" class="footer-links">LinkedIn</a></li>
                         <li><a class="footer-links">Contact</a></li>
                     </ul>
                     <div class="send-mail flex footer-cta">
@@ -96,7 +96,22 @@
 <script>
 
 export default {
-    name: 'TheFooter'
+    name: 'TheFooter',
+    data() {
+        return {
+            rand: null,
+            links: [
+                '/portfolio/graphisme',
+                '/portfolio/audiovisuel',
+                '/portfolio/developpement-web',
+                '/portfolio/ui-ux',
+                '/portfolio/tous'
+            ]
+        }
+    },
+    created() {
+        this.rand = Math.floor(Math.random() * this.links.length);
+    }
 }
 
 
@@ -201,7 +216,7 @@ export default {
 .footer-cta {
     margin-top: 2rem;
     gap:0.5vw;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .send-cta {

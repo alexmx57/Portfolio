@@ -5,6 +5,7 @@ import MyContact from '../views/MyContact.vue'
 import MyCompetencies from '../views/MyCompetencies.vue'
 
 
+import C_Tous from '../views/portfolio/C_Tous.vue'
 import C_Audiovisuel from '../views/portfolio/C_Audiovisuel.vue'
 import C_Graphisme from '../views/portfolio/C_Graphisme.vue'
 import C_DeveloppementWeb from '../views/portfolio/C_DeveloppementWeb.vue'
@@ -26,6 +27,7 @@ export const routes = [
         path: '/portfolio',
         component: MyPortfolio,
         children: [
+            { path: 'tous', component: C_Tous },
             { path: 'audiovisuel', component: C_Audiovisuel },
             { path: 'graphisme', component: C_Graphisme },
             { path: 'developpement-web', component: C_DeveloppementWeb },

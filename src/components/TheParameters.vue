@@ -68,12 +68,13 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateX(100vh);
+  transform: translateX(25vh) scale(0.5);
 }
 
 
 
 div svg {
+  cursor: pointer;
   fill: var(--white);
   transition: 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

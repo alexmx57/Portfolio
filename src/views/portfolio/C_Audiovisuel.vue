@@ -1,10 +1,8 @@
 <template>
-  <div>
     <TheTrombinoscope Title="Audiovisuel" TheTrombinoscope
       :projects="audiovisualProjects"
       baseRoute="/portfolio/audiovisuel"
     />
-  </div>
 </template>
 
 

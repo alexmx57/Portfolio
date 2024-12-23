@@ -88,49 +88,6 @@
 
 
 
-<div class="nav-container">
-<div class="navigation">
-
-
-
-
-<div class="links-container">
-    <router-link class="link" to="/portfolio/audiovisuel">
-   <p>Audiovisuel</p>
-</router-link>
-
-
-
-
-
-<router-link class="link" to="/portfolio/graphisme">
-   <p>Graphisme</p>
-</router-link>
-
-
-
-
-<router-link class="link" to="/portfolio/developpement-web">
-    <p>Développement web</p>
-</router-link>
-
-
-
-
-<router-link class="link" to="/portfolio/ui-ux">
-  <p>UI-UX</p>
-</router-link>
-</div>
-
-<div class="search-container">
-    <p>Rechercher un projet</p>
-    <label for="project-search"></label><input type="text" placeholder="Rechercher un projet" id="project-search">
-</div>
-
-
-
-</div>
-</div>
 
 
 
@@ -143,12 +100,10 @@
 
 
 
-
-        <div class="content">
-            <transition mode="out-in" name="router">
+        
+         <Transition name="router">
             <RouterView></RouterView>
-        </transition>
-        </div>
+        </Transition>
 
 
 
@@ -175,7 +130,7 @@
 .router-enter-from,
 .router-leave-to {
   opacity: 0;
-  transform: translateX(50px) scale(0.5) rotateX(20deg) rotateY(7.5deg);
+  transform: translateY(50px) scale(0.8);
 }
 
 .nav-container{
@@ -198,11 +153,10 @@
 .navigation{
     margin:auto;
     background: var(--footer-header_bck);
-    border:var(--light-gray-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 95%;
     padding:1vw;
     border-radius: 4px;
     gap:2vw;
@@ -261,7 +215,7 @@
     display: flex;
     gap: 45px;
     justify-content: center;
-    margin-bottom: 250px;
+    margin-bottom: 100px;
 }
 
 .card-container h4 {

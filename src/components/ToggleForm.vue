@@ -93,9 +93,10 @@ export default {
     right: 0;
     padding: 10px 20px 30px 40px;
     border-radius: 40px 5px 5px 40px;
-    border: var(--light-gray-border);
-    transition: 1s ease-in;
+    z-index:100000000000;
+    box-shadow: -2px 3px 20px 1px rgba(255, 255, 255, 0.025);
 }
+
 
 .params p {
     margin: 0 1rem;

@@ -98,14 +98,14 @@ export default {
                 title: "PHP", 
                 place: 'IUT Sénart-Fontainebleau', 
                 image: 'php.png', 
-                description: "Langage utilisé pour le développement backend, notamment pour des projets académiques à l'IUT Sénart-Fontainebleau.", 
+                description: "Langage utilisé pour le développement backend.", 
                 level: "5" 
             },
             { 
                 id: 2, 
                 title: "JavaScript", 
                 place: 'IUT Sénart-Fontainebleau', 
-                image: 'js.png', 
+                image: 'js.svg', 
                 description: "Langage central pour le développement web interactif et dynamique.", 
                 level: "6" 
             },
@@ -113,7 +113,7 @@ export default {
                 id: 3, 
                 title: "CSS", 
                 place: 'IUT Sénart-Fontainebleau', 
-                image: 'css.png', 
+                image: 'css.svg', 
                 description: "Utilisé pour le design et la mise en page des sites web.", 
                 level: "8" 
             },
@@ -121,7 +121,7 @@ export default {
                 id: 4, 
                 title: "HTML", 
                 place: 'IUT Sénart-Fontainebleau', 
-                image: 'HTML.ico', 
+                image: 'HTML.svg', 
                 description: "Langage de base pour structurer les pages web.", 
                 level: "7" 
             }
@@ -239,7 +239,7 @@ export default {
                 id: 15, 
                 title: "Figma", 
                 place: 'Projet personnel', 
-                image: 'figma.svg', 
+                image: 'figma.png', 
                 description: "Création de maquettes et de designs collaboratifs.", 
                 level: "2" 
             }
@@ -438,7 +438,7 @@ form p {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
-    transform: scale(0.5) translateY(-20px);
+    transform: scale(0.25) translateY(-20px);
 }
 
 .fade-move {
@@ -452,7 +452,7 @@ form p {
     border-radius: 0.8rem;
     box-sizing: border-box;
     color: rgb(255, 255, 255);
-    background: none;
+    background: var(--yellow-white);
     border: 1px solid var(--gray);
     display: flex;
     align-items: center;
@@ -463,11 +463,12 @@ form p {
     background: none;
     border: 0;
     outline: none;
-    min-width:40rem;
+    min-width:45rem;
 }
 
 #search-bar input[type="image"]{
-    width:2.5rem
+    width:2.5rem;
+    filter: invert(1);
 }
 
 .no-results {

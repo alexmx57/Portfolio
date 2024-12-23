@@ -30,7 +30,7 @@
                         </a>
                     </div>
                 </div>
-                <RouterLink class="cta-btn" :to="links[rand] ">
+                <RouterLink class="cta-btn" :to="links[rand]">
                     <button class="centered">Voir Plus<img class="plus" alt="plus image"
                             src="/img/pictogramme/plus.svg">
                         </button>
@@ -93,6 +93,7 @@ export default {
                 '/portfolio/audiovisuel',
                 '/portfolio/developpement-web',
                 '/portfolio/ui-ux',
+                '/portfolio/tous',
                 '/competences',
                 '/a-propos',
                 '/contact'
