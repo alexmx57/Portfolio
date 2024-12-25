@@ -2,73 +2,7 @@
 
 
 
-
-<div class="nav-container">
-<div class="navigation">
-
-
-
-
-
-   
-
-
-  <div class="links-container"> 
-    
-    
-    <router-link class="link" to="/portfolio/tous">
-   <p>Tous</p>
-</router-link>
-
-
-
-
-    <router-link class="link" to="/portfolio/audiovisuel">
-   <p>Audiovisuel</p>
-</router-link>
-
-
-  
-
-
-<router-link class="link" to="/portfolio/graphisme">
-   <p>Graphisme</p>
-</router-link>
-
-
-
-
-<router-link class="link" to="/portfolio/developpement-web">
-    <p>Développement web</p>
-</router-link>
-
-
-
-
-<router-link class="link" to="/portfolio/ui-ux">
-  <p>UI-UX</p>
-</router-link>
-</div>
-
-
-
-
-<div class="search-container">
-    <label for="project-search"></label>
-    <input 
-        type="text" 
-        placeholder="Rechercher un projet" 
-        id="project-search" 
-        v-model="searchQuery" 
-    />
-</div>
-
-
-
-</div>
-</div>
-
-
+ 
 
 
 
@@ -85,15 +19,18 @@
     <div class="section-details">
     <h3>{{ Title }}</h3>
 
-<div class="projectCounter"><span class="span">Tous les projets ({{ numberOfProject }})</span></div>
+<div class="projectCounter"><span class="span">Tous les projets ({{ numberOfProject }}) | Projets conservés ({{ filteredProjectsCount }})</span></div>
 
 
 
 
 
+<div class="filter-container">
+
+
+
+  
 <div class="select-container">
-
-
   <select id="sort" v-model="sortOption">
   <option value="none" selected>Pas de tri par ordre alphabétique</option>
   <option value="a-z">Trier par ordre alphabétique (A-Z)</option>
@@ -114,21 +51,76 @@
   <option value="reverse-chronological">Trier par ordre antichronologique</option>
 </select>
 
+<button @click="resetFilters">Réintialiser</button>
+
+</div>
+
+
+
+
+
+
+<div class="search-container">
+  <label for="project-search">
+    <input
+      type="text"
+      placeholder="Rechercher un projet"
+      id="project-search"
+      v-model="searchQuery"
+    >
+    <Transition mode="out-in" name="cross">
+      <div v-if="searchQuery">
+    <span
+      
+      class="clear-icon"
+      @click="clearSearch"
+    >
+      ✖
+    </span>
+  </div>
+  </Transition>
+  </label>
+</div>
+
+
+
+
+<div class="grid-layout">
+  <img id="2-columns" class="grid-icon" src="/img/pictogramme/grid2.png" alt="grid-icon">
+  <img id="3-columns" class="grid-icon" src="/img/pictogramme/grid3.png" alt="grid-icon">
+  <img id="4-columns" class="grid-icon" src="/img/pictogramme/grid4.png" alt="grid-icon">
+</div>
+
 
 </div>
 </div>    
     
     
-    <Transition mode="out-in" name="banner-appear">
-<h2 v-if="sortedProjects.length === 0" class="no-projects-message">
+
+
+
+
+
+
+<Transition mode="out-in" name="banner-appear">
+  <div>
+    <h2 v-if="sortedProjects.length === 0" class="no-projects-message">
       Aucun projet trouvé correspondant aux critères.
     </h2>
-    </Transition>
-
+  </div>
+</Transition>
     
+
+
+
+
+
+
+
     <TransitionGroup mode="out-in" name="list" tag="div" class="trombinoscope">
-      <div
+      <router-link
         v-for="project in sortedProjects"
+        :to="`${baseRoute}/${project.nom.toLowerCase().replace(/ /g, '-')}`" 
         :key="project.id"
         :style="{ backgroundImage: `url(${project.background})` }"
         class="project"
@@ -141,17 +133,14 @@
             <h3 class="project-name">{{ project.nom }}</h3>
             <div class="right-banner">
             <span class="date span">{{project.date}}</span>
-            <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="skill" :alt="`Skill: ${skill}`" class="skill-image" /></div>
+            <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="`skill-${skill}`" :alt="`Skill: ${skill}`" class="skill-image" /></div>
           </div>
           </div>
         </Transition>
         <Transition mode="out-in" name="text-appear">
           <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
         </Transition>
-        <RouterLink :to="`${baseRoute}/${project.nom.toLowerCase()}`">
-          <button class="projectButton">Voir les détails</button>
-        </RouterLink>
-      </div>
+      </router-link>
     </TransitionGroup>
   </div>
 </template>
@@ -185,7 +174,6 @@ required:true
     },
     baseRoute: {
       type: String,
-      default: '/portfolio/audiovisuel',
     },
   },
   data() {
@@ -248,11 +236,18 @@ computed: {
 
     return sorted;
   },
+  filteredProjectsCount() {
+    return this.sortedProjects.length;
+  },
 },
   mounted() {
     this.addHoverEffect();
+    this.loadFiltersFromStorage();
   },
   methods: {
+    clearSearch() {
+    this.searchQuery = '';
+  },
     normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   },
@@ -292,7 +287,48 @@ computed: {
         });
       });
     },
+    resetFilters() {
+    this.sortOption = 'none';
+    this.sortDateOption = 'none';
+    this.sortOrderOption = 'none';
+    this.searchQuery = '';
+    this.saveFiltersToStorage();
   },
+  saveFiltersToStorage() {
+      const filters = {
+        sortOption: this.sortOption,
+        sortDateOption: this.sortDateOption,
+        sortOrderOption: this.sortOrderOption,
+        searchQuery: this.searchQuery,
+      };
+      localStorage.setItem('projectFilters', JSON.stringify(filters));
+    },
+    loadFiltersFromStorage() {
+      const filters = JSON.parse(localStorage.getItem('projectFilters'));
+      if (filters) {
+        this.sortOption = filters.sortOption || 'none';
+        this.sortDateOption = filters.sortDateOption || 'none';
+        this.sortOrderOption = filters.sortOrderOption || 'none';
+        this.searchQuery = filters.searchQuery || '';
+      }
+    },
+    
+  },
+  watch: {
+    sortOption() {
+      this.saveFiltersToStorage();
+    },
+    sortDateOption() {
+      this.saveFiltersToStorage();
+    },
+    sortOrderOption() {
+      this.saveFiltersToStorage();
+    },
+    searchQuery() {
+      this.saveFiltersToStorage();
+    },
+  },
+  
 };
 </script>
   
@@ -321,6 +357,9 @@ computed: {
 
 
   <style scoped>
+
+/* CSS TRANSITION */
+
  .text-appear-enter-active,
 .text-appear-leave-active {
   transition: all 0.75s cubic-bezier(0.23, 1, 0.320, 1);
@@ -331,18 +370,6 @@ computed: {
   opacity: 0;
   transform: translateX(50vh);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .banner-appear-enter-active,
@@ -356,8 +383,16 @@ computed: {
   transform: translateY(-100px);
 }
 
+.cross-enter-active,
+.cross-leave-active {
+  transition: all 0.55s cubic-bezier(0.23, 1, 0.320, 1);
+}
 
-
+.cross-enter-from,
+.cross-leave-to {
+  opacity: 0;
+  transform:translateX(20px) rotate(25deg) !important;
+}
 
 
 .list-enter-active,
@@ -375,43 +410,12 @@ computed: {
   transition: transform 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
+/* CSS TRANSITION */
 
 
 
 
 
-
-
-
-
-.nav-container{
-    display: flex;
-    justify-content: center;
-}
-
-.navigation .links-container{
-    display: flex;
-    gap:4vw;
-    
-}
-
-.search-container{
-    display: flex;
-    align-items: center;
-    gap:1vw;
-}
-
-.navigation{
-    margin:auto;
-    background: var(--footer-header_bck);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 95%;
-    padding:1vw;
-    border-radius: 4px;
-    gap:2vw;
-}
 
 .trombinoscope-container{
   display: flex;
@@ -427,23 +431,29 @@ h2{
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   gap:0.75rem;
   margin-top: 4px;
 }
 
 .skill-image{
-  width:25px;
+  width:1.8vw;
 }
 
 .select-container{
   display: flex;
   flex-wrap: wrap;
+  gap:2rem;
+}
+
+.filter-container{
+  display: flex;
+  flex-wrap: wrap;
   gap:3rem;
+  justify-content: space-between;
 }
 
 .right-banner{
-  padding:10px;
+  padding:0.5vw;
   text-align: right;
 }
 
@@ -452,7 +462,12 @@ h2{
 }
 
 .section-details{
-  margin: 2rem 8vw;
+  margin: 2rem auto;
+  position: relative;
+    background: var(--footer-header_bck);
+    padding: 2vw;
+    width: 85%;
+    border-radius: 8px;
 }
 
 .project-description,.projectButton{
@@ -462,12 +477,13 @@ h2{
 .trombinoscope {
   display: flex;
   flex-wrap: wrap;
-  gap: 5rem;
+  justify-content: center; 
+  align-items: center; 
   width: 100%;
-  justify-content: center;
-  padding:0 0.4rem
+  padding: 0 1rem;
+  gap:5rem;
+  margin-bottom: 5rem;
 }
-
 
 .project {
     transition:0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
@@ -482,11 +498,8 @@ h2{
     overflow: hidden;
 }
 
-
-
-
 .project .project-description{
-  color:var(--white);
+  color:var(--white-text);
   font-weight:var(--font-weight-bold);
   text-align: center;
   padding:16rem 4rem;
@@ -495,20 +508,16 @@ h2{
   font-family: Advent Pro !important;
 }
 
-
-
-
 .project:hover {
   z-index: 1000;
-  transform: scale(1.1);
+  transform: scale(1.075);
 }
 
-
-
 .project .project-name{
-  font-size: 2rem;
+  font-size: 2.25rem;
   transition: 0.2s ease-in;
-  padding:1.5rem;
+  margin: 0.75vw  0 0 0.75vw;
+  text-wrap: nowrap;
 }
 
 .project .project-banner{
@@ -517,6 +526,7 @@ h2{
   height: fit-content;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   border-bottom: var(--light-gray-border);
 }
 
@@ -532,8 +542,125 @@ h2{
 }
 
 
+label{
+  background: var(--yellow-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.search-container input {
+  padding-right: 2rem; /* Espace pour la croix */
+}
+
+.clear-icon {
+  position: absolute;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transform: translateY(-1.3rem);
+    color: #666;
+    transition: color 0.3s;
+}
+
+.clear-icon:hover {
+  color: #000;
+}
+
+.grid-layout{
+  position: absolute;
+  top:2rem;
+  right:4rem;
+  display: flex;
+  gap:2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-icon{
+  width:2rem;
+}
 
 
 
-  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+/* RESPONSIVE */
+
+/*
+@media screen and (max-width: 1024px) {
+  .trombinoscope {
+    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  .project {
+    min-width: 20vw; 
+    min-height: 20vw;
+  }
+.project-name{font-size: 1vw;}
+  .project .project-description {
+    padding: 10rem 2rem;
+  }
+}
+
+
+@media screen and (max-width: 540px) {
+  .trombinoscope {
+    grid-template-columns: repeat(5,1fr);
+    gap:2px;
+  }
+
+  .project {
+    min-width: 10vw;
+    min-height: 10vw;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .trombinoscope {
+    grid-template-columns: repeat(3, minmax(10rem, 1fr));
+  }
+  .project-name{
+    font-size: 1.2rem !important;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .trombinoscope {
+    grid-template-columns: repeat(2, minmax(10rem, 1fr));
+  }
+}
+
+
   

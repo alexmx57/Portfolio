@@ -1,5 +1,5 @@
 <template>
-    <img width="200" src="/img/alexandre.jpg">
+  
     <div class="cv">
 
 

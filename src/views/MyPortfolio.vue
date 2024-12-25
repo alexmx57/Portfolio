@@ -12,12 +12,6 @@
 
 
 
-    <div class="nav">
-
-
-
-
-        <transition-group tag="nav" class="secondary-nav">
 
 
 
@@ -27,68 +21,64 @@
 
 
 
-            <router-link @click="updateActivityState('audiovisuel')" class="router-link" active-class="active-link" to="/portfolio/audiovisuel">
-    <div class="card-container">
-        <img src="/img/pictogramme/audiovisuel.png">
-        <h4>Audiovisuel</h4>
-        <transition><button v-if="audiovisuel">Découvrir</button></transition>
+
+
+<div class="nav-container">
+<div class="navigation">
+
+
+
+
+
+   
+
+
+  <div class="links-container" ref="linksContainer">
+      <router-link active-class="active"
+        class="link"
+        :to="'/portfolio/tous'"
+        @click="moveBorder($event)"
+      >
+        <p>Tous</p>
+      </router-link>
+      <router-link active-class="active"
+        class="link"
+        :to="'/portfolio/audiovisuel'"
+        @click="moveBorder($event)"
+      >
+        <p>Audiovisuel</p>
+      </router-link>
+      <router-link active-class="active"
+        class="link"
+        :to="'/portfolio/graphisme'"
+        @click="moveBorder($event)"
+      >
+        <p>Graphisme</p>
+      </router-link>
+      <router-link active-class="active"
+        class="link"
+        :to="'/portfolio/developpement-web'"
+        @click="moveBorder($event)"
+      >
+        <p>Développement web</p>
+      </router-link>
+      <router-link active-class="active"
+        class="link"
+        :to="'/portfolio/UI-UX'"
+        @click="moveBorder($event)"
+      >
+        <p>UI-UX</p>
+      </router-link>
+      <!-- Bordure animée -->
+      <div class="animated-border" ref="animatedBorder"></div>
     </div>
-    <span  class="span">Level</span>
-</router-link>
 
 
 
 
 
-<router-link @click="updateActivityState('graphisme')" class="router-link" active-class="active-link" to="/portfolio/graphisme">
-    <div class="card-container">
-        <img src="/img/pictogramme/graphisme.png">
-        <h4>Graphisme</h4>
-        <transition><button v-if="graphisme">Découvrir</button></transition>
-    </div>
-    <span  class="span">Level</span>
-</router-link>
-
-
-
-
-<router-link @click="updateActivityState('devWeb')" class="router-link" active-class="active-link" to="/portfolio/developpement-web">
-    <div class="card-container">
-        <img src="/img/pictogramme/devWeb.webp">
-        <h4>Développement Web</h4>
-        <transition><button v-if="devWeb">Découvrir</button></transition>
-    </div>
-    <span class="span">Level</span>
-</router-link>
-
-
-
-
-<router-link @click="updateActivityState('uiux')" class="router-link" active-class="active-link" to="/portfolio/UI-UX">
-    <div class="card-container">
-        <img src="/img/pictogramme/ux-design.svg">
-        <h4>UI/UX</h4>
-        <transition><button v-if="uiux">Découvrir</button></transition>
-    </div>
-    <span  class="span">Level</span>
-</router-link>
-
-
-
-
-        </transition-group>
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</div>
 
 
 
@@ -101,9 +91,10 @@
 
 
         
-         <Transition name="router">
-            <RouterView></RouterView>
-        </Transition>
+       
+  <transition name="router">
+  <RouterView/>
+  </transition>
 
 
 
@@ -111,7 +102,7 @@
 
 
 
-    </div>
+
 </template>
 
 
@@ -133,34 +124,6 @@
   transform: translateY(50px) scale(0.8);
 }
 
-.nav-container{
-    display: flex;
-    justify-content: center;
-}
-
-.navigation .links-container{
-    display: flex;
-    gap:4vw;
-    
-}
-
-.search-container{
-    display: flex;
-    align-items: center;
-    gap:1vw;
-}
-
-.navigation{
-    margin:auto;
-    background: var(--footer-header_bck);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 95%;
-    padding:1vw;
-    border-radius: 4px;
-    gap:2vw;
-}
 
 .router-link span{
     position: absolute;
@@ -179,54 +142,85 @@
     transform: translateY(-30px);
 }
 
-.nav{
-    position: relative;
-    bottom: 90px;
-}
 
 
-.router-link {
-    background: none;
-    border: 1px solid var(--gray);
-    border-radius: 20px;
-    padding: 3rem;
-    text-align: center;
-    min-width: 20rem;
-    transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    transform: translateY(30px);
-    background: var(--light-blue);
-}
 
-.active-link {
-    background-color: var(--footer-header_bck);
-    border-radius: 20px;
-    box-shadow: inset 0px 0px 2px 5px var(--yellow-white), 0px 0px 2px 4px var(--gray);
-    border: 2px solid var(--gray);
-    transform: none;
-    position: relative;
-}
-
-.active-link h4 {
-    font-weight: 900;
-    text-decoration: underline;
-}
-
-.secondary-nav {
+.link {
+  position: relative;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: inherit;
     display: flex;
-    gap: 45px;
+    width: -webkit-fill-available;
+    align-items: center;
     justify-content: center;
-    margin-bottom: 100px;
 }
 
-.card-container h4 {
-    margin-top: 10px;
-    margin-bottom: 20px;
+.animated-border {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: var(--yellow-white);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transition fluide */
+  pointer-events: none;
 }
 
-.card-container img {
-    max-width: 7.5rem;
-    filter: invert(1);
+.active p{
+  opacity: 1 !important;
+  color:var(--yellow-white);
+ 
 }
+
+.link p {
+  font-family: 'Roboto Flex';
+  letter-spacing: -0.5px;
+  font-weight: var(--font-weight-bold);
+  transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin:1vw; 
+  text-wrap: nowrap; 
+  opacity: 0.7;
+}
+
+.link p:hover {
+  opacity: 1;
+  color:var(--yellow-white);
+
+}
+
+.link:hover{
+  background: rgb(90,106,121,0.1);
+}
+
+.nav-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.navigation .links-container{
+  width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    gap:1vw;
+}
+
+.navigation{
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    gap:2vw;
+    overflow: hidden;
+    border-bottom: var(--light-gray-border);
+}
+
 
 
 
@@ -280,7 +274,8 @@ export default {
             audiovisuel: false,
             graphisme: false,
             devWeb: false,
-            uiux: false
+            uiux: false,
+            activeLink: null,
         }
     },
     mounted() {
@@ -291,8 +286,39 @@ export default {
             this.devWeb = storedState.devWeb;
             this.uiux = storedState.uiux;
         }
+        this.updateBorderOnMount();
     },
     methods: {
+        moveBorder(event) {
+      // Récupérer l'élément survolé
+      const target = event.currentTarget;
+      const border = this.$refs.animatedBorder;
+
+      // Obtenir la position et la largeur de l'élément
+      const { offsetLeft, offsetWidth } = target;
+
+      // Appliquer la position et la largeur à la bordure
+      border.style.left = `${offsetLeft}px`;
+      border.style.width = `${offsetWidth}px`;
+    },
+    updateBorderOnMount() {
+        // Trouver le lien correspondant au chemin actuel
+        const activeRoute = this.$route.path;
+        const linksContainer = this.$refs.linksContainer;
+        if (linksContainer) {
+            const links = linksContainer.querySelectorAll('.link');
+            links.forEach((link) => {
+                if (link.getAttribute('href') === activeRoute) {
+                    const event = { currentTarget: link }; // Simuler un événement
+                    this.moveBorder(event); // Déplacer la bordure
+                }
+            });
+        }
+    },
+    normalizeString(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  },
+
         updateActivityState(activity) {
             this.audiovisuel = false;
             this.graphisme = false;

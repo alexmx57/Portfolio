@@ -1,5 +1,5 @@
 <template>
-    <TheTrombinoscope Title="Tous" TheTrombinoscope
+    <TheTrombinoscope Title="Tous"
       :projects="AllProjects"
       baseRoute="/portfolio/graphisme"
     />
@@ -13,7 +13,7 @@
 <script>
 
 
-import TheTrombinoscope from '@/components/TheTrombinoscope.vue';
+import TheTrombinoscope from '@/views/portfolio/C_Audiovisuel.vue';
 
 
 

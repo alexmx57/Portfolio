@@ -432,24 +432,23 @@ form p {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.25s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all 0.5s ease;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
-    transform: scale(0.25) translateY(-20px);
+  opacity: 0;
+  transform: scale(0.4) translateY(20px);
 }
 
 .fade-move {
-    transition: all .5s cubic-bezier(0, 0, 0.33, 1.32);
+  transition: transform 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 #search-bar {
     padding: 0.8rem;
-    font-size: 1.5rem;
     margin-bottom: 20px;
-    border-radius: 0.8rem;
+    border-radius: 7px 7px 0 0;
     box-sizing: border-box;
     color: rgb(255, 255, 255);
     background: var(--yellow-white);
@@ -525,11 +524,11 @@ form p {
 
 .skill {
     border: var(--light-gray-border);
-    padding: 20px;
+    padding: 2rem;
     border-radius: 12px;
-    width: 30rem;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
     cursor: pointer;
+    width: 30rem;
 }
 
 .skill:hover {

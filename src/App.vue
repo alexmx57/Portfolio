@@ -222,13 +222,13 @@ select{
   font-family: 'Roboto Flex';
   padding:0.8rem 1rem;
   border-radius: 0.5rem;
-  color:#ECECEC;
+  font-size: 1.33rem;
+  color:var(--white-text);
   font-weight: var(--font-weight-extrabold);
-  border: var(--light-black-border);
 }
 
 select:focus{
- border:2px solid var(--white-text);
+ border:1px solid var(--black);
 }
 
 select option{
@@ -237,14 +237,15 @@ select option{
 
 * input::placeholder,textarea::placeholder{
   color:var(--gray);
+  font-family: Advent Pro;
 }
 
 input[type="text"],input[type='email'],textarea {
-  font-family: "Roboto Flex";
+  font-family: "Advent Pro";
   font-weight: var(--font-weight-bold);
   color: var(--gray);
   letter-spacing: 1px;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   padding: 1.2rem 1rem;
   border-radius: 5px 5px 0 0;
   display: flex;
@@ -286,14 +287,16 @@ u {
 
 h4 {
   font-size: 1.5rem;
+  font-family: "Roboto Flex";
 }
 
 h3 {
   font-size: 2.5rem;
+  font-family: "Advent Pro";
 }
 
 h2 {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: var(--font-weight-bold);
 }
 
@@ -313,7 +316,6 @@ h2 {
 
 h3,
 h4 {
-  font-family: "Roboto Flex";
   color: var(--yellow-white);
   letter-spacing: -0.5px;
   font-weight: 700;

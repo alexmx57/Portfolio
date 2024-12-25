@@ -118,7 +118,7 @@ export default {
            date:"Novembre 2023"
           },
           { id: 14, 
-          nom: 'Lame secrète',
+           nom: 'Lame secrète',
            description: 'Téléphone lame secrète', 
            background: '/img/projet/lameSecrete.jpg',
            skills:['photoshop.png'],
