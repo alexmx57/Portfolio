@@ -66,6 +66,11 @@
 
 
 <style scoped>
+.router-link span{
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+}
 
 .router-link {
     background: none;
@@ -111,3 +116,46 @@
     filter: invert(1);
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+export default{
+data(){
+return{
+            audiovisuel: false,
+            graphisme: false,
+            devWeb: false,
+            uiux: false,
+}
+},
+methods:{
+    updateActivityState(activity) {
+            this.audiovisuel = false;
+            this.graphisme = false;
+            this.devWeb = false;
+            this.uiux = false;
+            
+            this[activity] = true;
+
+            localStorage.setItem('activityState', JSON.stringify({
+                audiovisuel: this.audiovisuel,
+                graphisme: this.graphisme,
+                devWeb: this.devWeb,
+                uiux: this.uiux
+            }));
+        }
+    }
+}
+
+
+</script>

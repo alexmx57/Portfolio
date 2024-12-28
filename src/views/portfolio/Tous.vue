@@ -1,7 +1,9 @@
 <template>
-    <TheTrombinoscope Title="Tous"
+    <Trombinoscope 
+      Title="Tous"
       :projects="AllProjects"
       baseRoute="/portfolio/graphisme"
+      banner=""
     />
 </template>
 
@@ -13,18 +15,34 @@
 <script>
 
 
-import TheTrombinoscope from '@/views/portfolio/C_Audiovisuel.vue';
+import Trombinoscope from '@/views/portfolio/Audiovisuel.vue';
 
 
 
 
 export default {
   components:{
-    TheTrombinoscope
+    Trombinoscope
   },
   data() {
     return {
       AllProjects: [
+      {
+          id: 29,
+          nom: 'Quantum',
+          description: "Affiche campagne publicitaire contre l'étalement urbain",
+          background: '/img/projet/LOGOQUANTUMBLANC.png',
+          skills: ['photoshop.png'],
+          date: "Juin 2024"
+        },
+        {
+          id: 30,
+          nom: 'Eh Connard !',
+          description: "Affiche campagne publicitaire contre l'étalement urbain",
+          background: '/img/projet/logoEhConnard.png',
+          skills: ['photoshop.png'],
+          date: "Janvier 2024"
+        },
       {
           id: 7,
           nom: 'Mbappé',

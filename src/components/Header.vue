@@ -54,7 +54,7 @@
 
 
 
-            <TheParameters />
+            <Parameters />
 
         </div>
 
@@ -94,7 +94,7 @@
                         </li>
                         <li>
                             <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header">
-                            <RouterLink active-class="active-header-link" to="/portfolio" class="header-links">Portfolio
+                            <RouterLink active-class="active-header-link" to="/portfolio/tous" class="header-links">Portfolio
                             </RouterLink>
                         </li>
                         <li>
@@ -151,13 +151,13 @@
 
 
 <script>
-import TheParameters from './TheParameters.vue';
+import Parameters from './Parameters.vue';
 
 
 export default {
     name: 'TheHeader',
     components: {
-        TheParameters
+        Parameters
     },
     data() {
         return {

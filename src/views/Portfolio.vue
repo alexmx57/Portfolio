@@ -92,8 +92,8 @@
 
         
        
-  <transition name="router">
-  <RouterView/>
+  <transition mode="out-in" :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'">
+    <RouterView/>
   </transition>
 
 
@@ -113,7 +113,7 @@
 
 <style scoped>
 
-.router-enter-active,
+/* .router-enter-active,
 .router-leave-active {
   transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
@@ -122,28 +122,34 @@
 .router-leave-to {
   opacity: 0;
   transform: translateY(50px) scale(0.8);
+} */
+
+.slide-left-enter-active,
+.slide-right-enter-active,
+.slide-left-leave-active,
+.slide-right-leave-active {
+  transition: all 0.75s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-
-.router-link span{
-    position: absolute;
-    right: 20px;
-    bottom: 15px;
+.slide-left-enter-from,
+.slide-right-leave-to {
+  transform: translateX(100%)  rotateX(30deg) rotateY(10deg);
+  opacity: 0;
 }
 
-.v-enter-active,
-.v-leave-active {
-    transition: all 0.25s cubic-bezier(0.23, 1, 0.320, 1);
+.slide-left-leave-to,
+.slide-right-enter-from {
+  transform: translateX(-100%) rotateX(30deg) rotateY(10deg);
+  opacity: 0;
 }
 
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
-    transform: translateY(-30px);
+.slide-left-enter-to,
+.slide-right-enter-to,
+.slide-left-leave-from,
+.slide-right-leave-from {
+  transform: translateX(0);
+  opacity: 1;
 }
-
-
-
 
 .link {
   position: relative;
@@ -182,14 +188,14 @@
   opacity: 0.7;
 }
 
-.link p:hover {
+.link:hover p {
   opacity: 1;
   color:var(--yellow-white);
 
 }
 
 .link:hover{
-  background: rgb(90,106,121,0.1);
+  background: rgb(90,106,121,0.15);
 }
 
 .nav-container{
@@ -230,7 +236,7 @@
 
 .banner {
     width: 100%;
-    min-height: 60rem;
+    min-height: 50rem;
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),url(/public/img/banniere.png);
     background-size: cover;
     background-position: center;
@@ -251,8 +257,9 @@
 }
 
 .banner-content p {
-    margin-top: 35px;
-    margin-bottom: 55px;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    padding:0 15rem;
 }
 
 
@@ -268,15 +275,29 @@
 <script>
 
 export default {
-    name: "MyPortfolio",
+    name: "Portfolio",
     data() {
         return {
-            audiovisuel: false,
-            graphisme: false,
-            devWeb: false,
-            uiux: false,
             activeLink: null,
+            transitionDirection: 'forward',
+            previousRouteIndex: null,
         }
+    },
+    watch: {
+        $route(to, from) {
+            const routesOrder = [
+                '/portfolio/tous',
+                '/portfolio/audiovisuel',
+                '/portfolio/graphisme',
+                '/portfolio/developpement-web',
+                '/portfolio/UI-UX',
+            ];
+            const toIndex = routesOrder.indexOf(to.path);
+            const fromIndex = routesOrder.indexOf(from.path);
+
+            this.transitionDirection = toIndex > fromIndex ? 'forward' : 'backward';
+            this.previousRouteIndex = toIndex;
+        },
     },
     mounted() {
         const storedState = JSON.parse(localStorage.getItem('activityState'));
@@ -291,7 +312,7 @@ export default {
     methods: {
         moveBorder(event) {
       // Récupérer l'élément survolé
-      const target = event.currentTarget;
+      const target = event.currentTarget; 
       const border = this.$refs.animatedBorder;
 
       // Obtenir la position et la largeur de l'élément
@@ -318,22 +339,6 @@ export default {
     normalizeString(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   },
-
-        updateActivityState(activity) {
-            this.audiovisuel = false;
-            this.graphisme = false;
-            this.devWeb = false;
-            this.uiux = false;
-            
-            this[activity] = true;
-
-            localStorage.setItem('activityState', JSON.stringify({
-                audiovisuel: this.audiovisuel,
-                graphisme: this.graphisme,
-                devWeb: this.devWeb,
-                uiux: this.uiux
-            }));
-        }
     }
 }
 

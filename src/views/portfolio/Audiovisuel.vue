@@ -1,5 +1,7 @@
 <template>
-    <TheTrombinoscope Title="Audiovisuel" TheTrombinoscope
+    <Trombinoscope 
+      banner="/img/banniereAudiovisuel.png"
+      Title="Audiovisuel"
       :projects="audiovisualProjects"
       baseRoute="/portfolio/audiovisuel"
     />
@@ -13,14 +15,14 @@
 <script>
 
 
-import TheTrombinoscope from '@/components/TheTrombinoscope.vue';
+import Trombinoscope from '@/components/Trombinoscope.vue';
 
 
 
 
 export default {
   components:{
-    TheTrombinoscope
+    Trombinoscope
   },
   data() {
     return {

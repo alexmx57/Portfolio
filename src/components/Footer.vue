@@ -57,8 +57,8 @@
                     <p class="navigation-title gray-bck">Contact</p>
                     <ul>
                         <li><a class="footer-links"><u>Téléphone:</u>07 50 57 84 84</a></li>
-                        <li><a class="footer-links"><u>E-mail:</u>alexandre.meux@etu.u-pec.fr</a></li>
-                        <li><a href="https://www.linkedin.com/in/alexandre-meux-2ba28a29b/" class="footer-links">LinkedIn</a></li>
+                        <li><a targer="_blank" class="footer-links"><u>E-mail:</u>alexandre.meux@etu.u-pec.fr</a></li>
+                        <li><a target="_blank" href="https://www.linkedin.com/in/alexandre-meux-2ba28a29b/" class="footer-links">LinkedIn</a></li>
                         <li><a class="footer-links">Contact</a></li>
                     </ul>
                     <div class="send-mail flex footer-cta">

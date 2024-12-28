@@ -17,9 +17,33 @@
 
 
     <div class="section-details">
-    <h3>{{ Title }}</h3>
 
-<div class="projectCounter"><span class="span">Tous les projets ({{ numberOfProject }}) | Projets conservés ({{ filteredProjectsCount }})</span></div>
+
+      <div v-if="banner" :style="{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95)),'+'url(' + banner + ')' }" class="banner-section">
+        <p>Bienvenue dans le Trombinoscope des Projets</p>
+      </div>
+
+
+<div class="info-grid_layout">
+  <div class="title-counter">
+    <h3>{{ Title }}</h3>
+    <div class="projectCounter">
+    <span class="span">Tous les projets ({{ numberOfProject }}) | Projets conservés ({{ filteredProjectsCount }})</span>
+   </div>
+  </div>
+  <div class="grid-layout">
+  <img
+    v-for="(icon, index) in icons"
+    :key="index"
+    :class="{'active': activeIndex === index, 'inactive': activeIndex !== index}"
+    @click="changeGrid(index)"
+    :id="`icon-${index}`"
+    class="grid-icon"
+    :src="icon.src"
+    :alt="icon.alt"
+  />
+ </div>
+</div>
 
 
 
@@ -28,8 +52,6 @@
 <div class="filter-container">
 
 
-
-  
 <div class="select-container">
   <select id="sort" v-model="sortOption">
   <option value="none" selected>Pas de tri par ordre alphabétique</option>
@@ -52,6 +74,8 @@
 </select>
 
 <button @click="resetFilters">Réintialiser</button>
+
+
 
 </div>
 
@@ -85,11 +109,7 @@
 
 
 
-<div class="grid-layout">
-  <img id="2-columns" class="grid-icon" src="/img/pictogramme/grid2.png" alt="grid-icon">
-  <img id="3-columns" class="grid-icon" src="/img/pictogramme/grid3.png" alt="grid-icon">
-  <img id="4-columns" class="grid-icon" src="/img/pictogramme/grid4.png" alt="grid-icon">
-</div>
+
 
 
 </div>
@@ -117,12 +137,13 @@
 
 
 
-    <TransitionGroup mode="out-in" name="list" tag="div" class="trombinoscope">
+    <TransitionGroup :style="{gridTemplateColumns:grid}" mode="out-in" name="list" tag="div" class="trombinoscope">
       <router-link
         v-for="project in sortedProjects"
         :to="`${baseRoute}/${project.nom.toLowerCase().replace(/ /g, '-')}`" 
         :key="project.id"
-        :style="{ backgroundImage: `url(${project.background})` }"
+        :style="{ backgroundImage: `url(${project.background})`, width: activeIndex === 0 ? '40vw' : activeIndex === 1 ? '35vw' : activeIndex === 2 ? '27.5vw' : '20vw',
+        height: activeIndex === 0 ? '40vw' : activeIndex === 1 ? '35vw' : activeIndex === 2 ? '27.5vw' : '20vw' }"
         class="project"
         @mouseleave="visibleProjectId = null"
         @mouseover="setHover(project.id)"
@@ -135,11 +156,14 @@
             <span class="date span">{{project.date}}</span>
             <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="`skill-${skill}`" :alt="`Skill: ${skill}`" class="skill-image" /></div>
           </div>
-          </div>
+          </div> 
         </Transition>
         <Transition mode="out-in" name="text-appear">
           <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
-        </Transition>
+        </Transition> <div class="favorite-icon" @click.stop="toggleFavorite(project)">
+           <span v-if="isFavorite(project.id)">❤️</span>
+           <span v-else>♡</span>
+          </div>
       </router-link>
     </TransitionGroup>
   </div>
@@ -175,9 +199,21 @@ required:true
     baseRoute: {
       type: String,
     },
+    banner:{
+      type:String
+    }
   },
   data() {
   return {
+    icons: [
+        { src: "/img/pictogramme/grid1.png", alt: "grid-icon-1", grid: "repeat(1, auto)" },
+        { src: "/img/pictogramme/grid2.png", alt: "grid-icon-2", grid: "repeat(2, auto)" },
+        { src: "/img/pictogramme/grid3.png", alt: "grid-icon-3", grid: "repeat(3, auto)" },
+        { src: "/img/pictogramme/grid4.png", alt: "grid-icon-4", grid: "repeat(4, auto)" },
+      ],
+      favorites: JSON.parse(localStorage.getItem('favorites')) || [],
+    grid: "repeat(3, auto)",
+    activeIndex: 2, 
     numberOfProject: this.projects.length,
     visibleProjectId: null,
     sortByAlphabet: false,
@@ -187,7 +223,22 @@ required:true
     searchQuery: '',
   };
 },
+created(){
+  // Récupérer les valeurs depuis le localStorage au chargement de la page
+  const savedIndex = localStorage.getItem("activeIndex");
+    const savedGrid = localStorage.getItem("grid");
+
+    if (savedIndex !== null) {
+      this.activeIndex = parseInt(savedIndex, 10); // Convertir en entier
+    }
+    if (savedGrid) {
+      this.grid = savedGrid;
+    }
+},
 computed: {
+  favoriteProjects() {
+    return this.projects.filter(project => this.isFavorite(project.id));
+  },
   sortedProjects() {
     let sorted = [...this.projects];
 
@@ -245,6 +296,28 @@ computed: {
     this.loadFiltersFromStorage();
   },
   methods: {
+  resizeProject(){
+
+  },
+    toggleFavorite(project) {
+    if (this.isFavorite(project.id)) {
+      this.favorites = this.favorites.filter(id => id !== project.id);
+    } else {
+      this.favorites.push(project.id);
+    }
+    localStorage.setItem('favorites', JSON.stringify(this.favorites)); // Sauvegarder dans le localStorage
+  },
+  isFavorite(projectId) {
+    return this.favorites.includes(projectId);
+  },
+    changeGrid(index) {
+      this.activeIndex = index;
+      this.grid = this.icons[index].grid;
+
+      // Sauvegarder dans le localStorage
+      localStorage.setItem("activeIndex", index);
+      localStorage.setItem("grid", this.grid);
+    },
     clearSearch() {
     this.searchQuery = '';
   },
@@ -413,9 +486,52 @@ computed: {
 /* CSS TRANSITION */
 
 
+.grid-icon {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
 
+.grid-icon.active {
+  opacity: 1;
+}
 
+.grid-icon.inactive {
+  opacity: 0.35;
+}
 
+.grid-icon.inactive:hover {
+  opacity: 0.7;
+}
+
+.info-grid_layout{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.favorite-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    font-size:4rem;
+}
+
+.banner-section {
+    color: #333;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-height: 15rem;
+    background-repeat: no-repeat;
+    background-size: 115%;
+    background-position: center;
+}
 
 .trombinoscope-container{
   display: flex;
@@ -448,7 +564,6 @@ h2{
 .filter-container{
   display: flex;
   flex-wrap: wrap;
-  gap:3rem;
   justify-content: space-between;
 }
 
@@ -462,12 +577,13 @@ h2{
 }
 
 .section-details{
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   position: relative;
     background: var(--footer-header_bck);
-    padding: 2vw;
+    padding: 1vw;
     width: 85%;
     border-radius: 8px;
+    box-shadow: 0px 0px 15px 1px #ffffff0f;
 }
 
 .project-description,.projectButton{
@@ -475,20 +591,19 @@ h2{
 }
 
 .trombinoscope {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-  align-items: center; 
-  width: 100%;
-  padding: 0 1rem;
-  gap:5rem;
-  margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    width: 100%;
+    padding: 0 1rem;
+    gap: 3vw;
+    margin-bottom: 5rem;
+    justify-content: center;
 }
 
 .project {
     transition:0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    min-width: 40rem;
-    min-height: 40rem;
+    width: 40rem;
+    height: 40rem;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -510,7 +625,7 @@ h2{
 
 .project:hover {
   z-index: 1000;
-  transform: scale(1.075);
+  transform: scale(1.05);
 }
 
 .project .project-name{
@@ -576,9 +691,6 @@ label{
 }
 
 .grid-layout{
-  position: absolute;
-  top:2rem;
-  right:4rem;
   display: flex;
   gap:2rem;
   justify-content: center;

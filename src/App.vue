@@ -5,18 +5,17 @@
 
 
 
-    <TheHeader />
+    <Header/>
 
-<Transition mode="out-in" name="fade-slide">
-    <RouterView />
-</Transition>
+    <Transition mode="out-in" name="fade-slide">
+      <RouterView />
+    </Transition>
 
-    <TheFooter />
+    <Footer/>
 
 
 
-    <div @click="scrollTop" :class="{ scroll_arrow_visible: activeArrow }" class="scroll-arrow">↑
-    </div>
+    <div @click="scrollTop" :class="{ scroll_arrow_visible: activeArrow }" class="scroll-arrow">↑</div>
 
 
 
@@ -39,15 +38,16 @@
 
 
 <script>
-import TheHeader from './components/TheHeader.vue';
-import TheFooter from './components/TheFooter.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
+
 
 
 export default {
   name: 'App',
   components: {
-    TheHeader,
-    TheFooter
+    Header,
+    Footer
   },
   data() {
     return {
@@ -84,7 +84,7 @@ export default {
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.75s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .fade-slide-enter-from,

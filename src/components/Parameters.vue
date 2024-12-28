@@ -39,7 +39,7 @@
 import ToggleForm from './ToggleForm.vue'
 
 export default {
-  name: 'TheParameters',
+  name: 'Parameters',
   components: {
     ToggleForm
   },

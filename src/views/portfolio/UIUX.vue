@@ -1,5 +1,5 @@
 <template>
-    <TheTrombinoscope Title="UI-UX" TheTrombinoscope
+    <Trombinoscope Title="UI-UX" TheTrombinoscope
       :projects="ui_ux_Projects"
       baseRoute="/portfolio/audiovisuel"
     />
@@ -13,14 +13,14 @@
 <script>
 
 
-import TheTrombinoscope from '@/components/TheTrombinoscope.vue';
+import Trombinoscope from '@/components/Trombinoscope.vue';
 
 
 
 
 export default {
   components:{
-    TheTrombinoscope
+    Trombinoscope
   },
   data() {
     return {
