@@ -1,7 +1,7 @@
 <template>
     <Trombinoscope Title="UI-UX" TheTrombinoscope
       :projects="ui_ux_Projects"
-      baseRoute="/portfolio/audiovisuel"
+      baseRoute="/portfolio/UI-UX"
     />
 </template>
 

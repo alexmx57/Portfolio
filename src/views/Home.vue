@@ -1,53 +1,54 @@
 <template>
-    <div class="grid">
-        <div class="block flex-column ">
-            <div class="block1 flex-column">
-                <h1 class="title">Mon Portfolio</h1>
-                <h2>Alexandre Meux</h2>
-                <h3><i class="gray">Un développeur web</i> et bien d'autres</h3>
-            </div>
-            <div class="block2 flex-column">
-                <p>Je m'appelle Alexandre Meux, je suis étudiant en BUT MMI
-                    et je suis passionné par l'univers du multimédia et d'Internet. Mes domaines de prédilection sont le
-                    développement web et le graphisme.
-                    Je suis actuellement à la recherche d'une alternance pour ma deuxième année de BUT.
-                </p>
-                <div class="social-media flex">
-                    <div>
-                        <a class="centered" href="www.linkedin.com/in/alexandre-meux-2ba28a29b" target="_blank"><img
-                                class="linkedIn" width="40" src="/img/pictogramme/linkedIn.png"></a>
-                    </div>
-                    <div>
-                        <a class="centered" href="" target="_blank"><img class="mail" width="40"
-                                src="/img/pictogramme/email.svg">
-                            <p>alexandre.meux@etu.u-pec.fr</p>
-                        </a>
-                    </div>
-                    <div>
-                        <a class="centered" href="" target="_blank"><img class="phone" width="40"
-                                src="/img/pictogramme/phone.png">
-                            <p>07 50 57 84 84</p>
-                        </a>
-                    </div>
-                </div>
-                <RouterLink class="cta-btn" :to="links[rand]">
-                    <button class="centered">Voir Plus<img class="plus" alt="plus image"
-                            src="/img/pictogramme/plus.svg">
-                        </button>
-                </RouterLink>
-            </div>
+   <div class="grid" id="portfolio-grid">
+    <div class="block flex-column" id="intro-section">
+        <div class="block1 flex-column" id="header-block">
+            <h1 class="title" id="main-title">Mon Portfolio</h1>
+            <h2 id="name">Alexandre Meux</h2>
+            <h3><i class="gray" id="job-title">Un développeur web</i> et bien d'autres</h3>
         </div>
-        <div class="card">
-            <div class="card-inner centered">
-                <div class="card-front">
-                    <img class="scroll-fade front" src="/img/hero-img.png" width="300" alt="photo Alexandre MEUX">
+        <div class="block2 flex-column" id="bio-section">
+            <p id="bio-text">Je m'appelle Alexandre Meux, je suis étudiant en BUT MMI
+                et je suis passionné par l'univers du multimédia et d'Internet. Mes domaines de prédilection sont le
+                développement web et le graphisme.
+                Je suis actuellement à la recherche d'une alternance pour ma deuxième année de BUT.
+            </p>
+            <div class="social-media flex" id="social-media-links">
+                <div class="social-media-item" id="linkedin">
+                    <a class="centered" href="https://www.linkedin.com/in/alexandre-meux-2ba28a29b" target="_blank">
+                        <img class="linkedIn" width="40" src="/img/pictogramme/linkedIn.png" alt="LinkedIn">
+                    </a>
                 </div>
-                <div class="card-back">
-                    <h3>11 septembre 2023</h3>
+                <div class="social-media-item" id="email">
+                    <a class="centered" href="mailto:alexandre.meux@etu.u-pec.fr" target="_blank">
+                        <img class="mail" width="40" src="/img/pictogramme/email.svg" alt="Email">
+                        <p>alexandre.meux@etu.u-pec.fr</p>
+                    </a>
                 </div>
+                <div class="social-media-item" id="phone">
+                    <a class="centered" href="tel:+33750578484" target="_blank">
+                        <img class="phone" width="40" src="/img/pictogramme/phone.png" alt="Phone">
+                        <p>07 50 57 84 84</p>
+                    </a>
+                </div>
+            </div>
+            <RouterLink class="cta-btn" :to="links[rand]" id="view-more-link">
+                <button class="centered" id="view-more-btn">Voir Plus
+                    <img class="plus" alt="plus image" src="/img/pictogramme/plus.svg">
+                </button>
+            </RouterLink>
+        </div>
+    </div>
+    <div class="card" id="profile-card">
+        <div class="card-inner centered" id="card-inner">
+            <div class="card-front" id="card-front">
+                <img class="scroll-fade front" src="/img/hero-img.png" width="300" alt="photo Alexandre MEUX" id="profile-image">
+            </div>
+            <div class="card-back" id="card-back">
+                <h3 id="date">11 septembre 2023</h3>
             </div>
         </div>
     </div>
+</div>
 
 
 

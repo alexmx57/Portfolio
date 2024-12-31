@@ -34,7 +34,7 @@ export const routes = [
             { path: 'UI-UX', component: UIUX },
         ]
     },
-    {path: "/portfolio/:category/:id",component: ProjectDetails, },
+    {path: "/portfolio/:category/:name",component: ProjectDetails, },
 ]
 
 

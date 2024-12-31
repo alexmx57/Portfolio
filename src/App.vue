@@ -165,7 +165,7 @@ transform: scale(0.75) rotateX(60deg) rotateY(25deg) translateX(75vw);
   --bck: rgb(0, 0, 0);
   --footer-header_bck: #141428;
   --transparent-bck: rgba(0, 0, 0, 0.2);
-  --gray-hover: rgba(90, 106, 121, 0.6);
+  --gray-hover: rgba(90, 106, 121, 0.15);
 
 
 
@@ -357,6 +357,7 @@ body {
   background: var(--light-blue);
   color: rgb(236, 236, 236);
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 *,

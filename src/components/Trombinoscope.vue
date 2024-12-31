@@ -2,11 +2,6 @@
 
 
 
- 
-
-
-
-
 
 
 
@@ -160,10 +155,7 @@
         </Transition>
         <Transition mode="out-in" name="text-appear">
           <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
-        </Transition> <div class="favorite-icon" @click.stop="toggleFavorite(project)">
-           <span v-if="isFavorite(project.id)">❤️</span>
-           <span v-else>♡</span>
-          </div>
+        </Transition> 
       </router-link>
     </TransitionGroup>
   </div>
@@ -211,7 +203,6 @@ required:true
         { src: "/img/pictogramme/grid3.png", alt: "grid-icon-3", grid: "repeat(3, auto)" },
         { src: "/img/pictogramme/grid4.png", alt: "grid-icon-4", grid: "repeat(4, auto)" },
       ],
-      favorites: JSON.parse(localStorage.getItem('favorites')) || [],
     grid: "repeat(3, auto)",
     activeIndex: 2, 
     numberOfProject: this.projects.length,
@@ -236,9 +227,6 @@ created(){
     }
 },
 computed: {
-  favoriteProjects() {
-    return this.projects.filter(project => this.isFavorite(project.id));
-  },
   sortedProjects() {
     let sorted = [...this.projects];
 
@@ -298,17 +286,6 @@ computed: {
   methods: {
   resizeProject(){
 
-  },
-    toggleFavorite(project) {
-    if (this.isFavorite(project.id)) {
-      this.favorites = this.favorites.filter(id => id !== project.id);
-    } else {
-      this.favorites.push(project.id);
-    }
-    localStorage.setItem('favorites', JSON.stringify(this.favorites)); // Sauvegarder dans le localStorage
-  },
-  isFavorite(projectId) {
-    return this.favorites.includes(projectId);
   },
     changeGrid(index) {
       this.activeIndex = index;
@@ -570,6 +547,9 @@ h2{
 .right-banner{
   padding:0.5vw;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .select-container{

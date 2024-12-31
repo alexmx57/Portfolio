@@ -485,8 +485,14 @@ form p {
     flex-direction: column;
     gap: 15px;
     align-items: flex-start;
-    margin: 5rem 0;
+    margin: 5rem;
     flex-wrap: wrap
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .skill-collection {
@@ -542,5 +548,17 @@ form p {
     margin-top: 10px;
     flex-wrap: wrap;
     gap:4px;
+}
+
+@media(max-width:412px){
+    .skill-collection{
+        justify-content: center;
+    }
+    .category{
+        align-items: center;
+    }
+    .domain-title{
+        padding-left: 0;
+    }
 }
 </style>

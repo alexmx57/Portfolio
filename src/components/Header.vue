@@ -1,118 +1,146 @@
 <template>
-
     <header id="header">
 
-
-
-
+        <!-- Logo and Navbar -->
         <div class="logo-navbar centered">
-            <div @click="this.isActive = !this.isActive" class="menu"
+            <!-- Menu Icon -->
+            <div 
+                @click="this.isActive = !this.isActive" 
+                class="menu" 
                 style="width: 32px; height: 100%; display: block; fill: currentcolor;">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false"
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    width="24" 
+                    focusable="false" 
                     style="pointer-events: none; display: inherit; width: 100%; height: 100%;">
                     <path d="M21 6H3V5h18v1zm0 5H3v1h18v-1zm0 6H3v1h18v-1z"></path>
                 </svg>
             </div>
-            <RouterLink to="/"><img class="logo" width="45" src="/img/am.png" alt="Logo"></RouterLink>
+
+            <!-- Logo -->
+            <RouterLink to="/">
+                <img class="logo" width="45" src="/img/am.png" alt="Logo">
+            </RouterLink>
         </div>
 
-
-
-
+        <!-- Name -->
         <h3 class="name">Alexandre MEUX</h3>
 
-
-
+        <!-- Right Header Section -->
         <div class="right-header centered">
 
-
+            <!-- Social Media Icons -->
             <div class="social-media-header centered">
 
-
+                <!-- Email Icon -->
                 <div class="social-media-img-container">
-                   <img @mouseout="activeEmail = false" @mouseover="activeEmail = true" class="mail"
-                        width="30" src="/img/pictogramme/email.svg">
+                    <img 
+                        @mouseout="activeEmail = false" 
+                        @mouseover="activeEmail = true" 
+                        class="mail" 
+                        width="30" 
+                        src="/img/pictogramme/email.svg">
                 </div>
 
-
-
-
+                <!-- LinkedIn Icon -->
                 <div class="social-media-img-container">
-                    <img @mouseout="activeLinkedIn = false" @mouseover="activeLinkedIn = true"
-                        class="linkedIn" width="35" src="/img/pictogramme/linkedIn.png">
+                    <img 
+                        @mouseout="activeLinkedIn = false" 
+                        @mouseover="activeLinkedIn = true" 
+                        class="linkedIn" 
+                        width="35" 
+                        src="/img/pictogramme/linkedIn.png">
                 </div>
 
-
-
-
-
+                <!-- Phone Icon -->
                 <div class="social-media-img-container">
-<img @mouseout="activePhone = false" @mouseover="activePhone = true" class="phone"
-                        width="30" src="/img/pictogramme/phone.png">
+                    <img 
+                        @mouseout="activePhone = false" 
+                        @mouseover="activePhone = true" 
+                        class="phone" 
+                        width="30" 
+                        src="/img/pictogramme/phone.png">
                 </div>
             </div>
 
-
-
+            <!-- Parameters Component -->
             <Parameters />
-
         </div>
 
+        <!-- Responsive Navbar -->
+        <Transition name="fade-slide" mode="in-out">
+            <div v-if="isActive" class="navbar-responsive">
+                <div class="navbar-responsive-container">
 
-     <Transition name="fade-slide" mode="in-out">
-        <div v-if="isActive" class="navbar-responsive">
-            <div class="navbar-responsive-container">
+                    <!-- Logo and Close Button -->
+                    <div class="logo_menu">
+                        <p class="navbar-responsive-title gray-bck">Menu</p>
+                        <RouterLink to="/">
+                            <img class="logo" width="55" src="/img/am.png" alt="Logo">
+                        </RouterLink>
+                        <span @click="isActive = !isActive" class="close-btn">✖</span>
+                    </div>
 
-
-                <div class="logo_menu">
-                    <p class="navbar-responsive-title gray-bck">Menu</p>
-                    <RouterLink to="/"><img class="logo" width="55" src="/img/am.png" alt="Logo"></RouterLink>
-                    <span @click="isActive = !isActive" class="close-btn">✖</span>
-                </div>
-
-
-
-
-
-
-                <div class="navbar-responsive-list-container">
-                    <ul class="navbar-responsive-list">
-                        <li>
-                            <img class="pictogramme-header" src="/img/pictogramme/header/home.svg">
-                            <RouterLink active-class="active-header-link" class="header-links" to="/">Accueil
-                            </RouterLink>
-                        </li>
-                        <li>
-                            <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg">
-                            <RouterLink active-class="active-header-link" class="header-links" to="/a-propos">À propos de
-                                moi</RouterLink>
-                        </li>
-                        <li>
-                            <img src="/img/pictogramme/header/stars.svg" class="pictogramme-header">
-                            <RouterLink active-class="active-header-link" to="/competences" class="header-links">
-                                Compétences</RouterLink>
-                        </li>
-                        <li>
-                            <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header">
-                            <RouterLink active-class="active-header-link" to="/portfolio/tous" class="header-links">Portfolio
-                            </RouterLink>
-                        </li>
-                        <li>
-                            <img src="/img/pictogramme/header/contact.svg" class="pictogramme-header">
-                            <RouterLink active-class="active-header-link" to="/contact" class="header-links">Contact
-                            </RouterLink>
-                        </li>
-                    </ul>
+                    <!-- Navbar Links -->
+                    <div class="navbar-responsive-list-container">
+                        <ul class="navbar-responsive-list">
+                            <li>
+                                <img class="pictogramme-header" src="/img/pictogramme/header/home.svg">
+                                <RouterLink 
+                                    active-class="active-header-link" 
+                                    class="header-links" 
+                                    to="/">
+                                    Accueil
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <img class="pictogramme-header" src="/img/pictogramme/header/aPropos.svg">
+                                <RouterLink 
+                                    active-class="active-header-link" 
+                                    class="header-links" 
+                                    to="/a-propos">
+                                    À propos de moi
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <img src="/img/pictogramme/header/stars.svg" class="pictogramme-header">
+                                <RouterLink 
+                                    active-class="active-header-link" 
+                                    class="header-links" 
+                                    to="/competences">
+                                    Compétences
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <img src="/img/pictogramme/header/portfolio.png" class="pictogramme-header">
+                                <RouterLink 
+                                    active-class="active-header-link" 
+                                    class="header-links" 
+                                    to="/portfolio/tous">
+                                    Portfolio
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <img src="/img/pictogramme/header/contact.svg" class="pictogramme-header">
+                                <RouterLink 
+                                    active-class="active-header-link" 
+                                    class="header-links" 
+                                    to="/contact">
+                                    Contact
+                                </RouterLink>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-     </Transition>
-
-
+        </Transition>
 
     </header>
-
 </template>
+
+
 
 
 
@@ -333,7 +361,7 @@ header {
 }
 
 .navbar-responsive-container {
-    width: max-content;
+    width: 30rem;
     padding: 20px;
     background: var(--footer-header_bck);
     position: relative;
@@ -349,7 +377,7 @@ header {
 
 .logo_menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 2rem;
 }
@@ -362,7 +390,6 @@ header {
     display: grid;
     place-items: center;
     border-radius: 8px;
-    margin-left: 10rem;
 }
 
 .close-btn:hover {

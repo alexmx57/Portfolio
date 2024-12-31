@@ -2,7 +2,7 @@
     <Trombinoscope 
       Title="Tous"
       :projects="AllProjects"
-      baseRoute="/portfolio/graphisme"
+      baseRoute="/portfolio/tous"
       banner=""
     />
 </template>
@@ -15,7 +15,7 @@
 <script>
 
 
-import Trombinoscope from '@/views/portfolio/Audiovisuel.vue';
+import Trombinoscope from '@/components/Trombinoscope.vue';
 
 
 
@@ -68,7 +68,7 @@ export default {
         },
         {
           id: 20,
-          nom: 'Quantum',
+          nom: 'Site Quantum',
           description: "Site web de vente de bière",
           background: '/img/projet/quantum.png',
           date: "Juin 2024",
@@ -140,7 +140,7 @@ export default {
         },
         {
           id: 22,
-          nom: 'Shanks',
+          nom: 'Shanks Website',
           description: 'Site web consacré au personnage de Shanks dans One Piece',
           background: '/img/projet/shanksSite.png',
           date: "Avril 2024",
@@ -252,7 +252,7 @@ export default {
         },
         {
           id: 21,
-          nom: 'Eh Connard !',
+          nom: 'Site Eh Connard !',
           description: 'Site web féministe',
           background: '/img/projet/ehConnard.png',
           date: "Janvier 2024",

@@ -195,7 +195,7 @@
 }
 
 .link:hover{
-  background: rgb(90,106,121,0.15);
+  background: var(--gray-hover);
 }
 
 .nav-container{

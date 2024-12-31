@@ -25,7 +25,7 @@ export default {
       webDevelopmentProjects: [
       {
           id: 1,
-          nom: 'Quantum',
+          nom: 'Site Quantum',
           description: "Site web de vente de bière",
           background: '/img/projet/quantum.png',
           date:"Juin 2024",
@@ -39,7 +39,7 @@ export default {
            skills:['php.png','css.svg','vscode.png']
           },
           { id: 3, 
-          nom: 'Shanks',
+          nom: 'Shanks Website',
            description: 'Site web consacré au personnage de Shanks dans One Piece', 
            background: '/img/projet/shanksSite.png',
            date:"Avril 2024",
