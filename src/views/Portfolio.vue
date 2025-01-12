@@ -1,110 +1,45 @@
 <template>
-
-
-
+  <div>
+    <!-- Bannière -->
     <div class="banner">
-        <div class="banner-content">
-            <h1>Bienvenue sur mon PORTFOLIO</h1>
-            <p>Découvrez mes meilleurs projets auquels j'ai pu participé, que ce soit en BUT MMI ou dans le cadre d'un projet personnel et compétences.</p>
-            <button>En savoir plus</button>
+      <div class="banner-content">
+        <h1>Bienvenue sur mon PORTFOLIO</h1>
+        <p>
+          Découvrez mes meilleurs projets auquels j'ai pu participé, que ce soit
+          en BUT MMI ou dans le cadre d'un projet personnel et compétences.
+        </p>
+        <button>En savoir plus</button>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+      <div class="navigation">
+        <div class="links-container" ref="linksContainer">
+          <router-link
+            v-for="(route, index) in routes"
+            :key="index"
+            active-class="active"
+            class="link"
+            :to="route.path"
+            @click="handleClick($event, route.path)"
+          >
+            <p>{{ route.name }}</p>
+          </router-link>
+          <div class="animated-border" ref="animatedBorder"></div>
         </div>
+      </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="nav-container">
-<div class="navigation">
-
-
-
-
-
-   
-
-
-  <div class="links-container" ref="linksContainer">
-      <router-link active-class="active"
-        class="link"
-        :to="'/portfolio/tous'"
-        @click="moveBorder($event)"
-      >
-        <p>Tous</p>
-      </router-link>
-      <router-link active-class="active"
-        class="link"
-        :to="'/portfolio/audiovisuel'"
-        @click="moveBorder($event)"
-      >
-        <p>Audiovisuel</p>
-      </router-link>
-      <router-link active-class="active"
-        class="link"
-        :to="'/portfolio/graphisme'"
-        @click="moveBorder($event)"
-      >
-        <p>Graphisme</p>
-      </router-link>
-      <router-link active-class="active"
-        class="link"
-        :to="'/portfolio/developpement-web'"
-        @click="moveBorder($event)"
-      >
-        <p>Développement web</p>
-      </router-link>
-      <router-link active-class="active"
-        class="link"
-        :to="'/portfolio/UI-UX'"
-        @click="moveBorder($event)"
-      >
-        <p>UI-UX</p>
-      </router-link>
-      <!-- Bordure animée -->
-      <div class="animated-border" ref="animatedBorder"></div>
-    </div>
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-        
-       
-  <transition mode="out-in" :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'">
-    <RouterView/>
-  </transition>
-
-
-
-
-
-
-
-
+    <!-- Contenu principal avec transition -->
+    <transition
+      mode="out-in"
+      :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'"
+    >
+      <RouterView />
+    </transition>
+  </div>
 </template>
-
 
 
 
@@ -257,9 +192,22 @@
 }
 
 .banner-content p {
-    margin-top: 15px;
-    margin-bottom: 35px;
-    padding:0 15rem;
+  text-align: center;
+    max-width: 430px;
+    margin: 15px auto 35px auto;
+}
+
+@media screen and (max-width: 745px) {
+  .navigation{
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 745px) {
+  .link p{
+    font-size: 2.8vw;
+  }
 }
 
 
@@ -270,77 +218,58 @@
 
 
 
-
-
 <script>
-
 export default {
-    name: "Portfolio",
-    data() {
-        return {
-            activeLink: null,
-            transitionDirection: 'forward',
-            previousRouteIndex: null,
-        }
-    },
-    watch: {
-        $route(to, from) {
-            const routesOrder = [
-                '/portfolio/tous',
-                '/portfolio/audiovisuel',
-                '/portfolio/graphisme',
-                '/portfolio/developpement-web',
-                '/portfolio/UI-UX',
-            ];
-            const toIndex = routesOrder.indexOf(to.path);
-            const fromIndex = routesOrder.indexOf(from.path);
+  name: "Portfolio",
+  data() {
+    return {
+      routes: [
+        { name: "Tous", path: "/portfolio/tous" },
+        { name: "Audiovisuel", path: "/portfolio/audiovisuel" },
+        { name: "Graphisme", path: "/portfolio/graphisme" },
+        { name: "Développement web", path: "/portfolio/developpement-web" },
+        { name: "UI-UX", path: "/portfolio/UI-UX" },
+      ],
+      transitionDirection: "forward",
+    };
+  },
+  watch: {
+    $route(to, from) {
+      const routesOrder = this.routes.map((route) => route.path);
+      const toIndex = routesOrder.indexOf(to.path);
+      const fromIndex = routesOrder.indexOf(from.path);
 
-            this.transitionDirection = toIndex > fromIndex ? 'forward' : 'backward';
-            this.previousRouteIndex = toIndex;
-        },
+      this.transitionDirection = toIndex > fromIndex ? "forward" : "backward";
     },
-    mounted() {
-        const storedState = JSON.parse(localStorage.getItem('activityState'));
-        if (storedState) {
-            this.audiovisuel = storedState.audiovisuel;
-            this.graphisme = storedState.graphisme;
-            this.devWeb = storedState.devWeb;
-            this.uiux = storedState.uiux;
-        }
-        this.updateBorderOnMount();
+  },
+  methods: {
+    handleClick(event, path) {
+      this.moveBorder(event);
+      this.$router.push(path);
     },
-    methods: {
-        moveBorder(event) {
-      // Récupérer l'élément survolé
-      const target = event.currentTarget; 
+    moveBorder(event) {
+      const target = event.currentTarget;
       const border = this.$refs.animatedBorder;
-
-      // Obtenir la position et la largeur de l'élément
       const { offsetLeft, offsetWidth } = target;
-
-      // Appliquer la position et la largeur à la bordure
       border.style.left = `${offsetLeft}px`;
       border.style.width = `${offsetWidth}px`;
     },
     updateBorderOnMount() {
-        // Trouver le lien correspondant au chemin actuel
-        const activeRoute = this.$route.path;
-        const linksContainer = this.$refs.linksContainer;
-        if (linksContainer) {
-            const links = linksContainer.querySelectorAll('.link');
-            links.forEach((link) => {
-                if (link.getAttribute('href') === activeRoute) {
-                    const event = { currentTarget: link }; // Simuler un événement
-                    this.moveBorder(event); // Déplacer la bordure
-                }
-            });
-        }
+      const activeRoute = this.$route.path;
+      const linksContainer = this.$refs.linksContainer;
+      if (linksContainer) {
+        const links = linksContainer.querySelectorAll(".link");
+        links.forEach((link) => {
+          if (link.getAttribute("href") === activeRoute) {
+            const event = { currentTarget: link };
+            this.moveBorder(event);
+          }
+        });
+      }
     },
-    normalizeString(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   },
-    }
-}
-
-
+  mounted() {
+    this.updateBorderOnMount();
+  },
+};
 </script>

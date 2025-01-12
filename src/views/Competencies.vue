@@ -47,7 +47,11 @@
                            
                            
                              <div>
-                                <button>Projet associé</button><span class="span">Level {{ skill.level }}<div class="level-indicator"><span v-for="n in 10" :key="n" class="circle" :class="{ active: n <= skill.level }"></span>
+                                <router-link :to="`/portfolio/${link || 'tous/not-found'}`" ><button>Projet associé</button>
+                                </router-link>
+                                <span class="span">Level {{ skill.level }}<div class="level-indicator">
+                                    <span v-for="n in 10" :key="n" class="circle" :class="{ active: n <= skill.level }">
+                                    </span>
                              </div></span>
                             </div>
 
@@ -550,7 +554,7 @@ form p {
     gap:4px;
 }
 
-@media(max-width:412px){
+@media(max-width:525px){
     .skill-collection{
         justify-content: center;
     }

@@ -529,7 +529,7 @@ h2{
 }
 
 .skill-image{
-  width:1.8vw;
+  width:1.5vw;
 }
 
 .select-container{
@@ -699,6 +699,26 @@ label{
 
 
 
+@media (max-width: 1024px) {
+.project-name{
+  font-size: 1.75vw !important;
+}
+}
+
+
+@media screen and (max-width: 745px) {
+  .navigation{
+    width: 100%;
+  }
+
+
+  .section-details {
+    width: 95%;
+    padding:4vw;
+  }
+}
+
+
 
 </style>
 
@@ -706,53 +726,7 @@ label{
 
 
 
-/* RESPONSIVE */
 
-/*
-@media screen and (max-width: 1024px) {
-  .trombinoscope {
-    gap: 0.5rem;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-  }
-
-  .project {
-    min-width: 20vw; 
-    min-height: 20vw;
-  }
-.project-name{font-size: 1vw;}
-  .project .project-description {
-    padding: 10rem 2rem;
-  }
-}
-
-
-@media screen and (max-width: 540px) {
-  .trombinoscope {
-    grid-template-columns: repeat(5,1fr);
-    gap:2px;
-  }
-
-  .project {
-    min-width: 10vw;
-    min-height: 10vw;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .trombinoscope {
-    grid-template-columns: repeat(3, minmax(10rem, 1fr));
-  }
-  .project-name{
-    font-size: 1.2rem !important;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .trombinoscope {
-    grid-template-columns: repeat(2, minmax(10rem, 1fr));
-  }
-}
 
 
   

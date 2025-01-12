@@ -1,35 +1,15 @@
 <template>
-
   <div @scroll="handleScroll" id="main">
-
-
-
-
     <Header/>
-
     <Transition mode="out-in" name="fade-slide">
       <RouterView />
     </Transition>
-
     <Footer/>
-
-
-
-    <div @click="scrollTop" :class="{ scroll_arrow_visible: activeArrow }" class="scroll-arrow">↑</div>
-
-
-
+   <Transition name="arrow">
+    <div @click="scrollTop" v-if="activeArrow" class="scroll-arrow">↑</div>
+   </Transition>
   </div>
-
-
-
 </template>
-
-
-
-
-
-
 
 
 
@@ -89,7 +69,7 @@ export default {
 
 .fade-slide-enter-from,
 .fade-slide-leave-to {
-transform: scale(0.75) rotateX(60deg) rotateY(25deg) translateX(75vw);
+transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
   opacity: 0;
 }
 
@@ -500,9 +480,22 @@ hr {
 
 /* SCROLL ARROW CSS */
 
+.arrow-enter-active,
+.arrow-leave-active {
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.arrow-enter-from,
+.arrow-leave-to {
+  opacity: 0;
+  transform: translateY(-25vh) scale(0.5);
+}
+
+
+
 .scroll-arrow {
   position: fixed;
-  bottom: 200px;
+  bottom: 25px;
   right: 25px;
   background: var(--black);
   border: var(--light-gray-border);
@@ -511,17 +504,10 @@ hr {
   height: 5rem;
   z-index: 10000;
   cursor: pointer;
-  transition: all 0.25s ease-out;
-  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20%;
-}
-
-.scroll_arrow_visible {
-  bottom: 25px;
-  opacity: 1;
 }
 
 .scroll-arrow:hover {

@@ -88,6 +88,7 @@
     display: flex;
     flex-direction: column;
     justify-self: center;
+    margin:1.5rem;
   }
 
   .contact-info strong{
@@ -121,5 +122,12 @@
   textarea {
     resize: vertical;
   }
+
+  @media screen and (max-width: 700px) {
+  .contact-container{
+    grid-template-columns: 1fr;
+  }
+}
+
   
   </style>

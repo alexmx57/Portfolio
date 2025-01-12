@@ -1,121 +1,65 @@
 <template>
+  <transition name="page-transition">
+    <div v-if="project" class="project-details">
+      <div class="name-description">
+        <h3>{{ project.nom }}</h3>
+        <p>{{ project.description }}</p>
+      </div>
 
+      <div class="grid-section">
+        <img class="visual" :src="project.background" alt="project background" />
+        
+        <div v-if="project.brief" id="brief" class="sub-section">
+          <img class="section-image" src="/img/pictogramme/brief.png" alt="stars">
+          <h4>BRIEF</h4>
+          <p>{{ project.brief }}</p>
+        </div>
 
+        <div v-if="project.idees" id="ideas" class="sub-section">
+          <img class="section-image" src="/img/pictogramme/idees.png" alt="stars">
+          <h4>IDÉES</h4>
+          <p>{{ project.idees }}</p>
+        </div>
 
+        <div v-if="project.livrable" id="livrable" class="sub-section">
+          <img class="section-image" src="/img/pictogramme/livrable.png" alt="stars">
+          <h4>LIVRABLE</h4>
+          <p>{{ project.livrable }}</p>
+        </div>
 
-  <div v-if="project" class="project-details">
+        <div v-if="project.skills" id="skills" class="sub-section">
+          <img class="section-image" src="/img/pictogramme/header/stars.svg" alt="stars">
+          <h4>COMPÉTENCES ASSOCIÉES</h4>
+          <div class="skill-collection">
+            <img class="skill-image" :alt="skill" v-for="skill in project.skills" :key="skill" :src="'/img/pictogramme/competences/' + skill">
+          </div>
+        </div>
 
+        <div v-if="project.contexte" id="contexte" class="sub-section">
+          <img class="section-image" src="/img/pictogramme/contexte.svg" alt="stars">
+          <h4>CONTEXTE</h4>
+          <p>{{ project.contexte }}</p>
+        </div>
+      </div>
 
-    <div class="name-description">
-    <h3>{{ project?.nom }}</h3>
-    <p>{{ project?.description }}</p>
+      <div class="navigation">
+        <RouterLink v-if="prevProject" :to="`/portfolio/tous/${normalizeName(prevProject.nom)}`">
+          <button>← Précédent : {{ prevProject.nom }}</button>
+        </RouterLink>
+        <RouterLink v-if="nextProject" :to="`/portfolio/tous/${normalizeName(nextProject.nom)}`">
+          <button>Suivant : {{ nextProject.nom }} →</button>
+        </RouterLink>
+      </div>
     </div>
 
-
-
-
-
-
-<div class="grid-section">
-
-
-
-    <img class="visual" :src="project?.background" alt="project background" />
-    <div id="section-1" class="sub-section">
-      <h4>TITLE</h4>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor,
-         consectetur! Aspernatur temporibus iusto cum delectus! Rem mollitia et optio minus.</p>
-        </div>
-
-
-
-    <div id="section-2" class="sub-section">
-      <h4>TITLE</h4>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, consectetur! 
-        Aspernatur temporibus iusto cum delectus! Rem mollitia et optio minus.</p>
-      </div>
-
-
-
-
-    <div id="section-3" class="sub-section">
-      <h4>TITLE</h4>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, consectetur! 
-        Aspernatur temporibus iusto cum delectus! Rem mollitia et optio minus.</p>
-      </div>
-
-
-
-
-    <div id="section-4" class="sub-section">
-      <img class="section-image" src="/img/pictogramme/header/stars.svg" alt="">
-      <h4>COMPÉTENCES ASSOCIÉES</h4>
-      <div class="skill-collection">
-        <img class="skill-image" :alt="skill" v-for="skill in project?.skills" :key="skill" :src="'/img/pictogramme/competences/'+skill">
-      </div>
-        </div>
-
-
-
-
-    <div id="section-5" class="sub-section">
-      <h4>TITLE</h4>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, consectetur! Aspernatur temporibus
-         iusto cum delectus! Rem mollitia et optio minus.</p>
-        </div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<div class="navigation">
-      <RouterLink
-        v-if="prevProject"
-        :to="`/portfolio/tous}/${normalizeName(prevProject.nom)}`"
-      >
-        <button>← Précédent : {{ prevProject.nom }}</button>
-      </RouterLink>
-      <RouterLink
-        v-if="nextProject"
-        :to="`/portfolio/tous/${normalizeName(nextProject.nom)}`"
-      >
-        <button>Suivant : {{ nextProject.nom }} →</button>
+    <div v-else>
+      <h1 class="unfound">AUCUN PROJET TROUVÉ</h1>
+      <RouterLink :to="`/portfolio/${category}`">
+        <img class="backward-arrow" alt="Flèche de navigation" src="/img/pictogramme/arrow-left.png">
       </RouterLink>
     </div>
-
-
-
-
-
-    
-
-
-  </div>
-
-
-
-
-
-
-
-
-
-
-  <h1 class="unfound" v-else>AUCUN PROJET TROUVÉ</h1>
-  <RouterLink :to="`/portfolio/${category}`"><img class="backward-arrow" alt="Flèche de navigation" src="/img/pictogramme/arrow-left.png"></RouterLink>
+  </transition>
 </template>
-
-
 
 
 
@@ -152,7 +96,11 @@ export default {
           description: "Affiche campagne publicitaire contre l'étalement urbain",
           background: '/img/projet/LOGOQUANTUMBLANC.png',
           skills: ['photoshop.png'],
-          date: "Juin 2024"
+          date: "Juin 2024",
+          brief:"Créer une affiche pour une campagne publicitaire contre l'étalement urbain",
+          livrable:" Affiche imprimée",
+          contexte:"Projet réalisé en cours de graphisme",
+          idees:"Créer une affiche qui interpelle le spectateur"
         },
         {
           id: 30,
@@ -160,7 +108,11 @@ export default {
           description: "Affiche campagne publicitaire contre l'étalement urbain",
           background: '/img/projet/logoEhConnard.png',
           skills: ['photoshop.png'],
-          date: "Janvier 2024"
+          date: "Juin 2024",
+          brief:"Créer une affiche pour une campagne publicitaire contre l'étalement urbain",
+          livrable:" Affiche imprimée",
+          contexte:"Projet réalisé en cours de graphisme",
+          idees:"Créer une affiche qui interpelle le spectateur"
         },
       {
           id: 7,
@@ -175,7 +127,12 @@ export default {
           nom: 'Bande-Dessinnée',
           description: "Vidéo réalisée en cours d'Anglais pour aider les gens...",
           background: '/img/projet/digitaldetox.png',
-          skills: ['animate.png']
+          skills: ['animate.png'],
+          date: "Juin 2024",
+          brief:"Créer une affiche pour une campagne publicitaire contre l'étalement urbain",
+          livrable:" Affiche imprimée",
+          contexte:"Projet réalisé en cours de graphisme",
+          idees:"Créer une affiche qui interpelle le spectateur"
         },
         {
           id: 1,
@@ -191,7 +148,11 @@ export default {
           description: "Site web de vente de bière",
           background: '/img/projet/quantum.png',
           date: "Juin 2024",
-          skills: ['php.png', 'css.svg', 'js.svg', 'filezilla.png', 'vscode.png']
+          skills: ['php.png', 'css.svg', 'js.svg', 'filezilla.png', 'vscode.png'],
+          brief:"Créer une affiche pour une campagne publicitaire contre l'étalement urbain",
+          livrable:" Affiche imprimée",
+          contexte:"Projet réalisé en cours de graphisme",
+          idees:"Créer une affiche qui interpelle le spectateur",
         },
         {
           id: 3,
