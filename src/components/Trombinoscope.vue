@@ -14,9 +14,9 @@
     <div class="section-details">
 
 
-      <div v-if="banner" :style="{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95)),'+'url(' + banner + ')' }" class="banner-section">
+      <!-- <div v-if="banner" :style="{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95)),'+'url(' + banner + ')' }" class="banner-section">
         <p>Bienvenue dans le Trombinoscope des Projets</p>
-      </div>
+      </div> -->
 
 
 <div class="info-grid_layout">
@@ -557,11 +557,10 @@ h2{
 }
 
 .section-details{
-  margin: 1.5rem auto;
+  margin: 1.5rem 0;
   position: relative;
     background: var(--footer-header_bck);
     padding: 1vw;
-    width: 85%;
     border-radius: 8px;
     box-shadow: 0px 0px 15px 1px #ffffff0f;
 }
@@ -706,17 +705,9 @@ label{
 }
 
 
-@media screen and (max-width: 745px) {
-  .navigation{
-    width: 100%;
-  }
+/* @media screen and (max-width: 745px) {
 
-
-  .section-details {
-    width: 95%;
-    padding:4vw;
-  }
-}
+} */
 
 
 

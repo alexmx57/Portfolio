@@ -421,11 +421,6 @@ form {
     gap: 2.5rem;
 }
 
-form p {
-    padding: 0 16rem;
-}
-
-
 .page {
     min-height: 125vh;
     display: flex;
@@ -466,7 +461,7 @@ form p {
     background: none;
     border: 0;
     outline: none;
-    min-width:45rem;
+    min-width:45vw;
 }
 
 #search-bar input[type="image"]{

@@ -12,26 +12,27 @@
       </div>
     </div>
 
-    <!-- Navigation -->
+  <div class="portfolio">
     <div class="nav-container">
       <div class="navigation">
         <div class="links-container" ref="linksContainer">
-          <router-link
-            v-for="(route, index) in routes"
-            :key="index"
-            active-class="active"
-            class="link"
-            :to="route.path"
-            @click="handleClick($event, route.path)"
-          >
-            <p>{{ route.name }}</p>
-          </router-link>
-          <div class="animated-border" ref="animatedBorder"></div>
-        </div>
+  <router-link
+    v-for="(route, index) in routes"
+    :key="index"
+    active-class="active"
+    class="link"
+    :to="route.path"
+    @click="handleClick($event, route.path)"
+  >
+    <img :src="getPictogram(route.name)" :alt="`${route.name} icon`" class="pictogram" />
+    <p>{{ route.name }}</p>
+  </router-link>
+  <div class="animated-border" ref="animatedBorder"></div>
+</div>
       </div>
     </div>
 
-    <!-- Contenu principal avec transition -->
+    
     <transition
       mode="out-in"
       :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'"
@@ -39,6 +40,7 @@
       <RouterView />
     </transition>
   </div>
+</div>
 </template>
 
 
@@ -86,15 +88,20 @@
   opacity: 1;
 }
 
+.portfolio{
+  margin: 0 5vw;
+}
+
 .link {
   position: relative;
-    padding: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    width: -webkit-fill-available;
-    align-items: center;
-    justify-content: center;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  width: -webkit-fill-available;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .animated-border {
@@ -131,6 +138,7 @@
 
 .link:hover{
   background: var(--gray-hover);
+  border-bottom: 2px solid var(--gray);
 }
 
 .nav-container{
@@ -152,11 +160,10 @@
 }
 
 .navigation{
-    margin:auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 85%;
+    width: 100%;
     gap:2vw;
     overflow: hidden;
     border-bottom: var(--light-gray-border);
@@ -185,6 +192,10 @@
     box-shadow: -5px 3px 15px black;
 }
 
+.pictogram{
+  max-width: 20px;
+  filter:invert(0.9);
+}
 
 .banner-content {
     max-width: 800px;
@@ -244,16 +255,26 @@ export default {
   },
   methods: {
     handleClick(event, path) {
-      this.moveBorder(event);
-      this.$router.push(path);
-    },
-    moveBorder(event) {
-      const target = event.currentTarget;
-      const border = this.$refs.animatedBorder;
-      const { offsetLeft, offsetWidth } = target;
-      border.style.left = `${offsetLeft}px`;
-      border.style.width = `${offsetWidth}px`;
-    },
+    this.moveBorder(event);
+    this.$router.push(path);
+  },
+  moveBorder(event) {
+    const target = event.currentTarget;
+    const border = this.$refs.animatedBorder;
+    const { offsetLeft, offsetWidth } = target;
+    border.style.left = `${offsetLeft}px`;
+    border.style.width = `${offsetWidth}px`;
+  },
+  getPictogram(routeName) {
+    const icons = {
+      Tous: "/img/pictogramme/tous.png",
+      Audiovisuel: "/img/pictogramme/audiovisuel.png",
+      Graphisme: "/img/pictogramme/graphisme.png",
+      "Développement web": "/img/pictogramme/devWeb.webp",
+      "UI-UX": "/img/pictogramme/ux-design.svg",
+    };
+    return icons[routeName] || "/path/to/default-icon.png"; // Fallback icon
+  },
     updateBorderOnMount() {
       const activeRoute = this.$route.path;
       const linksContainer = this.$refs.linksContainer;

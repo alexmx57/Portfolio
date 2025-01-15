@@ -293,7 +293,7 @@ header {
 }
 
 .navbar-responsive-container li {
-    margin: 1.8rem 0;
+    margin: 18px 0;
     width: max-content;
     display: flex;
     align-items: center;

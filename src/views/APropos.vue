@@ -2,15 +2,19 @@
     <div id="cv-container">
       <div class="top-container">
         <img class="profile-picture" src="/img/alexandre.jpg" alt="Photo Alexandre Meux" />
+        <div class="intro-btn">
         <p class="introduction">
           Je m'appelle Alexandre Meux, je suis étudiant en 2ème année de BUT MMI et je suis passionné par l'univers du multimédia. Mes domaines de prédilection sont le développement web et le graphisme. Je suis actuellement à la recherche d'une alternance ou d'un stage pour ma deuxième année de BUT dans le domaine du multimédia.
         </p>
+        <RouterLink to="/portfolio/tous"><button class="cta-button">Voir mes projets</button></RouterLink>
+      </div>
       </div>
   
       <div id="cv-sections">
         <div class="shape-container">
           <img class="shape" alt="shape" src="/img/shape.png" />
         </div>
+        
         <div class="cv-details">
        
           <section id="experiences-section" class="cv-section">
@@ -131,32 +135,24 @@
                 <h4>Calme</h4>
                 <ul>
                   <li>2023 - En cours</li>
-                  <li>IUT Sénart Fontainebleau (UPEC)</li>
-                  <li>Parcours création numérique</li>
                 </ul>
               </li>
               <li class="item">
                 <h4>Polyvalence</h4>
                 <ul>
                   <li>2023 - En cours</li>
-                  <li>IUT Sénart Fontainebleau (UPEC)</li>
-                  <li>Parcours création numérique</li>
                 </ul>
               </li>
               <li class="item">
                 <h4>Rigueur</h4>
                 <ul>
                   <li>2023 - En cours</li>
-                  <li>IUT Sénart Fontainebleau (UPEC)</li>
-                  <li>Parcours création numérique</li>
                 </ul>
               </li>
               <li class="item">
                 <h4>Perfectionnisme</h4>
                 <ul>
                   <li>2023 - En cours</li>
-                  <li>IUT Sénart Fontainebleau (UPEC)</li>
-                  <li>Parcours création numérique</li>
                 </ul>
               </li>
             </ul>
@@ -188,17 +184,21 @@ main {
 }
 
 .profile-picture{
-    width: 40rem;
+    width:35rem;
 }
 
 .top-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     text-align: justify;
-    gap: 2rem;
-    padding: 0 10rem;
+    flex-wrap: wrap;
+    gap: 6rem;
+    padding: 0 6rem;
     margin-bottom: 8rem;
+}
+
+.cta-button{
+  margin:2rem 0;
 }
 
 .top-container .profile-picture {
