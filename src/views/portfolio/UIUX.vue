@@ -27,7 +27,7 @@ export default {
       ui_ux_Projects: [
       {
           id: 1,
-          nom: 'Bande-Dessinnée',
+          nom: 'Bande.Dessinnee',
           description: "Vidéo réalisé en cours d'Anglais pour aider les gens...",
           background: '/img/projet/digitaldetox.png',
           skills:['animate.png',]

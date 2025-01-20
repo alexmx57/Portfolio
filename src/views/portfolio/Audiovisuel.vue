@@ -63,7 +63,13 @@ export default {
            date:"Octobre 2024",
            skills:["/aftereffects.png","illustrator.png"]
           },
-          
+          { id: 6, 
+          nom: 'Générique',
+           description: 'Générique de fin de comédie romantique', 
+           background: '/img/projet/generique.png',
+           date:"Janvier 2025",
+           skills:["/aftereffects.png"]
+          },
       ],
     };
   },

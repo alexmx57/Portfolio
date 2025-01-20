@@ -265,7 +265,14 @@ export default {
           background: '/img/projet/campagnePublicitaire.jpg',
           skills: ['photoshop.png'],
           date: "Décembre 2024"
-        }
+        },
+        { id: 6, 
+          nom: 'Générique',
+           description: 'Générique de fin de comédie romantique', 
+           background: '/img/projet/generique.png',
+           date:"Janvier 2025",
+           skills:["/aftereffects.png"]
+          },
       ],
     };
   },

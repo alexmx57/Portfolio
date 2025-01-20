@@ -2,7 +2,7 @@
     <div class="contact-container">
       <div class="contact-info">
         <img width="200" src="/img/am.png">
-        <h4>Mes coordonnées</h4>
+        <h3>Mes coordonnées</h3>
         <p>
           <strong>Email :</strong> <a target="_blank" href="mailto:alexandre.meux@etu.u-pec.fr">alexandre.meux@etu.u-pec.fr</a>
         </p>
@@ -102,9 +102,9 @@
 
   }
 
-  .contact-info h4{
+  .contact-info h3{
     margin-bottom: 5rem;
-    font-size: 5rem;
+    font-size: 3rem;
   }
 
   .contact-info p{

@@ -1,10 +1,11 @@
 <template>
   <div @scroll="handleScroll" id="main">
-    <Header/>
+    <Header v-if="!activeResponsiveHeader"/>
     <Transition mode="out-in" name="fade-slide">
       <RouterView />
     </Transition>
     <Footer/>
+    <ResponsiveHeader v-if="activeResponsiveHeader"/>
    <Transition name="arrow">
     <div @click="scrollTop" v-if="activeArrow" class="scroll-arrow">↑</div>
    </Transition>
@@ -16,22 +17,22 @@
 
 
 
-
 <script>
 import Header from './components/Header.vue';
+import ResponsiveHeader from './components/ResponsiveHeader.vue';
 import Footer from './components/Footer.vue';
-
-
 
 export default {
   name: 'App',
   components: {
     Header,
-    Footer
+    Footer,
+    ResponsiveHeader
   },
   data() {
     return {
-      activeArrow: false
+      activeArrow: false,
+      activeResponsiveHeader: false
     }
   },
   methods: {
@@ -42,9 +43,18 @@ export default {
     scrollTop() {
       document.querySelector('#main').scrollTop = 0;
     },
+    windowWidth() {
+      this.activeResponsiveHeader = window.innerWidth < 700;
+    }
+  },
+  mounted() {
+    this.windowWidth(); 
+    window.addEventListener('resize', this.windowWidth);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.windowWidth);
   }
 }
-
 </script>
 
 
@@ -61,7 +71,6 @@ export default {
 
 
 
-
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: all 0.75s cubic-bezier(0.23, 1, 0.320, 1);
@@ -75,7 +84,10 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 
 
-
+@font-face {
+  font-family: 'Horizon';
+  src: url('/public/font/horizon.otf');
+}
 
 
 :root {
@@ -170,6 +182,13 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 
 
+/**  FONT  **/
+  --font-text:'Roboto Flex';
+  --font-title: 'Horizon';
+
+
+
+
 
 
 
@@ -199,7 +218,7 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 select{
   background: var(--gray);
-  font-family: 'Roboto Flex';
+  font-family: var(--font-text);
   padding:0.8rem 1rem;
   border-radius: 0.5rem;
   font-size: 1.33rem;
@@ -217,11 +236,11 @@ select option{
 
 * input::placeholder,textarea::placeholder{
   color:var(--gray);
-  font-family: Advent Pro;
+  font-family: var(--font-text);
 }
 
 input[type="text"],input[type='email'],textarea {
-  font-family: "Advent Pro";
+  font-family: var(--font-text);
   font-weight: var(--font-weight-bold);
   color: var(--gray);
   letter-spacing: 1px;
@@ -259,7 +278,7 @@ u {
   text-decoration: underline;
   font-weight: var(--font-weight-midbold);
   padding-right: 0.45rem;
-  font-family: 'Roboto Flex';
+  font-family: var(--font-text);
   color: var(--yellow-white);
   letter-spacing: 0;
   font-size: 1.65rem;
@@ -267,31 +286,32 @@ u {
 
 h4 {
   font-size: 1.5rem;
-  font-family: "Roboto Flex";
+  font-family: var(--font-text);
 }
 
 h3 {
-  font-size: 2.5rem;
-  font-family: "Advent Pro";
+  font-size: 2rem;
+  font-family: var(--font-title);
 }
 
 h2 {
   font-size: 4rem;
   font-weight: var(--font-weight-bold);
+  letter-spacing: -2px;
 }
 
 h1 {
-  font-size: 10rem;
+  font-size: 7.5rem;
   color: var(--gray);
   font-weight: var(--font-weight-black);
   text-transform: uppercase;
+  letter-spacing: -5px;
 }
 
 h1,
 h2 {
-  font-family: "Advent Pro";
+  font-family: var(--font-title);
   color: rgb(90, 106, 121);
-  letter-spacing: 1.5px;
 }
 
 h3,
@@ -303,7 +323,7 @@ h4 {
 
 
 button {
-  font-family: 'Roboto Flex';
+  font-family: var(--font-text);
   font-weight: var(--font-weight-extrabold);
   border-radius: 1rem;
   padding: 0.8rem;
@@ -333,7 +353,7 @@ button:hover {
 
 
 body {
-  font-family: 'Roboto Flex';
+  font-family: var(--font-text);
   background: var(--light-blue);
   color: rgb(236, 236, 236);
   overflow-x: hidden;
@@ -495,7 +515,7 @@ hr {
 
 .scroll-arrow {
   position: fixed;
-  bottom: 25px;
+  bottom: 100px;
   right: 25px;
   background: var(--black);
   border: var(--light-gray-border);
@@ -552,30 +572,106 @@ hr {
 }
 
 @media (max-width:600px) {
-  html {
-    font-size: 7px;
-  }
-
   .navbar-responsive-container {
     width: 70% !important;
   }
+}
 
+
+@media (min-width: 1400px) {
+  h1 {
+    font-size: 7.5rem;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Écrans larges (1100px - 1400px) */
+@media (max-width: 1400px) {
+  h1 {
+    font-size: 6rem;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-size: 3.5rem;
+  }
+  h3 {
+    font-size: 1.8rem;
+  }
+  h4 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Tablettes et petits écrans (768px - 1100px) */
+@media (max-width: 1100px) {
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 3rem;
+  }
+  h3 {
+    font-size: 1.75rem;
+  }
+  h4 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobiles (600px - 768px) */
+@media (max-width: 768px) {
   h1 {
     font-size: 4rem;
   }
-
   h2 {
     font-size: 2.5rem;
   }
+  h3 {
+    font-size: 1.6rem;
+  }
+}
 
-  h3,
-  h4 {
-    font-size: 1.85rem;
+/* Petits mobiles (moins de 600px) */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Très petits écrans (moins de 400px) */
+@media (max-width: 400px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.3rem;
   }
 }
 
 
 
+@media (max-width:800px) {
+  select{
+    padding:1vw;
+  }
+}
 
 @media (max-width:350px) {
   .navbar-responsive-container {

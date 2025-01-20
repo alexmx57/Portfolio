@@ -3,8 +3,8 @@
     <div class="block flex-column" id="intro-section">
         <div class="block1 flex-column" id="header-block">
             <h1 class="title" id="main-title">Mon Portfolio</h1>
-            <h2 id="name">Alexandre Meux</h2>
-            <h3><i class="gray" id="job-title">Un développeur web</i> et bien d'autres</h3>
+             <h2 id="name">Alexandre Meux</h2>
+            <h3><i class="gray" id="job-title">Un développeur web</i> et bien d<span>'</span>autres</h3> 
         </div>
         <div class="block2 flex-column" id="bio-section">
             <p id="bio-text">Je m'appelle Alexandre Meux, je suis étudiant en BUT MMI
@@ -12,25 +12,25 @@
                 développement web et le graphisme.
                 Je suis actuellement à la recherche d'une alternance pour ma deuxième année de BUT.
             </p>
-            <div class="social-media flex" id="social-media-links">
+             <div class="social-media flex" id="social-media-links">
                 <div class="social-media-item" id="linkedin">
                     <a class="centered" href="https://www.linkedin.com/in/alexandre-meux-2ba28a29b" target="_blank">
-                        <img class="linkedIn" width="40" src="/img/pictogramme/linkedIn.png" alt="LinkedIn">
+                        <img class="linkedIn" src="/img/pictogramme/linkedIn.png" alt="LinkedIn">
                     </a>
                 </div>
                 <div class="social-media-item" id="email">
                     <a class="centered" href="mailto:alexandre.meux@etu.u-pec.fr" target="_blank">
-                        <img class="mail" width="40" src="/img/pictogramme/email.svg" alt="Email">
+                        <img class="mail" src="/img/pictogramme/email.svg" alt="Email">
                         <p>alexandre.meux@etu.u-pec.fr</p>
                     </a>
                 </div>
                 <div class="social-media-item" id="phone">
                     <a class="centered" href="tel:+33750578484" target="_blank">
-                        <img class="phone" width="40" src="/img/pictogramme/phone.png" alt="Phone">
+                        <img class="phone" src="/img/pictogramme/phone.png" alt="Phone">
                         <p>07 50 57 84 84</p>
                     </a>
                 </div>
-            </div>
+            </div> 
             <RouterLink class="cta-btn" :to="links[rand]" id="view-more-link">
                 <button class="centered" id="view-more-btn">Voir Plus
                     <img class="plus" alt="plus image" src="/img/pictogramme/plus.svg">
@@ -139,6 +139,10 @@ export default {
     padding: 12% 4%;
 }
 
+.social-media-item img{
+    width: 4rem;
+}
+
 .social-media div a {
     background: var(--white);
     opacity: 0.7;
@@ -230,12 +234,6 @@ export default {
     min-height: 350px;
     min-width: 350px;
 }
-
-
-p {
-    text-align: justify;
-}
-
 
 
 

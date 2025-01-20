@@ -283,6 +283,14 @@ export default {
                 image: 'indesign.png', 
                 description: "Mise en page avancée pour publications imprimées ou numériques.", 
                 level: "2" 
+            },
+            { 
+                id: 20, 
+                title: "Google Doc", 
+                place: 'Projet personnel', 
+                image: 'gdoc.png', 
+                description: "Mise en page avancée en collaboratif.", 
+                level: "6" 
             }
         ]
     },
@@ -461,7 +469,7 @@ form {
     background: none;
     border: 0;
     outline: none;
-    min-width:45vw;
+    width:50rem;
 }
 
 #search-bar input[type="image"]{

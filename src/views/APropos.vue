@@ -192,9 +192,10 @@ main {
     align-items: center;
     text-align: justify;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
     gap: 6rem;
     padding: 0 6rem;
-    margin-bottom: 8rem;
+    margin-bottom: 12rem;
 }
 
 .cta-button{
@@ -230,8 +231,8 @@ main {
 
 .cv-details {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vw;
 }
 
 #cv-sections{
@@ -256,7 +257,7 @@ main {
 }
 
 .section-title img.pictogrammes {
-    width: 40px;
+    width: 3.5rem;
     height: auto;
 }
 
@@ -278,16 +279,32 @@ ul li h4 {
     margin: 0.5rem 0;
 }
 
+@media (max-width: 1000px) {
+    #cv-sections{
+      grid-template-columns: 1fr;
+    }
+    .top-container{
+      flex-direction: column;
+    }
+  }
 
-
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .cv {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    #cv-sections{
+      grid-template-columns: 1fr;
     }
 
     .cv-details {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
     }
-}
+} */
+
+
+/* @media (min-width: 768px) {
+
+} */
 </style>

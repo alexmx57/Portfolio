@@ -12,27 +12,28 @@
       </div>
     </div>
 
-  <div class="portfolio">
+ 
     <div class="nav-container">
       <div class="navigation">
         <div class="links-container" ref="linksContainer">
-  <router-link
-    v-for="(route, index) in routes"
-    :key="index"
-    active-class="active"
-    class="link"
-    :to="route.path"
-    @click="handleClick($event, route.path)"
-  >
-    <img :src="getPictogram(route.name)" :alt="`${route.name} icon`" class="pictogram" />
-    <p>{{ route.name }}</p>
-  </router-link>
+          <router-link
+  v-for="(route, index) in routes"
+  :key="index"
+  active-class="active"
+  class="link"
+  :class="{ active: $route.path === route.path }"
+  :to="route.path"
+  @click="handleClick($event, route.path)"
+>
+  <img :src="getPictogram(route.name)" :alt="`${route.name} icon`" class="pictogram" />
+  <p>{{ route.name }}</p>
+</router-link>
   <div class="animated-border" ref="animatedBorder"></div>
 </div>
       </div>
     </div>
 
-    
+  <div class="portfolio">   
     <transition
       mode="out-in"
       :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'"
@@ -94,7 +95,7 @@
 
 .link {
   position: relative;
-  padding: 0.5rem;
+  padding: 0.5rem 0.1rem;
   text-decoration: none;
   color: inherit;
   display: flex;
@@ -121,8 +122,9 @@
 }
 
 .link p {
-  font-family: 'Roboto Flex';
+  font-family: var(--font-title);
   letter-spacing: -0.5px;
+  font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
   transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin:1vw; 
@@ -138,7 +140,6 @@
 
 .link:hover{
   background: var(--gray-hover);
-  border-bottom: 2px solid var(--gray);
 }
 
 .nav-container{
@@ -193,8 +194,14 @@
 }
 
 .pictogram{
-  max-width: 20px;
+  max-width: 2rem;
   filter:invert(0.9);
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.link.active .pictogram {
+  opacity: 1;
 }
 
 .banner-content {
@@ -208,18 +215,31 @@
     margin: 15px auto 35px auto;
 }
 
-@media screen and (max-width: 745px) {
-  .navigation{
-    width: 100%;
+
+
+@media screen and (max-width: 800px) {
+  .navigation .link  p{
+    font-size:1rem ;
+  }
+  .portfolio{
+    margin: 0 1vw;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .link{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navigation .link p{
+    font-size: 0.75rem;
   }
 }
 
 
-@media screen and (max-width: 745px) {
-  .link p{
-    font-size: 2.8vw;
-  }
-}
+
 
 
 </style>
@@ -273,7 +293,7 @@ export default {
       "Développement web": "/img/pictogramme/devWeb.webp",
       "UI-UX": "/img/pictogramme/ux-design.svg",
     };
-    return icons[routeName] || "/path/to/default-icon.png"; // Fallback icon
+    return icons[routeName] || "/path/to/default-icon.png"; 
   },
     updateBorderOnMount() {
       const activeRoute = this.$route.path;

@@ -6,12 +6,13 @@
         <img class="backward-arrow" alt="Flèche de navigation" src="/img/pictogramme/arrow-left.png">
       </RouterLink> 
       <div class="name-description">
-        <h3>{{ project.nom }}</h3>
+        <h1>{{ project.nom }}</h1>
         <p>{{ project.description }}</p>
       </div>
 
       <div class="grid-section">
-        <img class="visual" :src="project.background" alt="project background" />
+        <video class="visual" controls width="630" height="360" v-if="project.video"><source :src="project.video" type="video/mp4"></video>
+        <img v-else class="visual" :src="project.background" alt="project background" />
         
         <div v-if="project.brief" id="brief" class="sub-section">
           <img class="section-image" src="/img/pictogramme/brief.png" alt="stars">
@@ -91,7 +92,7 @@ export default {
     updateProjectData() {
       const { name } = this.$route.params;
 
-      // Exemple de données, remplacez-le par vos données réelles
+
       const allProjects = [
       {
           nom: 'Quantum',
@@ -186,7 +187,8 @@ export default {
           brief:"Créer un clip audiovisuel filmé avec le téléphone.",
           livrable:" Rendu d'un dossier de production et du clip audiovisuel.",
           contexte:"Projet de fin de semestre réalisé de manière individuelle.",
-          idees:"Créer une affiche qui interpelle le spectateur"
+          idees:"Créer une affiche qui interpelle le spectateur",
+          video: '/video/clip.mp4'
         },
         {
           nom: 'Vitinha 2.0',
@@ -211,7 +213,8 @@ export default {
           brief:"Créer une scène d'épouvante en utilisant la caméra 3D sur After Effects.",
           livrable:" La vidéo d'épouvante",
           contexte:"Projet réalisé en cours d'audiovisuel de manière individuelle.",
-          idees:"Créer une affiche qui interpelle le spectateur"
+          idees:"Créer une affiche qui interpelle le spectateur",
+          video: '/video/epouvante.mp4'
         },
         {
           nom: 'Limites planétaires',
@@ -313,18 +316,20 @@ export default {
           brief:"Créer une vidéo pour une campagne de sensibilisation face au danger des écrans et des réseaux sociaux",
           livrable:" Rendu de la vidéo au monté au format mp4.",
           contexte:"Projet réalisé en cours d'Anglais par groupe de 2",
-          idees:"Créer une affiche qui interpelle le spectateur"
+          idees:"Créer une affiche qui interpelle le spectateur",
+          video: '/video/digital-detox.mp4'
         },
         {
           nom: 'Les Arènes',
-          description: 'Vidéo sur l’univers de Bob...',
+          description: 'Vidéo sur les Arènes',
           background: '/img/projet/lesArenes.png',
           date: 'Novembre 2024',
           skills: ["premierepro.png"],
           brief:"Monter une vidéo faisant la promotion des Arènes de Corbeil-Essonnes à partir des rushs fournis par l'enseignant, la vidéo doit durer 45 secondes à 1 minute.",
           livrable:" Rendu de la vidéo au format .mp4",
           contexte:"Projet réalisé en d'écriture et multimédia en individuel.",
-          idees:"Créer une affiche qui interpelle le spectateur"
+          idees:"Créer une affiche qui interpelle le spectateur",
+          video:"/video/arenes.mp4"
         },
         {
           nom: 'Festival',
@@ -346,12 +351,12 @@ export default {
         },
         {
           nom: 'Player',
-          description: 'Vidéo sur l’univers de Bob...',
+          description: 'Vidéo sur un player audio',
           background: '/img/projet/player.png',
           date: "Octobre 2024",
           skills: ["/aftereffects.png", "illustrator.png"],
           brief:"Créer une vidéo grâce à After Effects qui doit simuler avec le fond d'un écran de démarrage d'ordinateur un player",
-          livrable:" Affiche imprimée",
+          livrable:" Rendu de la vidéo au format .mp4",
           contexte:"Projet réalisé en cours de graphisme",
           idees:"Créer une affiche qui interpelle le spectateur"
         },
@@ -388,7 +393,19 @@ export default {
           livrable:" Rendu de l'affiche",
           contexte:"Projet réalisé en cours de graphisme en individuel.",
           idees:"Créer une affiche qui interpelle le spectateur"
-        }
+        },
+        {
+          nom: 'Generique',
+           description: 'Générique de fin de comédie romantique', 
+           background: '/img/projet/generique.png',
+           date:"Janvier 2025",
+           skills:["/aftereffects.png"],
+           brief:"Créer une affiche pour une campagne publicitaire contre l'étalement urbain",
+           livrable:" Rendu de l'affiche",
+          contexte:"Projet réalisé en cours de graphisme en individuel.",
+          idees:"Créer une affiche qui interpelle le spectateur",
+          video:"/video/generique.mp4"
+          },
       ];
 
       const currentIndex = allProjects.findIndex(
@@ -465,6 +482,7 @@ export default {
 
 .name-description{
   margin-bottom: 5vw;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -472,8 +490,8 @@ export default {
   gap:10px;
 }
 
-.name-description h3{
-  font-size: 8rem;
+.name-description h1{
+  color:var(--yellow-white) !important;
 }
 
 .name-description p{

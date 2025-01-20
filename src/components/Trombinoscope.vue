@@ -529,7 +529,7 @@ h2{
 }
 
 .skill-image{
-  width:1.5vw;
+  width:2rem;
 }
 
 .select-container{
@@ -553,16 +553,16 @@ h2{
 }
 
 .select-container{
-  margin:2rem 0;
+  margin:1rem 0;
 }
 
 .section-details{
   margin: 1.5rem 0;
   position: relative;
-    background: var(--footer-header_bck);
-    padding: 1vw;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px 1px #ffffff0f;
+  background: var(--footer-header_bck);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px 1px #ffffff0f;
 }
 
 .project-description,.projectButton{
@@ -599,7 +599,7 @@ h2{
   padding:16rem 4rem;
   position: absolute;
   text-transform: uppercase;
-  font-family: Advent Pro !important;
+  font-family: var(--font-title);
 }
 
 .project:hover {
@@ -608,7 +608,7 @@ h2{
 }
 
 .project .project-name{
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   transition: 0.2s ease-in;
   margin: 0.75vw  0 0 0.75vw;
   text-wrap: nowrap;
@@ -619,6 +619,7 @@ h2{
   backdrop-filter: blur(6px);
   height: fit-content;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: var(--light-gray-border);
@@ -704,6 +705,17 @@ label{
 }
 }
 
+@media (max-width: 800px) {
+.right-banner{
+  align-items: flex-start;
+}
+}
+
+/* @media screen and (max-width: 800px) {
+  .section-details{
+    f
+  }
+} */
 
 /* @media screen and (max-width: 745px) {
 

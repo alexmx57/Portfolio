@@ -281,7 +281,7 @@ header {
     white-space: nowrap;
     font-size: 15px;
     font-family: 'Roboto Flex';
-    font-weight: 700;
+    font-weight: 800;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -317,7 +317,6 @@ header {
     filter:invert(1)
 }
 
-
 .right-header {
     justify-self: flex-end;
     margin-right: 1rem;
@@ -326,7 +325,6 @@ header {
 .name {
     transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
     justify-self: center;
-    font-family: 'Advent Pro';
     text-transform: uppercase;
     font-weight: 300;
     color: var(--yellow-white);
@@ -421,7 +419,7 @@ header {
     white-space: nowrap;
 }
 
-.actif {
+/* .actif {
     left: 0;
     height: 100vh;
     width: 100%;
@@ -432,5 +430,11 @@ header {
 
 .inactif {
     left: -200vw;
+} */
+
+@media (max-width:605px){
+    .name {
+        opacity: 0;
+    }
 }
 </style>
