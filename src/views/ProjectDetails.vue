@@ -124,7 +124,7 @@ export default {
           date: "Octobre 2024"
         },
         {
-          nom: 'Bande-Dessinnée',
+          nom: 'Bande Dessinnée',
           description: "Bande-dessinée intéractive",
           background: '/img/projet/digitaldetox.png',
           skills: ['animate.png'],
@@ -372,7 +372,7 @@ export default {
           idees:"Créer une affiche qui interpelle le spectateur"
         },
         {
-          nom: 'Site Eh Connard !',
+          nom: 'Site Eh Connard!',
           description: 'Site web féministe',
           background: '/img/projet/ehConnard.png',
           date: "Janvier 2024",
@@ -395,7 +395,7 @@ export default {
           idees:"Créer une affiche qui interpelle le spectateur"
         },
         {
-          nom: 'Generique',
+          nom: 'Générique',
            description: 'Générique de fin de comédie romantique', 
            background: '/img/projet/generique.png',
            date:"Janvier 2025",
@@ -539,7 +539,7 @@ export default {
   background: var(--footer-header_bck);
   padding:2rem;
   border-radius: 10px;
-  box-shadow:inset 0px 2px 18px 2px var(--gray);
+  box-shadow:var(--box-shadow-1);
 }
 
 /* #section-5{
@@ -573,4 +573,9 @@ export default {
 .skill-collection .skill-image{
   width:3.75rem;
 }
+
+@media (max-width:800px){
+
+}
+
 </style>

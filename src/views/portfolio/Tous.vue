@@ -53,7 +53,7 @@ export default {
         },
         {
           id: 16,
-          nom: 'Bande-Dessinnée',
+          nom: 'Bande Dessinnée',
           description: "Vidéo réalisée en cours d'Anglais pour aider les gens...",
           background: '/img/projet/digitaldetox.png',
           skills: ['animate.png']
@@ -252,7 +252,7 @@ export default {
         },
         {
           id: 21,
-          nom: 'Site Eh Connard !',
+          nom: 'Site Eh Connard!',
           description: 'Site web féministe',
           background: '/img/projet/ehConnard.png',
           date: "Janvier 2024",

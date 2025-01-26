@@ -14,10 +14,6 @@
     <div class="section-details">
 
 
-      <!-- <div v-if="banner" :style="{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95)),'+'url(' + banner + ')' }" class="banner-section">
-        <p>Bienvenue dans le Trombinoscope des Projets</p>
-      </div> -->
-
 
 <div class="info-grid_layout">
   <div class="title-counter">
@@ -129,33 +125,27 @@
 
 
 
-
+ <!-- <span class="date span">{{project.date}}</span>
+            <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="`skill-${skill}`" :alt="`Skill: ${skill}`" class="skill-image" /></div> -->
 
 
     <TransitionGroup :style="{gridTemplateColumns:grid}" mode="out-in" name="list" tag="div" class="trombinoscope">
       <router-link
-        v-for="project in sortedProjects"
+        v-for="(project, index) in sortedProjects"
         :to="`${baseRoute}/${project.nom.toLowerCase().replace(/ /g, '-')}`" 
         :key="project.id"
-        :style="{ backgroundImage: `url(${project.background})`, width: activeIndex === 0 ? '40vw' : activeIndex === 1 ? '35vw' : activeIndex === 2 ? '27.5vw' : '20vw',
-        height: activeIndex === 0 ? '40vw' : activeIndex === 1 ? '35vw' : activeIndex === 2 ? '27.5vw' : '20vw' }"
+        :style="{ backgroundImage: `url(${project.background})`, width: activeIndex === 0 ? '50vw' : activeIndex === 1 ? '40vw' : activeIndex === 2 ? '31vw' : '23vw',
+        height: activeIndex === 0 ? '50vw' : activeIndex === 1 ? '40vw' : activeIndex === 2 ? '31vw' : '23vw' }"
         class="project"
-        @mouseleave="visibleProjectId = null"
-        @mouseover="setHover(project.id)"
-        :class="{ 'project-hover': visibleProjectId === project.id }"
       >
-        <Transition mode="out-in" name="banner-appear">
-          <div v-if="visibleProjectId !== project.id" class="project-banner">
-            <h3 class="project-name">{{ project.nom }}</h3>
-            <div class="right-banner">
-            <span class="date span">{{project.date}}</span>
-            <div class="skills"><img loading="lazy" v-for="skill in project.skills"  :src="'/img/pictogramme/competences/'+skill" :key="`skill-${skill}`" :alt="`Skill: ${skill}`" class="skill-image" /></div>
-          </div>
-          </div> 
-        </Transition>
-        <Transition mode="out-in" name="text-appear">
-          <p v-if="visibleProjectId === project.id" class="project-description">{{ project.description }}</p>
-        </Transition> 
+      <Transition mode="out-in" name="banner-appear">
+  <div class="project-banner">
+    <h3 class="project-name">{{ project.nom }}</h3>
+    <div class="right-banner">
+      <h1 class="project-number">{{ index + 1 }}</h1>
+    </div>
+  </div> 
+</Transition>
       </router-link>
     </TransitionGroup>
   </div>
@@ -280,7 +270,6 @@ computed: {
   },
 },
   mounted() {
-    this.addHoverEffect();
     this.loadFiltersFromStorage();
   },
   methods: {
@@ -303,39 +292,6 @@ computed: {
   },
     toggleSort() {
       this.sortByAlphabet = !this.sortByAlphabet;
-    },
-    setHover(projectId) {
-      this.visibleProjectId = projectId;
-    },
-    addHoverEffect() {
-      const projectElements = document.querySelectorAll('.project');
-      projectElements.forEach((project) => {
-        project.addEventListener('mouseover', () => {
-          project.style.position = 'relative';
-
-          if (!project.querySelector('.overlay')) {
-            const overlay = document.createElement('div');
-            overlay.className = 'overlay';
-            overlay.style.position = 'absolute';
-            overlay.style.top = '0';
-            overlay.style.left = '0';
-            overlay.style.width = '100%';
-            overlay.style.height = '100%';
-            overlay.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75 ))';
-            overlay.style.pointerEvents = 'none';
-            overlay.style.transition = 'opacity 0.85s ease-in-out';
-            overlay.style.opacity = '1';
-            project.appendChild(overlay);
-          }
-        });
-
-        project.addEventListener('mouseleave', () => {
-          const overlay = project.querySelector('.overlay');
-          if (overlay) {
-            project.removeChild(overlay);
-          }
-        });
-      });
     },
     resetFilters() {
     this.sortOption = 'none';
@@ -410,18 +366,6 @@ computed: {
 
 /* CSS TRANSITION */
 
- .text-appear-enter-active,
-.text-appear-leave-active {
-  transition: all 0.75s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.text-appear-enter-from,
-.text-appear-leave-to {
-  opacity: 0;
-  transform: translateX(50vh);
-}
-
-
 .banner-appear-enter-active,
 .banner-appear-leave-active {
   transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
@@ -430,7 +374,7 @@ computed: {
 .banner-appear-enter-from,
 .banner-appear-leave-to {
   opacity: 0;
-  transform: translateY(-100px);
+  transform: translateY(100px);
 }
 
 .cross-enter-active,
@@ -480,6 +424,11 @@ computed: {
   opacity: 0.7;
 }
 
+.grid-icon{
+  width:2rem;
+  height:2rem;
+}
+
 .info-grid_layout{
     display: flex;
     justify-content: space-between;
@@ -524,12 +473,18 @@ h2{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap:0.75rem;
   margin-top: 4px;
 }
 
 .skill-image{
   width:2rem;
+  height:2rem;
+}
+
+.date{
+  text-wrap: nowrap;
 }
 
 .select-container{
@@ -557,24 +512,20 @@ h2{
 }
 
 .section-details{
-  margin: 1.5rem 0;
+  margin: 2.5rem auto;
+  width: 97.5%;
   position: relative;
   background: var(--footer-header_bck);
-  padding: 12px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 15px 1px #ffffff0f;
-}
-
-.project-description,.projectButton{
-  z-index:100;
 }
 
 .trombinoscope {
     display: grid;
     grid-template-columns: repeat(3,auto);
     width: 100%;
-    padding: 0 1rem;
-    gap: 3vw;
+    gap: 1.5vw;
     margin-bottom: 5rem;
     justify-content: center;
 }
@@ -588,46 +539,49 @@ h2{
     background-position: center;
     position:relative;
     display:grid;
-    border:var(--light-gray-border);
     overflow: hidden;
-}
-
-.project .project-description{
-  color:var(--white-text);
-  font-weight:var(--font-weight-bold);
-  text-align: center;
-  padding:16rem 4rem;
-  position: absolute;
-  text-transform: uppercase;
-  font-family: var(--font-title);
-}
-
-.project:hover {
-  z-index: 1000;
-  transform: scale(1.05);
+    box-shadow: -2px 3px 15px 2px rgb(255 255 255 / 8%)
 }
 
 .project .project-name{
-  font-size: 1.5rem;
-  transition: 0.2s ease-in;
-  margin: 0.75vw  0 0 0.75vw;
-  text-wrap: nowrap;
+  font-size: 2rem;
+  width:60%;
 }
 
 .project .project-banner{
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-  height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  border-bottom: var(--light-gray-border);
+    background: var(--footer-header_bck);
+    padding:.5vw 1vw;
+    height: 8vw;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    right: 0;
+    box-shadow: -1px -1px 10px 1px rgb(255,255,255,0.3);
+    border-top:1px solid rgba(0, 0, 0, 0.5);
+}
+
+.project-number{
+  font-family: var(--font-title-outlined);
+}
+
+.project:hover .project-number{
+  font-family: var(--font-title);
+}
+
+.project-banner,.project-name,.project-number{
+  transition: 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .project:hover .project-name{
-  text-decoration: underline;
-  font-weight: var(--font-weight-black);
+  color:var(--black);
+}
+
+.project:hover .project-banner{
+  background: var(--yellow-white);
 }
 
 .project .projectButton{
@@ -635,7 +589,6 @@ h2{
   bottom:3rem;
   right:3rem;
 }
-
 
 label{
   background: var(--yellow-white);
@@ -653,7 +606,7 @@ label{
 }
 
 .search-container input {
-  padding-right: 2rem; /* Espace pour la croix */
+  padding-right: 2rem; 
 }
 
 .clear-icon {
@@ -677,9 +630,6 @@ label{
   align-items: center;
 }
 
-.grid-icon{
-  width:2rem;
-}
 
 
 
@@ -699,27 +649,18 @@ label{
 
 
 
-@media (max-width: 1024px) {
-.project-name{
-  font-size: 1.75vw !important;
-}
-}
 
 @media (max-width: 800px) {
-.right-banner{
-  align-items: flex-start;
+.project-name{
+  font-size: 1.1rem !important;
 }
 }
 
-/* @media screen and (max-width: 800px) {
-  .section-details{
-    f
+@media (max-width:1024px) {
+  .trombinoscope{
+    gap:1px;
   }
-} */
-
-/* @media screen and (max-width: 745px) {
-
-} */
+}
 
 
 
@@ -732,4 +673,3 @@ label{
 
 
 
-  

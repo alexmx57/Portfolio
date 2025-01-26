@@ -4,7 +4,7 @@
         <div class="block1 flex-column" id="header-block">
             <h1 class="title" id="main-title">Mon Portfolio</h1>
              <h2 id="name">Alexandre Meux</h2>
-            <h3><i class="gray" id="job-title">Un développeur web</i> et bien d<span>'</span>autres</h3> 
+            <h4 ><i class="gray" id="job-title">Un développeur web</i> et bien d<span>'</span>autres</h4> 
         </div>
         <div class="block2 flex-column" id="bio-section">
             <p id="bio-text">Je m'appelle Alexandre Meux, je suis étudiant en BUT MMI

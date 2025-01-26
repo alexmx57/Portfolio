@@ -27,7 +27,7 @@
     width: 100%;
     position: fixed;
     bottom: 0;
-    background: #0000004f;
+    background: var(--footer-header_bck);
     backdrop-filter: blur(8px);
     z-index: 10000000000000000000000000000;
   }
@@ -79,8 +79,8 @@
   }
   
   .pictogramme {
-    width: 3rem;
-    height: 3rem;
+    width: 2.25rem;
+    height: 2.25rem;
     filter: invert(0.9);
   }
   
@@ -97,11 +97,20 @@
         routes: [
           { name: "À propos", path: "/a-propos", icon: "/img/pictogramme/header/aPropos.svg" },
           { name: "Compétences", path: "/competences", icon: "/img/pictogramme/header/stars.svg" },
+          { name: "Accueil", path: "/", icon: "/img/pictogramme/header/home.svg" },
           { name: "Portfolio", path: "/portfolio/tous", icon: "/img/pictogramme/header/portfolio.png" },
           { name: "Contact", path: "/contact", icon: "/img/pictogramme/header/contact.svg" },
         ],
       };
     },
+    watch: {
+  '$route.path': {
+    immediate: true, // Exécuter immédiatement au montage
+    handler() {
+      this.updateBorderOnMount();
+    }
+  }
+},
     methods: {
   handleClick(event, path) {
     this.moveBorder(event);
@@ -115,18 +124,19 @@
     border.style.width = `${offsetWidth}px`;
   },
   updateBorderOnMount() {
+  this.$nextTick(() => {
     const activeRoute = this.$route.path;
     const linksContainer = this.$refs.linksContainer;
     if (linksContainer) {
       const links = linksContainer.querySelectorAll(".link");
       links.forEach((link) => {
-        if (link.getAttribute("href") === activeRoute) {
-          const event = { currentTarget: link };
-          this.moveBorder(event);
+        if (link.getAttribute("href") === activeRoute || link.pathname === activeRoute) {
+          this.moveBorder({ currentTarget: link });
         }
       });
     }
-  },
+  });
+}
 },
     mounted() {
       this.updateBorderOnMount();

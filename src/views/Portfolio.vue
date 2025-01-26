@@ -33,14 +33,13 @@
       </div>
     </div>
 
-  <div class="portfolio">   
     <transition
       mode="out-in"
       :name="transitionDirection === 'forward' ? 'slide-left' : 'slide-right'"
     >
       <RouterView />
     </transition>
-  </div>
+  
 </div>
 </template>
 
@@ -66,7 +65,7 @@
 .slide-right-enter-active,
 .slide-left-leave-active,
 .slide-right-leave-active {
-  transition: all 0.75s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition: all 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
 .slide-left-enter-from,
@@ -87,10 +86,6 @@
 .slide-right-leave-from {
   transform: translateX(0);
   opacity: 1;
-}
-
-.portfolio{
-  margin: 0 5vw;
 }
 
 .link {
@@ -220,9 +215,6 @@
 @media screen and (max-width: 800px) {
   .navigation .link  p{
     font-size:1rem ;
-  }
-  .portfolio{
-    margin: 0 1vw;
   }
 }
 

@@ -32,7 +32,7 @@ export default {
           skills:['php.png','css.svg','js.svg','filezilla.png','vscode.png']
         },
         { id: 2, 
-          nom: 'Site Eh Connard !',
+          nom: 'Site Eh Connard!',
            description: 'Site web féministe', 
            background: '/img/projet/ehConnard.png',
            date:"Janvier 2024",

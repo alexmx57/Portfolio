@@ -89,6 +89,11 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
   src: url('/public/font/horizon.otf');
 }
 
+@font-face {
+  font-family: 'Horizon Outline';
+  src: url('/public/font/horizon_outlined.otf');
+}
+
 
 :root {
   --bg-color-smooth-dark-grey-1: radial-gradient(circle,
@@ -185,12 +190,13 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 /**  FONT  **/
   --font-text:'Roboto Flex';
   --font-title: 'Horizon';
+  --font-title-outlined: 'Horizon Outline';
 
 
 
 
-
-
+ /**  BOX-SHADOW  **/
+ --box-shadow-1:0px 2px 12px 2px var(--gray-hover);
 
 
 
@@ -217,9 +223,10 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 }
 
 select{
-  background: var(--gray);
   font-family: var(--font-text);
+  background: rgba(0, 0, 0, 0);
   padding:0.8rem 1rem;
+  border:var(--light-gray-border);
   border-radius: 0.5rem;
   font-size: 1.33rem;
   color:var(--white-text);
@@ -232,6 +239,8 @@ select:focus{
 
 select option{
   font-weight: var(--font-weight-extrabold);
+  background:var(--footer-header_bck);
+  border:1px solid white;
 }
 
 * input::placeholder,textarea::placeholder{
@@ -297,7 +306,6 @@ h3 {
 h2 {
   font-size: 4rem;
   font-weight: var(--font-weight-bold);
-  letter-spacing: -2px;
 }
 
 h1 {
@@ -305,7 +313,6 @@ h1 {
   color: var(--gray);
   font-weight: var(--font-weight-black);
   text-transform: uppercase;
-  letter-spacing: -5px;
 }
 
 h1,
@@ -369,11 +376,6 @@ body {
   text-decoration: none;
   scroll-behavior: smooth;
   box-sizing: border-box;
-}
-
-*::selection {
-  background: var(--gray);
-  color: var(--white);
 }
 
 html {
@@ -597,7 +599,6 @@ hr {
 @media (max-width: 1400px) {
   h1 {
     font-size: 6rem;
-    letter-spacing: -1px;
   }
   h2 {
     font-size: 3.5rem;
