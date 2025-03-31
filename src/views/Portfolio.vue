@@ -26,7 +26,7 @@
   @click="handleClick($event, route.path)"
 >
   <img :src="getPictogram(route.name)" :alt="`${route.name} icon`" class="pictogram" />
-  <p>{{ route.name }}</p>
+  <h3>{{ route.name }}</h3>
 </router-link>
   <div class="animated-border" ref="animatedBorder"></div>
 </div>
@@ -110,16 +110,14 @@
   pointer-events: none;
 }
 
-.active p{
+.active h3{
   opacity: 1 !important;
   color:var(--yellow-white);
- 
 }
 
-.link p {
+.link h3 {
   font-family: var(--font-title);
   letter-spacing: -0.5px;
-  font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
   transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   margin:1vw; 
@@ -127,7 +125,7 @@
   opacity: 0.7;
 }
 
-.link:hover p {
+.link:hover h3 {
   opacity: 1;
   color:var(--yellow-white);
 

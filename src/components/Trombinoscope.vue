@@ -540,16 +540,21 @@ h2{
     position:relative;
     display:grid;
     overflow: hidden;
-    box-shadow: -2px 3px 15px 2px rgb(255 255 255 / 8%)
+    box-shadow: rgba(255, 255, 255, 0.2) 0 0 15px;
+}
+
+.project:hover{
+  box-shadow: rgba(255, 255, 255, 0.4) 0 0 15px 3px;
 }
 
 .project .project-name{
-  font-size: 2rem;
+  font-size: 3rem;
   width:60%;
+  font-weight: 900;
 }
 
 .project .project-banner{
-    background: var(--footer-header_bck);
+    background: var(--hard-blue);
     padding:.5vw 1vw;
     height: 8vw;
     display: flex;
@@ -565,11 +570,11 @@ h2{
 }
 
 .project-number{
-  font-family: var(--font-title-outlined);
+  font-family: var(--font-number-title-outlined);
 }
 
 .project:hover .project-number{
-  font-family: var(--font-title);
+  font-family: var(--font-number-title);
 }
 
 .project-banner,.project-name,.project-number{
@@ -592,10 +597,10 @@ h2{
 
 label{
   background: var(--yellow-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 5px 0 0;
 }
 
 .search-container {

@@ -68,8 +68,10 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=DM+Serif+Text:ital@0;1&family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 .fade-slide-enter-active,
 .fade-slide-leave-active {
@@ -146,9 +148,9 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
   --light-blue:#1D1D2C;
   --white-text:#ECECEC;
   --black: hsl(0, 0%, 0%);
-  --gray: rgb(90, 106, 121);
+  --gray: #5a6a79;
   --white: hsl(0, 0%, 100%);
-  --yellow-white: rgb(243 234 187);
+  --yellow-white: rgb(243, 234, 187);
 
 
 
@@ -160,7 +162,6 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 
   --bck: rgb(0, 0, 0);
-  --footer-header_bck: #141428;
   --transparent-bck: rgba(0, 0, 0, 0.2);
   --gray-hover: rgba(90, 106, 121, 0.15);
 
@@ -188,9 +189,11 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 
 /**  FONT  **/
-  --font-text:'Roboto Flex';
-  --font-title: 'Horizon';
-  --font-title-outlined: 'Horizon Outline';
+  --font-text:'Montserrat';
+  --font-title: 'Montserrat';
+  --font-button: 'Montserrat';
+  --font-number-title: 'Horizon';
+  --font-number-title-outlined: 'Horizon Outline';
 
 
 
@@ -219,18 +222,23 @@ transform: scale(0.75);/*  rotateX(60deg) rotateY(25deg) translateX(75vw); */
 
 .span{
   color:var(--gray);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: 700;
+}
+
+::selection {
+  background: var(--yellow-white);
+  color: var(--black);
 }
 
 select{
-  font-family: var(--font-text);
+  font-family: var(--font-button);
   background: rgba(0, 0, 0, 0);
   padding:0.8rem 1rem;
   border:var(--light-gray-border);
   border-radius: 0.5rem;
   font-size: 1.33rem;
   color:var(--white-text);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: 700;
 }
 
 select:focus{
@@ -238,8 +246,8 @@ select:focus{
 }
 
 select option{
-  font-weight: var(--font-weight-extrabold);
-  background:var(--footer-header_bck);
+  font-weight: 700;
+  background:var(--hard-blue);
   border:1px solid white;
 }
 
@@ -293,18 +301,22 @@ u {
   font-size: 1.65rem;
 }
 
+h1,h2,h3,h4 {
+  letter-spacing:-1px;
+}
+
 h4 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-family: var(--font-text);
 }
 
 h3 {
-  font-size: 2rem;
+  font-size: 3rem;
   font-family: var(--font-title);
 }
 
 h2 {
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: var(--font-weight-bold);
 }
 
@@ -312,6 +324,10 @@ h1 {
   font-size: 7.5rem;
   color: var(--gray);
   font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+}
+
+h1,h2,h3{
   text-transform: uppercase;
 }
 
@@ -330,14 +346,14 @@ h4 {
 
 
 button {
-  font-family: var(--font-text);
-  font-weight: var(--font-weight-extrabold);
+  font-family: var(--font-button);
+  font-weight: 700;
   border-radius: 1rem;
-  padding: 0.8rem;
+  padding: 1rem 4rem;
   background: #141428;
   color: var(--white-text);
-  border: 1px solid rgb(90, 106, 121);
-  transition: 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  border: 1px solid var(--gray);
+  transition:all 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   white-space: nowrap;
   cursor: pointer;
   font-size: 1.33rem;
@@ -346,10 +362,16 @@ button {
 
 
 button:hover {
-  background: rgb(90, 106, 121);
+  background: var(--yellow-white);
+  color:var(--black)
+}
+
+button:hover .plus{
+  filter: invert(0);
 }
 
 .plus {
+  transition:all 0.35s cubic-bezier(0.785, 0.135, 0.15, 0.86); ;
   filter: invert(1);
   width: 1.75rem;
   margin-left: 0.75rem;
@@ -362,7 +384,7 @@ button:hover {
 body {
   font-family: var(--font-text);
   background: var(--light-blue);
-  color: rgb(236, 236, 236);
+  color: rgb(245, 245, 245);
   overflow-x: hidden;
   min-height: 100vh;
 }
@@ -430,18 +452,19 @@ hr {
 
 .gray-bck {
   background: var(--gray);
+  font-family: var(--font-button);
   padding: 4px;
   margin-bottom: 1.15rem;
   transition: 0.2s cubic-bezier(0.47, 0, 0.745, 0.715);
   cursor: pointer;
   border-radius: 6px;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.35rem;
 }
 
 .gray-bck:hover {
   transform: scale(1.15);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 
@@ -517,8 +540,9 @@ hr {
 
 .scroll-arrow {
   position: fixed;
-  bottom: 100px;
-  right: 25px;
+  font-family: var(--font-button);
+  bottom: 20px;
+  right: 30px;
   background: var(--black);
   border: var(--light-gray-border);
   font-size: 2rem;

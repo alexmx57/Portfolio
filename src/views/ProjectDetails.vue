@@ -7,7 +7,7 @@
       </RouterLink> 
       <div class="name-description">
         <h1>{{ project.nom }}</h1>
-        <p>{{ project.description }}</p>
+        <p class="gray-bck project-description">{{ project.description }}</p>
       </div>
 
       <div class="grid-section">
@@ -124,12 +124,12 @@ export default {
           date: "Octobre 2024"
         },
         {
-          nom: 'Bande Dessinnée',
-          description: "Bande-dessinée intéractive",
+          nom: 'Bande-Dessinnée',
+          description: "Bande-dessinée interactive",
           background: '/img/projet/digitaldetox.png',
           skills: ['animate.png'],
           date: "Novembre 2024",
-          brief:"Créer une bande-dessinée intéractive avec Animate",
+          brief:"Créer une bande-dessinée interactive avec Animate",
           livrable:" Rendu du scénario de la bande-dessinnée, et du dossier de l'animation",
           contexte:"Projet réalisé en cours de Création et design interactif par groupe de 4",
           idees:"Créer une affiche qui interpelle le spectateur"
@@ -499,6 +499,7 @@ export default {
   padding:6px;
   border-radius: 8px;
   font-weight: var(--font-weight-black);
+  font-size: 1.8rem;
 }
 
 .project-details{
@@ -536,7 +537,7 @@ export default {
   flex-direction: column;
   align-items: center;
   gap:1.5rem;
-  background: var(--footer-header_bck);
+  background: var(--hard-blue);
   padding:2rem;
   border-radius: 10px;
   box-shadow:var(--box-shadow-1);

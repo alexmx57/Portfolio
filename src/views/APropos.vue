@@ -243,7 +243,7 @@ main {
 }
 
 .cv-section {
-    background: var(--footer-header_bck);
+    background: var(--hard-blue);
     border-radius: 10px;
     box-shadow:var(--box-shadow-1);
     padding: 2rem;

@@ -391,6 +391,9 @@ export default {
     box-shadow: -5px 3px 15px black;
 }
 
+button{
+    padding:0.8rem;
+}
 
 .banner-content {
     max-width: 800px;
@@ -523,7 +526,7 @@ form {
 
 .skill:hover .skill-title {
     text-decoration: underline;
-    font-weight: 900;
+    font-weight: 800;
 }
 
 .skill span {

@@ -131,7 +131,7 @@ export default {
 <style scoped>
 .footer {
     border-top: var(--light-gray-border);
-    background: var(--footer-header_bck);
+    background: var(--hard-blue);
     backdrop-filter: var(--bck-blur);
     padding: 0.5rem;
 }
@@ -139,7 +139,7 @@ export default {
 .active-footer-link {
     transition: 0.25s ease-out;
     text-decoration: underline;
-    font-weight: var(--font-weight-extrabold) !important;
+    font-weight: 800 !important;
     color:var(--yellow-white);
 }
 
@@ -154,10 +154,10 @@ export default {
 
 .footer-links {
     white-space: nowrap;
-    font-family: "Roboto Flex";
+    font-family: var(--font-text);
     font-size: 1.5rem;
     margin: 0.5rem 0;
-    font-weight: 800;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -195,7 +195,7 @@ export default {
 }
 
 .footer-links:hover {
-    font-weight: var(--font-weight-extrabold);
+    font-weight: 800;
     color: var(--yellow-white)
 }
 
@@ -203,7 +203,7 @@ export default {
     text-align: center !important;
     text-transform: uppercase;
     color: var(--yellow-white);
-    font-weight: 100;
+    font-weight: 300;
     transition: 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -250,13 +250,12 @@ export default {
     transition: transform 0.2s cubic-bezier(0.47, 0, 0.745, 0.715);
     cursor: pointer;
     border-radius: 6px;
-    font-weight: 800;
     font-size: 1.425rem;
 }
 
 .navigation-title:hover {
     transform: scale(1.1);
-    font-weight: 900;
+    font-weight: 800;
 }
 
 

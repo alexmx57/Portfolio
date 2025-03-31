@@ -173,6 +173,7 @@ export default {
     color: black;
     padding: 0.2rem 0.8rem;
     text-transform: lowercase;
+    font-weight: 600;
 }
 
 

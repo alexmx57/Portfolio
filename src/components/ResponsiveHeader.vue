@@ -74,7 +74,7 @@
   
   .link p {
     font-size: 1rem;
-    font-weight: var(--font-weight-black);
+    font-weight: 700;
     transition: opacity 0.3s ease-in-out;
   }
   
